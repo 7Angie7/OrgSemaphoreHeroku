@@ -7,4 +7,4 @@ def index(request):
 
 
 def admin_page(request, room_name):
-    return render(request, 'admin_page.hmtl', {})
+    return render(request, 'admin_page.html', {})
