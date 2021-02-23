@@ -1,0 +1,18 @@
+body {
+    background-color: #F9F9F9;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #A9A9A9;
+    text-align: center;
+}
+
+h1{
+    color: black;
+}
+
+.dot {
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
