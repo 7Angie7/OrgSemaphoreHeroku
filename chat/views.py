@@ -6,5 +6,5 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-def admin_page(request, room_name):
-    return render(request, 'admin_page.html', {})
+def control(request, room_name):
+    return render(request, 'control.html', {})

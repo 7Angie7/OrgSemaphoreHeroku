@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/admin_page.css">
+    <link rel="stylesheet" type="text/css" href="../static/control.css">
     <title>Organize Semaphore</title>
 </head>
 <body>
@@ -17,7 +17,7 @@
         const ws = new WebSocket(
             'wss://'
             + window.location.host
-            + '/ws/admin_page/'
+            + '/ws/control/'
         );
 
         ws.onopen = function(event){
