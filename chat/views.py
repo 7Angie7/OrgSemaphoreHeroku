@@ -6,5 +6,5 @@ def index(request):
     return render(request, 'index.html', {})
 
 
-def control(request, room_name):
+def control(request):
     return render(request, 'control.html', {})
