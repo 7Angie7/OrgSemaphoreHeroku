@@ -8,3 +8,7 @@ def index(request):
 
 def control(request):
     return render(request, 'control.html', {})
+
+
+def mainpage(request):
+    return render(request, 'mainpage.html', {})

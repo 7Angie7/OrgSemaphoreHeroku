@@ -1,0 +1,85 @@
+body {
+	background-color: white;
+}
+
+.navbar-nav {
+	margin-left: auto;
+	font-size: 20px; 
+} 
+
+#MainWrapper {
+	margin-top: 56px;
+}
+
+#WindowWrapper {
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+
+#LogInPart {
+	padding-top: 70px;
+    padding-bottom: 40px;
+	background-image: url("bluewallpaper.png");
+	background-position: bottom;
+	color:#F9F9F9;
+	border-radius: 20px;
+	text-align: center;
+}
+
+#loginForm {
+	padding-top: 70px;
+	padding-bottom: 30px;
+}
+
+#loginForm input:focus {
+  border-color: #F5CE63;
+  box-shadow: 0px 1px 1px #F5CE63 inset, 0px 0px 8px #F5CE63;
+}
+
+#login-btn {
+	margin-top: 10px;
+	background-color: #F5CE63;
+	color: white;
+	border-color: #F5CE63;
+	font-weight: bold;
+}
+
+#login-btn:hover {
+	background-color: #E2BE59;
+	border-color: #E2BE59;
+}
+
+
+#RegisterPart {
+	padding-top: 40px;
+    padding-bottom: 40px;
+	border-radius: 20px;
+	background-image: url("dots.png");
+	color: #2DBBEF;
+}
+
+#registrationForm {
+	padding-top: 20px;
+	padding-bottom: 5px;
+}
+
+#registrationForm input:focus {
+  border-color: #F5CE63;
+  box-shadow: 0px 1px 1px #F5CE63 inset, 0px 0px 8px #F5CE63;
+}
+
+#register-btn {
+	margin-top: 10px;
+	background-color: #2DBBEF;
+	color: white;
+	border-color: #2DBBEF;
+	font-weight: bold;
+}
+
+#register-btn:hover {
+	background-color: #1AA8CB;
+	border-color: #1AA8CB;
+}
+
+
