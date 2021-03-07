@@ -13,7 +13,7 @@ def control(request):
 
 
 def mainpage(request):
-    '''form = CreateUserForm()
+    form = CreateUserForm()
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
@@ -21,6 +21,5 @@ def mainpage(request):
             form.save()
 
     context = {'form': form}
-    return render(request, 'mainpage.html', context)'''
+    return render(request, 'mainpage.html', context)
 
-    return render(request, 'mainpage.html', {})
