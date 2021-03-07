@@ -21,7 +21,7 @@ h1{
   cursor: pointer;
 }
 
-.btnready {background-color: green;}
+.btnready {background-color: blue;}
 .btnbusy{background-color: red;}
 
 .dot {

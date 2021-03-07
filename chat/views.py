@@ -13,16 +13,14 @@ def control(request):
 
 
 def mainpage(request):
-    return render(request, 'mainpage.html', {})
-
-
-def test(request):
-    form = CreateUserForm()
+    '''form = CreateUserForm()
 
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
             form.save()
 
-    context = {'form':form}
-    return render(request, 'test.html', context)
+    context = {'form': form}
+    return render(request, 'mainpage.html', context)'''
+
+    return render(request, 'mainpage.html', {})
