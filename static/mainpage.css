@@ -10,13 +10,22 @@ body, html{
     font-weight: bold;
 }
 
+.navbar-nav {
+    margin-left: auto;
+}
+
 .navbar .navbar-btn{
     background-color: #f2d24b;
-    color: white;
     font-family: 'Akaya Telivigala', cursive;
     font-weight: bold;
+    margin-left: 10px;
+    margin-right: 5px;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#navbarNav ul li a:link {
+    color: white
 }
 
 .log_card {

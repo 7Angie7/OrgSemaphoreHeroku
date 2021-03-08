@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
-def index(request):
-    return render(request, 'index.html', {})
+def nothing(request):
+    return redirect('mainpage')
 
 
 def control(request):
@@ -35,4 +35,8 @@ def register(request):
 
     context = {'form': form}
     return render(request, 'register.html', context)
+
+
+def semaphore(request):
+    return render(request, 'semaphore.html', {})
 
