@@ -36,39 +36,53 @@
 
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
-			<div class="log_card">
+            <div class="reg_card">
 				<div class="d-flex justify-content-center">
-					<h1 id="form-title">Open your dashboard and handle your semaphores</h1>
+					<h3 id="form-title">CREATE YOUR FIRST SEMAPHORE</h3>
 				</div>
 				<div class="d-flex justify-content-center form_container">
+
 					<form method="POST" action="">
                         {% csrf_token %}
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
-							<input type="text" name="username" placeholder="Username..." class="form-control">
+							{{form.username}}
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+							</div>
+							{{form.email}}
+						</div>
+						<div class="input-group mb-3">
+							<div class="input-group-append">
+								<span class="input-group-text"><i class="fas fa-key"></i></span>
+							</div>
+							{{form.password1}}
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
-								<input type="password" name="password" placeholder="Password..." class="form-control" >
+                            {{ form.password2 }}
 						</div>
 
-                        <div class="d-flex justify-content-center mt-4 login_container">
-                            <input class="btn login_btn" type="submit" value="Login">
-                        </div>
+				   		<div class="d-flex justify-content-center mt-4 register_container">
+				 			<input class="btn login_btn" type="submit" value="Register Account">
+				   		</div>
 
-                        {% for message in messages %}
-                            <p id="messages">{{ message }}</p>
-                        {% endfor %}
+                        {{form.errors}}
+
 					</form>
-
 				</div>
+
+
 			</div>
 		</div>
 	</div>
+
 
 </body>
 
