@@ -15,6 +15,18 @@ def control(request):
 
 
 def mainpage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('dashboard')
+        else:
+            messages.info(request, "Username OR password is incorrect")
+
     return render(request, 'mainpage.html', {})
 
 
@@ -39,4 +51,9 @@ def register(request):
 
 def semaphore(request):
     return render(request, 'semaphore.html', {})
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('mainpage')
 

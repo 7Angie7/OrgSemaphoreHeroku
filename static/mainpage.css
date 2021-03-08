@@ -8,6 +8,7 @@ body, html{
 .navbar {
     font-family: 'Akaya Telivigala', cursive;
     font-weight: bold;
+    font-size: 20px;
 }
 
 .navbar-nav {
@@ -18,14 +19,19 @@ body, html{
     background-color: #f2d24b;
     font-family: 'Akaya Telivigala', cursive;
     font-weight: bold;
+    font-size: 20px;
     margin-left: 10px;
     margin-right: 5px;
     padding-left: 10px;
     padding-right: 10px;
 }
 
-#navbarNav ul li a:link {
-    color: white
+#navbarNav ul li a{
+    color: white;
+}
+
+#navbarNav ul li a:hover{
+    color: #33ccff;
 }
 
 .log_card {

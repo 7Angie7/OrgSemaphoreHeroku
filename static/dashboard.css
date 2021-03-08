@@ -1,0 +1,36 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    font-family: 'Akaya Telivigala', cursive;
+}
+
+.navbar {
+    font-family: 'Akaya Telivigala', cursive;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .navbar-btn{
+    background-color: #f2d24b;
+    font-family: 'Akaya Telivigala', cursive;
+    font-weight: bold;
+    font-size: 20px;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#navbarNav ul li a{
+    color: white;
+}
+
+#navbarNav ul li a:hover{
+    color: #33ccff;
+}
