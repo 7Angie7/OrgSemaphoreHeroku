@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 
 
 # Create your views here.
-def nothing(request):
+def empty(request):
     return redirect('mainpage')
 
 
