@@ -29,6 +29,11 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">CONTACT</a>
                 </li>
+                <li>
+                <p class="navbar-btn">
+                    <a href="{% url 'mainpage' %}" class="btn">LOG IN</a>
+                </p>
+                </li>
             </ul>
         </div>
 
@@ -75,10 +80,14 @@
 
                         {{form.errors}}
 
+                        <div class="mt-4">
+					        <div class="d-flex justify-content-center links">
+						        Already have an account? <a href="{% url 'mainpage' %}" class="ml-2">LOG IN</a>
+					        </div>
+				        </div>
 					</form>
+
 				</div>
-
-
 			</div>
 		</div>
 	</div>

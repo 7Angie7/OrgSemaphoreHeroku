@@ -5,6 +5,20 @@ body, html{
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
 }
 
+.navbar {
+    font-family: 'Akaya Telivigala', cursive;
+    font-weight: bold;
+}
+
+.navbar .navbar-btn{
+    background-color: #f2d24b;
+    color: white;
+    font-family: 'Akaya Telivigala', cursive;
+    font-weight: bold;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .log_card {
     max-width: 600px;
     margin-top: auto;
