@@ -59,41 +59,10 @@ body, html {
     border-radius: 75%;
 }
 
-.dashboardCard {
+.addCard {
     margin-top: 20px;
     height: 600px;
     background: #F6FBFB;
     text-align: center;
     border-radius: 10px;
-}
-
-.dashboardCard h1 {
-    padding-top: 35px;
-    padding-bottom: 10px;
-}
-
-.profileImg {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 0 auto;
-    border-radius: 50%;
-}
-
-.center-btn {
-    text-align: center;
-    padding-top: 35px;
-}
-
-.center-btn a {
-    padding: 8px;
-    text-decoration: none;
-    color: white;
-    background-color: #33ccff;
-    border-radius: 15%;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.center-btn a:hover {
-    color: #f2d24b;
 }
