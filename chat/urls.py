@@ -10,4 +10,6 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('semaphore/', views.semaphore, name='semaphore'),
     path('logoutUser/', views.logoutUser, name='logoutUser'),
+    path('addSemaphore/', views.addSemaphore, name='addSemaphore'),
+    path('contact/', views.contact, name='contact'),
 ]

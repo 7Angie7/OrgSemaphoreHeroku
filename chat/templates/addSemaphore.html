@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/contact.css">
+    <link rel="stylesheet" type="text/css" href="../static/addSemaphore.css">
 
     <style>
         body, html{
@@ -47,7 +47,7 @@
     color: #33ccff;
 }
 
-.profileCard {
+.addCard {
     margin-top: 20px;
     height: 600px;
     background: #F6FBFB;
@@ -55,59 +55,11 @@
     border-radius: 10px;
 }
 
-.profileCard h1 {
+.addCard h1 {
     padding-top: 35px;
     padding-bottom: 10px;
 }
 
-.profileCard i {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 30px;;
-    border-color: grey;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 75%;
-}
-
-.dashboardCard {
-    margin-top: 20px;
-    height: 600px;
-    background: #F6FBFB;
-    text-align: center;
-    border-radius: 10px;
-}
-
-.dashboardCard h1 {
-    padding-top: 35px;
-    padding-bottom: 10px;
-}
-
-	.profileImg{
-		max-width: 200px;
-		max-height:200px;
-		margin: 0 auto;
-		border-radius: 50%;
-	}
-
-    .center-btn{
-        text-align: center;
-        padding-top: 35px;
-    }
-
-    .center-btn a{
-        padding: 8px;
-        text-decoration: none;
-        color: white;
-        background-color: #33ccff;
-        border-radius: 15%;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .center-btn a:hover{
-        color: #f2d24b;
-    }
     </style>
 </head>
 <body>
@@ -122,8 +74,7 @@
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                <!--  item CONTACT is active  -->
-                <li class="nav-item active"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
                 <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
             </ul>
         </div>
@@ -136,10 +87,9 @@
         <div class="row justify-content-lg-center">
             <div class="col-lg-8">
                 <div class="addCard">
-                    <h1> CONTACT </h1>
+                    <h1> Add New Semaphore </h1>
                 </div>
             </div>
         </div>
     </div>
-
 </body>

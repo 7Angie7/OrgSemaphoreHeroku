@@ -57,3 +57,10 @@ def logoutUser(request):
     logout(request)
     return redirect('mainpage')
 
+
+def addSemaphore(request):
+    return render(request, 'addSemaphore.html', {})
+
+
+def contact(request):
+    return render(request, 'contact.html', {})

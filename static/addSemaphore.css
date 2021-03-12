@@ -1,0 +1,50 @@
+body, html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    font-family: 'Akaya Telivigala', cursive;
+}
+
+.navbar {
+    font-family: 'Akaya Telivigala', cursive;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .navbar-btn{
+    background-color: #f2d24b;
+    font-family: 'Akaya Telivigala', cursive;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 17px;
+}
+
+.navbar-btn a{
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+#navbarNav ul li a:hover{
+    color: #33ccff;
+}
+
+.addCard {
+    margin-top: 20px;
+    height: 600px;
+    background: #F6FBFB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.addCard h1 {
+    padding-top: 35px;
+    padding-bottom: 10px;
+}
