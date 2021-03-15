@@ -24,12 +24,13 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'mainpage' %}">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
                 <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
-                <li class="navbar-btn"><a href="{% url 'register' %}" class="btn">SIGN UP</a></li>
+                <li class="navbar-btn"><a href="{% url 'login' %}" class="btn">LOG IN</a></li>
             </ul>
         </div>
-
     </nav>
+    <!--  ------------------------  -->
 
+    <!--  ---  MAIN CONTENT - REGISTER CARD  ---  -->
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
             <div class="reg_card">
@@ -38,6 +39,7 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
 
+                    <!--  ---  LOGIN FORM ---  -->
 					<form method="POST" action="">
                         {% csrf_token %}
 						<div class="input-group mb-3">
@@ -77,11 +79,12 @@
 					        </div>
 				        </div>
 					</form>
-
+                    <!--  ------------------------  -->
 				</div>
 			</div>
 		</div>
 	</div>
+    <!--  ------------------------  -->
 
     <script>
         /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript

@@ -3,11 +3,9 @@ body, html {
     padding: 0;
     height: 100%;
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
-    font-family: 'Akaya Telivigala', cursive;
 }
 
 .navbar {
-    font-family: 'Akaya Telivigala', cursive;
     font-weight: bold;
     font-size: 20px;
 }
@@ -18,7 +16,6 @@ body, html {
 
 .navbar .navbar-btn {
     background-color: #f2d24b;
-    font-family: 'Akaya Telivigala', cursive;
     margin-left: 10px;
     margin-right: 5px;
     padding-left: 10px;
@@ -45,6 +42,7 @@ body, html {
 }
 
 .profileCard h1 {
+    font-family: 'Akaya Telivigala', cursive;
     padding-top: 35px;
     padding-bottom: 10px;
 }
