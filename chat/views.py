@@ -3,6 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .forms import CreateUserForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -30,6 +31,7 @@ def mainpage(request):
     return render(request, 'mainpage.html', {})
 
 
+@login_required(login_url='mainpage')
 def dashboard(request):
     return render(request, 'dashboard.html', {})
 
@@ -49,6 +51,7 @@ def register(request):
     return render(request, 'register.html', context)
 
 
+@login_required(login_url='mainpage')
 def semaphore(request):
     return render(request, 'semaphore.html', {})
 
@@ -58,6 +61,7 @@ def logoutUser(request):
     return redirect('mainpage')
 
 
+@login_required(login_url='mainpage')
 def addSemaphore(request):
     return render(request, 'addSemaphore.html', {})
 
