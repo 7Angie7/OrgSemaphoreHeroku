@@ -11,5 +11,5 @@ urlpatterns = [
     path('logoutUser/', views.logoutUser, name='logoutUser'),
     path('addSemaphore/', views.addSemaphore, name='addSemaphore'),
     path('contact/', views.contact, name='contact'),
-    path('control/<str:pk_test>', views.contact, name='control'),
+    path('control/<str:pk_test>', views.control, name='control'),
 ]
