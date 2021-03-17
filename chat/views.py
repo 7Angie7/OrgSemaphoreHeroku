@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
-from .forms import CreateUserForm
+from .models import *
+from .forms import CreateUserForm, AddSemaphoreForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -33,7 +33,8 @@ def mainpage(request):
 
 @login_required(login_url='mainpage')
 def dashboard(request):
-    return render(request, 'dashboard.html', {})
+    semaphores = Semaphore.objects.all()
+    return render(request, 'dashboard.html', {'semaphores':semaphores})
 
 
 def register(request):
@@ -63,7 +64,16 @@ def logoutUser(request):
 
 @login_required(login_url='mainpage')
 def addSemaphore(request):
-    return render(request, 'addSemaphore.html', {})
+    form = AddSemaphoreForm()
+
+    if request.method == 'POST':
+        form = AddSemaphoreForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+
+    context = {'form': form}
+    return render(request, 'addSemaphore.html', context)
 
 
 def contact(request):

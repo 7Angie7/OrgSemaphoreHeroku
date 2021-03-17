@@ -107,6 +107,11 @@
     .center-btn a:hover{
         color: #f2d24b;
     }
+
+    .table{
+        margin-top: 40px;
+    }
+
     </style>
 </head>
 <body>
@@ -145,13 +150,26 @@
             <div class="col-lg-8">
                 <div class="dashboardCard">
                     <div class="row text-center">
-                        <div class="col-lg-10">
+                        <div class="col-lg-9">
                             <h1>Your Semaphores</h1>
                         </div>
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <div class="center-btn">
                                 <a href="{% url 'addSemaphore' %}" class="btn">+Add</a>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-10">
+                            <table class="table">
+                            {% for i in semaphores %}
+                                <tr>
+                                    <td>
+                                        {{ i.name }}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
                         </div>
                     </div>
                 </div>
