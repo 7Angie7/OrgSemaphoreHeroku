@@ -77,10 +77,10 @@ def contact(request):
 
 
 @login_required(login_url='mainpage')
-def control(request, pk_test):
-    semap = Semaphore.objects.get(id=pk_test)
-    context = {'semap': semap}
-    return render(request, 'control.html', {context})
+def control(request):
+    #semap = Semaphore.objects.get(id=pk_test)
+    #context = {'semap': semap}
+    return render(request, 'control.html', {})
 
 
 @login_required(login_url='mainpage')

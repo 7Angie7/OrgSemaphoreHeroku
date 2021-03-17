@@ -165,7 +165,7 @@
                             {% for i in semaphores %}
                                 <tr>
                                     <td>{{ i.name }}</td>
-                                    <td><a href="{% url 'control' i.id %}">View</a></td>
+                                    <td><a href="{% url 'control' %}" class="btn">+Add</a></td>
                                 </tr>
                             {% endfor %}
                         </table>
