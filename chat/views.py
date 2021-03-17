@@ -11,10 +11,6 @@ def empty(request):
     return redirect('mainpage')
 
 
-def control(request):
-    return render(request, 'control.html', {})
-
-
 def mainpage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -78,3 +74,17 @@ def addSemaphore(request):
 
 def contact(request):
     return render(request, 'contact.html', {})
+
+
+@login_required(login_url='mainpage')
+def control(request, pk_test):
+    semap = Semaphore.objects.get(id=pk_test)
+    context = {'semap': semap}
+    return render(request, 'contact.html', {context})
+
+
+@login_required(login_url='mainpage')
+def semaphore(request, pk_test):
+    semap = Semaphore.objects.get(id=pk_test)
+    context = {'semap': semap}
+    return render(request, 'semaphore.html', {context})

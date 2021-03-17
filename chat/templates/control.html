@@ -18,7 +18,7 @@
         const ws = new WebSocket(
             'wss://'
             + window.location.host
-            + '/ws/control/'
+            + '/ws/control/<str:pk_test>'
         );
 
         ws.onopen = function(event){

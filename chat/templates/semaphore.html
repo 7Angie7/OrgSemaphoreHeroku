@@ -19,7 +19,7 @@
         const ws = new WebSocket(
             'wss://'
             + window.location.host
-            + '/ws/'
+            + '/ws/semaphore/<str:pk_test>'
         );
 
         ws.onopen = function(event){
