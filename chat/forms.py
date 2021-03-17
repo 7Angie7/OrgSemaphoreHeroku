@@ -14,4 +14,4 @@ class CreateUserForm(UserCreationForm):
 class AddSemaphoreForm(forms.ModelForm):
     class Meta:
         model = Semaphore
-        fields = '__all__'
+        fields = ['name', 'time']

@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 
 # Create your models here.
+
 class Semaphore(models.Model):
     name = models.CharField(max_length=200, null=True)
     time = models.IntegerField()

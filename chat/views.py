@@ -30,7 +30,9 @@ def mainpage(request):
 @login_required(login_url='mainpage')
 def dashboard(request):
     semaphores = Semaphore.objects.all()
-    return render(request, 'dashboard.html', {'semaphores':semaphores})
+    user = request.user
+    usersemap = semaphores.filter(author__username=user)
+    return render(request, 'dashboard.html', {'usersemap': usersemap})
 
 
 def register(request):
@@ -65,7 +67,9 @@ def addSemaphore(request):
     if request.method == 'POST':
         form = AddSemaphoreForm(request.POST)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.author = request.user
+            task.save()
             return redirect('dashboard')
 
     context = {'form': form}
