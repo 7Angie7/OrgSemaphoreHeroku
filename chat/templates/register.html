@@ -1,108 +1,96 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <meta charset="UTF-8">
-	<title>Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Register|OrganizeSemaphore</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/mainpage.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../static/register.css">
 </head>
 <body>
 
-    <!--  ---  NAVIGATION BAR  ---  -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+<!--  ---  NAVIGATION BAR  ---  -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{% url 'mainpage' %}">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
-                <li class="navbar-btn"><a href="{% url 'mainpage' %}" class="btn">LOG IN</a></li>
-            </ul>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!--  item HOME is active  -->
+            <li class="nav-item"><a class="nav-link" href="{% url 'mainpage' %}">HOME</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
+            <li class="navbar-btn"><a href="{% url 'mainpage' %}" class="btn">LOG IN</a></li>
+        </ul>
+    </div>
+</nav>
+<!--  ------------------------  -->
+
+<!--  ---  MAIN CONTENT   ---  -->
+<br>
+<div class="container">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-5">
+            <div class="Card">
+                <div class="title">
+                    <h3>CREATE YOUR FIRST SEMAPHORE</h3>
+                </div>
+
+                <div class="row justify-content-lg-center">
+                    <div class="col-lg-10">
+                        <!--  ---  REGISTER FORM ---  -->
+                        <div class="registerForm">
+                            <form method="POST" action="">
+                                {% csrf_token %}
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    </div>
+                                    {{ form.username }}
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
+                                    </div>
+                                    {{ form.email }}
+                                </div>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    {{ form.password1 }}
+                                </div>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    </div>
+                                    {{ form.password2 }}
+                                </div>
+
+                                <div class="d-flex justify-content-center mt-4 register_container">
+                                    <input class="btn login_btn" type="submit" value="Register Account">
+                                </div>
+
+                                <p id="messages">{{ form.errors }}</p>
+
+                                <div class="mt-3 pb-2">
+                                    <div class="d-flex justify-content-center links">
+                                        Already have an account? <a href="{% url 'mainpage' %}" class="ml-2">LOG IN</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <!--  ------------------------  -->
+                    </div>
+                </div>
+
+            </div>
         </div>
-    </nav>
-    <!--  ------------------------  -->
-
-    <!--  ---  MAIN CONTENT - REGISTER CARD  ---  -->
-	<div class="container h-100">
-		<div class="d-flex justify-content-center h-100">
-            <div class="reg_card">
-				<div class="d-flex justify-content-center">
-					<h3 id="form-title">CREATE YOUR FIRST SEMAPHORE</h3>
-				</div>
-				<div class="d-flex justify-content-center form_container">
-
-                    <!--  ---  LOGIN FORM ---  -->
-					<form method="POST" action="">
-                        {% csrf_token %}
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-user"></i></span>
-							</div>
-							{{form.username}}
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
-							</div>
-							{{form.email}}
-						</div>
-						<div class="input-group mb-3">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-							{{form.password1}}
-						</div>
-						<div class="input-group mb-2">
-							<div class="input-group-append">
-								<span class="input-group-text"><i class="fas fa-key"></i></span>
-							</div>
-                            {{ form.password2 }}
-						</div>
-
-				   		<div class="d-flex justify-content-center mt-4 register_container">
-				 			<input class="btn login_btn" type="submit" value="Register Account">
-				   		</div>
-
-                        {{form.errors}}
-
-                        <div class="mt-3 pb-2">
-					        <div class="d-flex justify-content-center links">
-						        Already have an account? <a href="{% url 'mainpage' %}" class="ml-2">LOG IN</a>
-					        </div>
-				        </div>
-					</form>
-                    <!--  ------------------------  -->
-				</div>
-			</div>
-		</div>
-	</div>
-    <!--  ------------------------  -->
-
-    <script>
-        /* Because i didnt set placeholder values in forms.py they will be set here using vanilla Javascript
-		//We start indexing at one because CSRF_token is considered and input field
-		 */
-
-		//Query All input fields
-		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Username..';
-		form_fields[2].placeholder='Email..';
-		form_fields[3].placeholder='Enter password...';
-		form_fields[4].placeholder='Re-enter Password...';
-
-
-		for (var field in form_fields){
-			form_fields[field].className += ' form-control'
-		}
-	</script>
+    </div>
+</div>
+<!--  ------------------------  -->
 </body>
-
-</html>

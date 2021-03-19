@@ -7,6 +7,7 @@ body, html {
     overflow: hidden;
     font-family: 'Nunito', sans-serif;
 }
+
 /* ************** */
 
 /* navbar style */
@@ -37,6 +38,7 @@ body, html {
 #navbarNav ul li a:hover {
     color: #33ccff;
 }
+
 /* ********************** */
 
 /* card style */
@@ -52,8 +54,8 @@ body, html {
     font-style: italic;
     padding: 45px 10px 25px;
 }
-/* ******************** */
 
+/* ******************** */
 
 .input-group-text {
     background: #f2d24b !important;
@@ -62,9 +64,6 @@ body, html {
     border-radius: 0.25rem 0 0 0.25rem !important;
 }
 
-.loginForm {
-    margin-top: 20px;
-}
 
 .login_btn {
     padding-left: 10px;
