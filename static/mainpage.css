@@ -53,8 +53,6 @@ body, html {
     padding: 45px 10px 25px;
 }
 /* ******************** */
-
-
 .input-group-text {
     background: #f2d24b !important;
     color: white !important;
@@ -79,4 +77,8 @@ body, html {
     color: #fff;
     padding: 10px;
     margin-top: 10px;
+}
+
+.links {
+    padding-bottom: 12px;
 }

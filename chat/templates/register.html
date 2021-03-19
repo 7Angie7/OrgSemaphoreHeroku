@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/register.css">
+
 </head>
 <body>
 
@@ -75,7 +76,7 @@
                                     <input class="btn login_btn" type="submit" value="Register Account">
                                 </div>
 
-                                <p id="messages">{{ form.errors }}</p>
+                                {{ form.errors }}
 
                                 <div class="mt-3 pb-2">
                                     <div class="d-flex justify-content-center links">
