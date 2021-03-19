@@ -49,7 +49,7 @@ body, html {
     border-radius: 10px;
 }
 
-.title {
+.title h3{
     font-family: 'Lato', sans-serif;
     font-style: italic;
     padding: 45px 10px 25px;
@@ -72,20 +72,14 @@ body, html {
 
 
 .login_btn {
-    padding: 10px;
+    padding-right: 20px;
+    padding-left: 20px;
     color: white;
     background-color: #33ccff;
 }
 
 .login_btn:hover {
     color: #f2d24b;
-}
-
-#messages {
-    background-color: darkorange;
-    color: #fff;
-    padding: 10px;
-    margin-top: 10px;
 }
 
 .links {
