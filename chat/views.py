@@ -83,8 +83,7 @@ def contact(request):
 @login_required(login_url='mainpage')
 def control(request, pk_test):
     semap = Semaphore.objects.get(id=pk_test)
-    context = {'semap': semap}
-    return render(request, 'control.html', {})
+    return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test})
 
 
 @login_required(login_url='mainpage')

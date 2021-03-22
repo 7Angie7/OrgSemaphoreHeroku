@@ -4,8 +4,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 
 class SemaphoreConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']
-        self.room_group_name = 'semaphore'
+        self.pk_test = self.scope['url_route']['kwargs']['pk_test']
+        self.room_group_name = 'semaphore_%s' % self.pk_test
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -41,11 +41,13 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
             'message': message,
         }))
 
-
+'''
 class IndexConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.room_name = self.scope['url_route']['kwargs']
-        self.room_group_name = 'semaphore'
+        self.pk_test = self.scope['url_route']['kwargs']['pk_test']
+        self.room_group_name = 'semaphore_%s' % self.pk_test
+
+        print(self.room_group_name)
 
         await self.channel_layer.group_add(
             self.room_group_name,
@@ -81,4 +83,4 @@ class IndexConsumer(AsyncWebsocketConsumer):
             'message': message,
         }))
 
-    pass
+    pass '''

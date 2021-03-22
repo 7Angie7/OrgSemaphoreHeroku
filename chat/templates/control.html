@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/control.css">
-    <title>Organize Semaphore</title>
+    <title>Control|OrganizeSemaphore</title>
 </head>
 <body>
     <div>
-        <h1>ORGANIZE SEMAPHORE</h1>
+        <h1> Semaphore - " {{ semap.name }} "</h1>
 
         <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
         <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
     </div>
-
+    {{ pk_test|json_script:"pk-test" }}
     <script>
+        const roomName = JSON.parse(document.getElementById('pk-test').textContent);
+        console.log(roomName)
         const ws = new WebSocket(
             'wss://'
             + window.location.host
             + '/ws/control/'
+            + roomName
+            + '/'
         );
 
         ws.onopen = function(event){
