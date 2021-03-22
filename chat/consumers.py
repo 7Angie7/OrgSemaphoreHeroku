@@ -41,7 +41,7 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
             'message': message,
         }))
 
-'''
+
 class IndexConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.pk_test = self.scope['url_route']['kwargs']['pk_test']
@@ -83,4 +83,4 @@ class IndexConsumer(AsyncWebsocketConsumer):
             'message': message,
         }))
 
-    pass '''
+    pass

@@ -3,8 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/index.css">
-    <title>Organize Semaphore</title>
+    <title>Semaphore|OrganizeSemaphore</title>
+    <style>
+        body {
+    background-color: #F9F9F9;
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #A9A9A9;
+    text-align: center;
+}
+
+h1{
+    color: black;
+}
+
+.dot {
+    height: 100px;
+    width: 100px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+    </style>
 </head>
 <body>
     <div>
@@ -14,12 +33,16 @@
         <span class="dot" id="demo"></span>
     </div>
 
-
+    {{ pk_test|json_script:"pk-test" }}
     <script>
+        const roomName = JSON.parse(document.getElementById('pk-test').textContent);
+        console.log(roomName)
         const ws = new WebSocket(
             'wss://'
             + window.location.host
-            + '/ws/semaphore/<str:pk_test>'
+            + '/ws/control/'
+            + roomName
+            + '/'
         );
 
         ws.onopen = function(event){
