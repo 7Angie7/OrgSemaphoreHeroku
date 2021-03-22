@@ -5,7 +5,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
 </head>
 <body>
@@ -59,7 +59,7 @@
                             {% for i in usersemap %}
                                 <tr>
                                     <td>{{ i.name }}</td>
-                                    <td><a href="{% url 'control' %}" class="btn">View</a></td>
+                                    <td><a href="{% url 'control' i.id %}" class="btn">View</a></td>
                                 </tr>
                             {% endfor %}
                         </table>

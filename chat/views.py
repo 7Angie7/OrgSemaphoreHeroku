@@ -81,9 +81,9 @@ def contact(request):
 
 
 @login_required(login_url='mainpage')
-def control(request):
-    #semap = Semaphore.objects.get(id=pk_test)
-    #context = {'semap': semap}
+def control(request, pk_test):
+    semap = Semaphore.objects.get(id=pk_test)
+    context = {'semap': semap}
     return render(request, 'control.html', {})
 
 
