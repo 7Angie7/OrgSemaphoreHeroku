@@ -1,10 +1,53 @@
+/* body style */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
 }
 
+/* ************** */
+
+/* navbar style */
+.navbar {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .navbar-btn {
+    background-color: #f2d24b;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 17px;
+}
+
+.navbar-btn a {
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+}
+
+/* body style */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* ************** */
+
+/* navbar style */
 .navbar {
     font-weight: bold;
     font-size: 20px;
@@ -33,6 +76,8 @@ body, html {
     color: #33ccff;
 }
 
+/* ********************** */
+
 .profileCard {
     margin-top: 20px;
     height: 600px;
@@ -42,7 +87,8 @@ body, html {
 }
 
 .profileCard h1 {
-    font-family: 'Akaya Telivigala', cursive;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
     padding-top: 35px;
     padding-bottom: 10px;
 }
@@ -66,7 +112,8 @@ body, html {
 }
 
 .dashboardCard h1 {
-    font-family: 'Akaya Telivigala', cursive;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
     padding-top: 35px;
     padding-bottom: 10px;
 }
@@ -95,4 +142,8 @@ body, html {
 
 .center-btn a:hover {
     color: #f2d24b;
+}
+
+.table {
+    margin-top: 40px;
 }

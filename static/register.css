@@ -52,8 +52,9 @@ body, html {
 .title h3{
     font-family: 'Lato', sans-serif;
     font-style: italic;
-    padding: 45px 10px 25px;
+    padding: 45px 20px 25px;
     font-weight: bold;
+
 }
 
 /* ******************** */
