@@ -2,18 +2,121 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <title>Control|OrganizeSemaphore</title>
+	<title>Control-{{ semap.name }}|OrganizeSemaphore</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
+
     <style>
-        body {
-    background-color: #F9F9F9;
-    font-family: 'Noto Sans JP', sans-serif;
-    color: #A9A9A9;
-    text-align: center;
+        /* body style */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
 }
 
-h1{
+/* ************** */
+
+/* navbar style */
+.navbar {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .navbar-btn {
+    background-color: #f2d24b;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 17px;
+}
+
+.navbar-btn a {
+    font-weight: bold;
+    font-size: 20px;
     color: black;
+}
+
+#navbarNav ul li a:hover {
+    color: #33ccff;
+}
+
+/* ********************** */
+
+.profileCard {
+    margin-top: 20px;
+    height: 600px;
+    background: #F6FBFB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.profileCard h1 {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    padding-top: 35px;
+    padding-bottom: 10px;
+}
+
+.profileCard i {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 75%;
+}
+
+.dashboardCard {
+    margin-top: 20px;
+    height: 600px;
+    background: #F6FBFB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.dashboardCard h1 {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    padding-top: 35px;
+    padding-bottom: 10px;
+}
+
+.profileImg {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.center-btn {
+    text-align: center;
+    padding-top: 35px;
+}
+
+.center-btn a {
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    background-color: #33ccff;
+    border-radius: 15%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.center-btn a:hover {
+    color: #f2d24b;
 }
 
 .button {
@@ -39,15 +142,65 @@ h1{
     display: inline-block;
 }
 
+
     </style>
 </head>
 <body>
-    <div>
-        <h1> Semaphore - " {{ semap.name }} "</h1>
+    <!--  ---  NAVIGATION BAR  ---  -->
+    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <!--  item DASHBOARD is active  -->
+                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
+                <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!--  ------------------------  -->
 
-        <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
-        <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
+    <!--  ---  MAIN CONTENT   ---  -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <!--  ---    ---  -->
+            <div class="col-lg-4">
+                <div class="profileCard">
+                    <span class="dot" id="demo"></span>
+                    <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
+                    <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
+                </div>
+            </div>
+             <!--  ------------------------  -->
+            <!--  ---    ---  -->
+            <div class="col-lg-8">
+                <div class="dashboardCard">
+                    <div class="row text-center">
+                        <div class="col-lg-9">
+                            <h1>Semaphore - " {{ semap.name }} "</h1>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="center-btn">
+                                <a href="{% url 'dashboard' %}" class="btn">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-10">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!--  ------------------------  -->
+        </div>
     </div>
+     <!--  ------------------------  -->
     {{ pk_test|json_script:"pk-test" }}
     <script>
         const roomName = JSON.parse(document.getElementById('pk-test').textContent);
