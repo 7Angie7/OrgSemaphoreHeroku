@@ -242,11 +242,11 @@ img {
 
             if (data.message === 'GREEN'){
                 console.log("greeen message");
-                document.getElementById("demo").src = "{{ STATIC_URL }}images/greenLight.png";
+                document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
             }
             else if (data.message === 'RED'){
                 console.log("red message");
-                document.getElementById("demo").src = "{{ STATIC_URL }}images/redLight.png";
+                document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
             }
             else {
                 console.log("wrong message");
