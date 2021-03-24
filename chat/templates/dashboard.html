@@ -1,76 +1,80 @@
 <head>
     <meta charset="UTF-8">
-	<title>Dashboard|OrganizeSemaphore</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Dashboard|OrganizeSemaphore</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../static/dashboard.css">
 </head>
 <body>
 
-    <!--  ---  NAVIGATION BAR  ---  -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+<!--  ---  NAVIGATION BAR  ---  -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <!--  item DASHBOARD is active  -->
-                <li class="nav-item active"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
-                <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
-            </ul>
-        </div>
-    </nav>
-    <!--  ------------------------  -->
-
-    <!--  ---  MAIN CONTENT   ---  -->
-    <br>
-    <div class="container">
-        <div class="row">
-            <!--  ---  PROFILE CARD  ---  -->
-            <div class="col-lg-4">
-                <div class="profileCard">
-                    <h1>{{ request.user }}</h1>
-                    <i class="fas fa-user fa-10x"></i>
-                </div>
-            </div>
-             <!--  ------------------------  -->
-            <!--  ---  DASHBOARD CARD  ---  -->
-            <div class="col-lg-8">
-                <div class="dashboardCard">
-                    <div class="row text-center">
-                        <div class="col-lg-9">
-                            <h1>Your Semaphores</h1>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="center-btn">
-                                <a href="{% url 'addSemaphore' %}" class="btn">+Add</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-lg-center">
-                        <div class="col-lg-10">
-                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                                <table class="table table-bordered table-striped mb-0">
-                                    {% for i in usersemap %}
-                                        <tr>
-                                            <td>{{ i.name }}</td>
-                                            <td><a href="{% url 'control' i.id %}" class="btn btn-manage">Manage</a></td>
-                                        </tr>
-                                    {% endfor %}
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-             <!--  ------------------------  -->
-        </div>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <!--  item DASHBOARD is active  -->
+            <li class="nav-item active"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
+            <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
+        </ul>
     </div>
-     <!--  ------------------------  -->
+</nav>
+<!--  ------------------------  -->
+
+<!--  ---  MAIN CONTENT   ---  -->
+<br>
+<div class="container">
+    <div class="row">
+        <!--  ---  PROFILE CARD  ---  -->
+        <div class="col-lg-4">
+            <div class="profileCard">
+                <h1>{{ request.user }}</h1>
+                <i class="fas fa-user fa-10x"></i>
+            </div>
+        </div>
+        <!--  ------------------------  -->
+        <!--  ---  DASHBOARD CARD  ---  -->
+        <div class="col-lg-8">
+            <div class="dashboardCard">
+                <div class="row text-center">
+                    <div class="col-lg-9">
+                        <h1>Your Semaphores</h1>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="center-btn">
+                            <a href="{% url 'addSemaphore' %}" class="btn">+Add</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-lg-center">
+                    <div class="col-lg-10">
+                        <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <table class="table table-bordered table-striped mb-0">
+                                {% for i in usersemap %}
+                                    <tr>
+                                        <div class="tableRows">
+                                            <td class="tdName">{{ i.name }}</td>
+                                            <td class="tdManageBtn"><a href="{% url 'control' i.id %}" class="btn btn-manage">Manage</a></td>
+                                        </div>
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  ------------------------  -->
+    </div>
+</div>
+<!--  ------------------------  -->
 </body>
