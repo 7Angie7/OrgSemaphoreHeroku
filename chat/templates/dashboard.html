@@ -55,14 +55,16 @@
                     </div>
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
-                            <table class="table">
-                            {% for i in usersemap %}
-                                <tr>
-                                    <td>{{ i.name }}</td>
-                                    <td><a href="{% url 'control' i.id %}" class="btn">View</a></td>
-                                </tr>
-                            {% endfor %}
-                        </table>
+                            <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                                <table class="table table-bordered table-striped mb-0">
+                                    {% for i in usersemap %}
+                                        <tr>
+                                            <td>{{ i.name }}</td>
+                                            <td><a href="{% url 'control' i.id %}" class="btn">View</a></td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
