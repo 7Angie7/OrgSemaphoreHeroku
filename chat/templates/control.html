@@ -131,15 +131,25 @@ body, html {
   cursor: pointer;
 }
 
-.btnready {background-color: blue;}
-.btnbusy{background-color: red;}
+.btnready {
+    background-color: #80DF38;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-bottom: 15px;
+}
 
-.dot {
-    height: 100px;
-    width: 100px;
-    background-color: red;
-    border-radius: 50%;
-    display: inline-block;
+.btnbusy {
+    background-color: #DE3047;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-bottom: 10px;
+}
+
+img {
+    margin-top: 50px;
+    height: 300px;
+    width: 180px;
+    margin-bottom: 50px;
 }
 
 
@@ -171,9 +181,15 @@ body, html {
             <!--  ---    ---  -->
             <div class="col-lg-4">
                 <div class="profileCard">
-                    <span class="dot" id="demo"></span>
-                    <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
-                    <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
+                    <div class="row justify-content-lg-center">
+                        <img src="../static/redLight.png" id="demo" alt="busyLight">
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
+                    </div>
                 </div>
             </div>
              <!--  ------------------------  -->
@@ -182,7 +198,7 @@ body, html {
                 <div class="dashboardCard">
                     <div class="row text-center">
                         <div class="col-lg-9">
-                            <h1>Semaphore - " {{ semap.name }} "</h1>
+                            <h1>" {{ semap.name }} "</h1>
                         </div>
                         <div class="col-lg-3">
                             <div class="center-btn">
@@ -220,6 +236,20 @@ body, html {
         ws.onmessage = function(event){
             console.log("Message is received");
             console.log(event);
+
+            const data = JSON.parse(event.data)
+
+            if (data.message === 'GREEN'){
+                console.log("greeen message");
+                document.getElementById("demo").src = "../static/greenLight.png";
+            }
+            else if (data.message === 'RED'){
+                console.log("red message");
+                document.getElementById("demo").src = "../static/redLight.png";
+            }
+            else {
+                console.log("wrong message");
+            }
         }
         ws.onclose = function(event){
             console.log(event);
