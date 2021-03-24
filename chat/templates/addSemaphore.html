@@ -43,15 +43,24 @@
                     <form method="POST" action="">
                         {% csrf_token %}
                         <div class="input-group mb-3">
-                            <label>Name of Semaphore</label>
-                            {{ form.name }}
+                            <div class="col-lg-4">
+                                <label>Name of Semaphore</label>
+                            </div>
+                            <div class="col-lg-8">
+                                {{ form.name }}
+                            </div>
+
                         </div>
                         <div class="input-group mb-3">
-                            <label>Estimated time for 1 person</label>
-                            {{ form.time }}
+                            <div class="col-lg-4">
+                                <label>Estimated time for 1 person (in minutes)</label>
+                            </div>
+                            <div class="col-lg-8">
+                                {{ form.time }}
+                            </div>
                         </div>
 
-                        <div class="d-flex justify-content-center mt-4 register_container">
+                        <div class="d-flex justify-content-center mt-4">
                             <input class="btn login_btn" type="submit" value="Create Semaphore">
                         </div>
 
@@ -67,8 +76,8 @@
 <script>
     var form_fields = document.getElementsByTagName('input')
 
-    for (var field in form_fields) {
-        form_fields[field].className += ' form-control'
-    }
+    form_fields[1].className += ' form-control'
+    form_fields[2].className += ' form-control'
+
 </script>
 </body>
