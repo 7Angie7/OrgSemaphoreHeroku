@@ -107,13 +107,10 @@ body, html {
     color: #f2d24b;
 }
 
-.table {
-    margin-top: 40px;
-}
-
 .my-custom-scrollbar {
+    margin-top: 40px;
     position: relative;
-    height: 350px;
+    height: 400px;
     overflow: auto;
 }
 

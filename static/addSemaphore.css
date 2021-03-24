@@ -1,10 +1,16 @@
-body, html{
+/* body style */
+body, html {
     margin: 0;
     padding: 0;
     height: 100%;
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
 }
 
+/* ************** */
+
+/* navbar style */
 .navbar {
     font-weight: bold;
     font-size: 20px;
@@ -14,7 +20,7 @@ body, html{
     margin-left: auto;
 }
 
-.navbar .navbar-btn{
+.navbar .navbar-btn {
     background-color: #f2d24b;
     margin-left: 10px;
     margin-right: 5px;
@@ -23,15 +29,17 @@ body, html{
     border-radius: 17px;
 }
 
-.navbar-btn a{
+.navbar-btn a {
     font-weight: bold;
     font-size: 20px;
     color: black;
 }
 
-#navbarNav ul li a:hover{
+#navbarNav ul li a:hover {
     color: #33ccff;
 }
+
+/* ********************** */
 
 .addCard {
     margin-top: 20px;
@@ -42,7 +50,21 @@ body, html{
 }
 
 .addCard h1 {
-    font-family: 'Akaya Telivigala', cursive;
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
     padding-top: 35px;
     padding-bottom: 10px;
+}
+
+
+.login_btn {
+    padding-right: 20px;
+    padding-left: 20px;
+    color: white;
+    background-color: #f2d24b;
+    font-weight: bold;
+}
+
+.login_btn:hover {
+    color: #33ccff;
 }
