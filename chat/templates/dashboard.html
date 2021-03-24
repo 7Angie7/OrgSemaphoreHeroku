@@ -60,7 +60,7 @@
                                     {% for i in usersemap %}
                                         <tr>
                                             <td>{{ i.name }}</td>
-                                            <td><a href="{% url 'control' i.id %}" class="btn">View</a></td>
+                                            <td><a href="{% url 'control' i.id %}" class="btn btn-manage">Manage</a></td>
                                         </tr>
                                     {% endfor %}
                                 </table>

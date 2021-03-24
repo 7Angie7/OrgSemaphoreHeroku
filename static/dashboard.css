@@ -117,3 +117,17 @@ body, html {
 .table-wrapper-scroll-y {
     display: block;
 }
+
+table tr td a {
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    background-color: #f2d24b;
+    border-radius: 15%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+table tr td a:hover {
+    color: #33ccff;
+}
