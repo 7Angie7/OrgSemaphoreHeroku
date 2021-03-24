@@ -118,7 +118,7 @@ body, html {
     display: block;
 }
 
-table td {
+.table td {
     vertical-align: middle;
     padding-top: 5px;
     padding-bottom: 0px;
@@ -151,4 +151,10 @@ table tr td a:hover {
 .tdManageBtn {
     width: 30%;
     text-align: center;
+}
+
+a.btn.btn-manage {
+    font-size: 13px;
+    margin-bottom: 5px;
+    padding: 5px;
 }

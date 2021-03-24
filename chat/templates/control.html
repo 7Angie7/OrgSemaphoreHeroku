@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -182,7 +183,7 @@ img {
             <div class="col-lg-4">
                 <div class="profileCard">
                     <div class="row justify-content-lg-center">
-                        <img src="{{ STATIC_URL }}images/redLight.png" id="demo" alt="busyLight">
+                        <img src="{% static redLight.png %}" id="demo" alt="busyLight">
                     </div>
                     <div class="row justify-content-lg-center">
                         <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
