@@ -40,22 +40,21 @@
                     <h1> Add New Semaphore </h1>
                 </div>
                 <div class="addForm">
-                    <form>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-lg-4 col-form-label">Name</label>
-                            <div class="col-sm-8">
-                                {{ form.name }}
-                            </div>
+                    <form method="POST" action="">
+                        {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <label>Name of Semaphore</label>
+                            {{ form.name }}
                         </div>
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-lg-4 col-form-label">Estimated time for 1 person</label>
-                            <div class="col-sm-8">
-                                {{ form.time }}
-                            </div>
+                        <div class="input-group mb-3">
+                            <label>Estimated time for 1 person</label>
+                            {{ form.time }}
                         </div>
+
                         <div class="d-flex justify-content-center mt-4 register_container">
                             <input class="btn login_btn" type="submit" value="Create Semaphore">
                         </div>
+
                     </form>
                 </div>
 
@@ -66,6 +65,8 @@
 <!--  ------------------------  -->
 
 <script>
+    var form_fields = document.getElementsByTagName('input')
+
     for (var field in form_fields) {
         form_fields[field].className += ' form-control'
     }
