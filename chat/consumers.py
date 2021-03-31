@@ -72,8 +72,10 @@ class IndexConsumer(AsyncWebsocketConsumer):
 
         if message == 'GREEN':
             semap.status = 'Ready'
+            semap.save()
         elif message == 'RED':
             semap.status = 'Busy'
+            semap.save()
         else:
             print('Ooops ... Another message?')
 
