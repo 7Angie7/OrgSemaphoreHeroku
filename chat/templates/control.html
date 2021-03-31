@@ -183,7 +183,12 @@ img {
             <div class="col-lg-4">
                 <div class="profileCard">
                     <div class="row justify-content-lg-center">
+                        {% if semap.status == 'Busy' %}
                         <img src="{% static 'images/redLight.png' %}" id="demo" alt="busyLight">
+                        {% endif %}
+                        {% if semap.status == 'Ready' %}
+                        <img src="{% static 'images/greenLight.png' %}" id="demo" alt="busyLight">
+                        {% endif %}
                     </div>
                     <div class="row justify-content-lg-center">
                         <button class="button btnready" onclick="readyAlert()">I'm ready!</button>

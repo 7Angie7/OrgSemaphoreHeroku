@@ -67,6 +67,13 @@ class IndexConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
+        if message == 'Ready':
+            print("Green message received")
+        elif message == 'Busy':
+            print('Busy message received')
+        else:
+            print('Ooops ... Another message?')
+
         await self.channel_layer.group_send(
             self.room_group_name,
             {
