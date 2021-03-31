@@ -1,5 +1,6 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
+from .models import *
 
 
 class SemaphoreConsumer(AsyncWebsocketConsumer):
@@ -67,10 +68,12 @@ class IndexConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
 
-        if message == 'Ready':
-            print("Green message received")
-        elif message == 'Busy':
-            print('Busy message received')
+        semap = Semaphore.objects.get(controlUrl=self.pk_test)
+
+        if message == 'GREEN':
+            semap.status = 'Ready'
+        elif message == 'RED':
+            semap.status = 'Busy'
         else:
             print('Ooops ... Another message?')
 
