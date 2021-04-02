@@ -1,36 +1,197 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
-    <title>Semaphore|OrganizeSemaphore</title>
+	<title>{{ semap.name }}|OrganizeSemaphore</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
+
     <style>
-        body {
-    background-color: #F9F9F9;
-    font-family: 'Noto Sans JP', sans-serif;
-    color: #A9A9A9;
-    text-align: center;
+        /* body style */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+    overflow: hidden;
+    font-family: 'Nunito', sans-serif;
 }
 
-h1{
+/* ************** */
+
+/* navbar style */
+.navbar {
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .navbar-btn {
+    background-color: #f2d24b;
+    margin-left: 10px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 17px;
+}
+
+.navbar-btn a {
+    font-weight: bold;
+    font-size: 20px;
     color: black;
 }
 
-.dot {
-    height: 100px;
-    width: 100px;
-    background-color: red;
-    border-radius: 50%;
-    display: inline-block;
+#navbarNav ul li a:hover {
+    color: #33ccff;
 }
+
+/* ********************** */
+
+.profileCard {
+    margin-top: 20px;
+    height: 600px;
+    background: #F6FBFB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.profileCard h1 {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    padding-top: 35px;
+    padding-bottom: 10px;
+}
+
+.profileCard i {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;;
+    border-color: grey;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 75%;
+}
+
+.dashboardCard {
+    margin-top: 20px;
+    height: 600px;
+    background: #F6FBFB;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.dashboardCard h1 {
+    font-family: 'Lato', sans-serif;
+    font-style: italic;
+    padding-top: 35px;
+    padding-bottom: 10px;
+}
+
+.profileImg {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 0 auto;
+    border-radius: 50%;
+}
+
+.center-btn {
+    text-align: center;
+    padding-top: 35px;
+}
+
+.center-btn a {
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    background-color: #33ccff;
+    border-radius: 15%;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.center-btn a:hover {
+    color: #f2d24b;
+}
+
+.button {
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.btnready {
+    background-color: #80DF38;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-bottom: 15px;
+}
+
+.btnbusy {
+    background-color: #DE3047;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-bottom: 10px;
+}
+
+img {
+    margin-top: 50px;
+    height: 300px;
+    width: 180px;
+    margin-bottom: 50px;
+}
+
+
     </style>
 </head>
 <body>
-    <div>
-        <h1>SEMAPHORE</h1>
-        <p>Do not send a connection request until the green light is on!</p>
+    <!--  ---  MAIN CONTENT   ---  -->
+    <br>
+    <div class="container">
+        <div class="row">
+            <!--  ---    ---  -->
+            <div class="col-lg-4">
+                <div class="profileCard">
+                    <div class="row justify-content-lg-center">
+                        {% if semap.status == 'Busy' %}
+                        <img src="{% static 'images/redLight.png' %}" id="demo" alt="busyLight">
+                        {% endif %}
+                        {% if semap.status == 'Ready' %}
+                        <img src="{% static 'images/greenLight.png' %}" id="demo" alt="busyLight">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+             <!--  ------------------------  -->
+            <!--  ---    ---  -->
+            <div class="col-lg-8">
+                <div class="dashboardCard">
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-10">
+                            <h1>" {{ semap.name }} "</h1>
+                        </div>
+                    </div>
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-10">
 
-        <span class="dot" id="demo"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             <!--  ------------------------  -->
+        </div>
     </div>
 
     {{ pk_test|json_script:"pk-test" }}
