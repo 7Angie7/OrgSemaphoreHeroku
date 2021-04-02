@@ -194,9 +194,9 @@ img {
         </div>
     </div>
 
-    {{ semap_url|json_script:"semap-url" }}
+    {{ pk_test|json_script:"pk-test" }}
     <script>
-        const roomName = JSON.parse(document.getElementById('semap-url').textContent);
+        const roomName = JSON.parse(document.getElementById('pk-test').textContent);
         console.log(roomName)
         const ws = new WebSocket(
             'wss://'

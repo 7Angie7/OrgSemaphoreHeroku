@@ -90,6 +90,6 @@ def control(request, pk_test):
     return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test})
 
 
-def semaphore(request, semap_url):
-    semap = Semaphore.objects.get(controlUrl=semap_url)
-    return render(request, 'semaphore.html', {'semap': semap, 'semap_url': semap_url})
+def semaphore(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test})

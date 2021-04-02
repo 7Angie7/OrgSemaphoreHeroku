@@ -45,8 +45,8 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
 
 class IndexConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.pk_test = self.scope['url_route']['kwargs']['semap_url']
-        self.room_group_name = 'semaphore_%s' % self.semap_url
+        self.pk_test =  self.scope['url_route']['kwargs']['pk_test']
+        self.room_group_name = 'semaphore_%s' % self.pk_test
 
         print(self.room_group_name)
 
