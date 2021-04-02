@@ -194,9 +194,9 @@ img {
         </div>
     </div>
 
-    {{ pk_test|json_script:"pk-test" }}
+    {{ semap_url|json_script:"semap-url" }}
     <script>
-        const roomName = JSON.parse(document.getElementById('pk-test').textContent);
+        const roomName = JSON.parse(document.getElementById('semap-url').textContent);
         console.log(roomName)
         const ws = new WebSocket(
             'wss://'
@@ -218,11 +218,14 @@ img {
 
             if (data.message === 'GREEN'){
                 console.log("greeen message");
-                document.getElementById("demo").style.backgroundColor = "green";
+                document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+            }
+            else if (data.message === 'RED'){
+                console.log("red message");
+                document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
             }
             else {
-                console.log("red message");
-                document.getElementById("demo").style.backgroundColor = "red";
+                console.log("wrong message");
             }
 
         }
