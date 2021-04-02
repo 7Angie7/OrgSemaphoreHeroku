@@ -219,6 +219,14 @@ img {
                             </div>
                         </div>
                     </div>
+                    <div class="row justify-content-lg-center">
+                        <div class="col-lg-10">
+                            <div class="input-group mb-3">
+                                <input type="text" value="https://organize/semaphore.herokuapp.com/semaphore/{{ semap.controlUrl }}" id="copyText">
+                            </div>
+                            <button onclick="copyFunction()">Copy Link</button>
+                        </div>
+                    </div>
                 </div>
             </div>
              <!--  ------------------------  -->
@@ -227,6 +235,16 @@ img {
      <!--  ------------------------  -->
     {{ pk_test|json_script:"pk-test" }}
     <script>
+
+        function copyFunction(){
+            console.log('Copy Fce')
+            var textToCopy = document.getElementById('copyText');
+            textToCopy.select();
+            textToCopy.setSelectionRange(0, 99999)
+            document.execCommand("copy");
+            alert("Copied the text: " + textToCopy.value)
+        }
+
         const roomName = JSON.parse(document.getElementById('pk-test').textContent);
         console.log(roomName)
         const ws = new WebSocket(
