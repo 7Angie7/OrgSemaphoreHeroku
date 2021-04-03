@@ -103,10 +103,6 @@ body, html {
     font-weight: bold;
 }
 
-.center-btn a:hover {
-    color: #f2d24b;
-}
-
 .my-custom-scrollbar {
     margin-top: 40px;
     position: relative;
@@ -137,7 +133,7 @@ table tr td a {
 }
 
 table tr td a:hover {
-    color: #33ccff;
+    background-color: #d0b341;
 }
 
 .tableRows {
@@ -157,4 +153,35 @@ a.btn.btn-manage {
     font-size: 13px;
     margin-bottom: 5px;
     padding: 5px;
+}
+
+.btnEdit {
+    background-color: #33ccff;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    padding: 10px 40px;
+    color: white;
+    border: none;
+}
+
+.btnEdit:hover, .center-btn a:hover{
+    background-color: #30b5e5;
+}
+
+.btnRemove:hover {
+    background-color: #d57a05;
+}
+
+.btnRemove{
+    background-color: darkorange;
+    font-weight: bold;
+    border-radius: 5%;
+    margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px 22px;
+    color: white;
+    border: none;
 }

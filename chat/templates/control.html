@@ -110,14 +110,14 @@ body, html {
     padding: 8px;
     text-decoration: none;
     color: white;
-    background-color: #33ccff;
-    border-radius: 15%;
+    background-color: darkorange;
+    border-radius: 5%;
     font-size: 18px;
     font-weight: bold;
 }
 
 .center-btn a:hover {
-    color: #f2d24b;
+    background-color: #d57a05;
 }
 
 .button {
@@ -137,6 +137,16 @@ body, html {
     font-weight: bold;
     border-radius: 5%;
     margin-bottom: 15px;
+    font-size: 18px;
+    padding: 10px 20px;
+}
+
+.btnready:hover {
+    background-color: #72c633;
+}
+
+        .btnbusy:hover {
+    background-color: #bf2a3e;
 }
 
 .btnbusy {
@@ -144,6 +154,8 @@ body, html {
     font-weight: bold;
     border-radius: 5%;
     margin-bottom: 10px;
+    font-size: 18px;
+    padding: 10px 22px;
 }
 
 img {
@@ -151,6 +163,26 @@ img {
     height: 300px;
     width: 180px;
     margin-bottom: 50px;
+}
+
+.dashboardCard input {
+    width: 70%;
+    padding: 8px;
+}
+
+#copyBtn{
+    padding: 8px;
+    text-decoration: none;
+    color: white;
+    background-color: #33ccff;
+    border-radius: 5%;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+}
+
+#copyBtn:hover {
+    background-color: #30b5e5;
 }
 
 
@@ -221,10 +253,11 @@ img {
                     </div>
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
-                            <div class="input-group mb-3">
+
                                 <input type="text" value="https://organize/semaphore.herokuapp.com/semaphore/{{ semap.controlUrl }}" id="copyText">
-                            </div>
-                            <button onclick="copyFunction()">Copy Link</button>
+
+                                <button onclick="copyFunction()" id="copyBtn">Copy Link</button>
+
                         </div>
                     </div>
                 </div>

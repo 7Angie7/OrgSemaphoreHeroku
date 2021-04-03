@@ -65,7 +65,7 @@ body, html {
 }
 
 .login_btn:hover {
-    color: #33ccff;
+    background-color: #d0b341;
 }
 
 .addForm{
