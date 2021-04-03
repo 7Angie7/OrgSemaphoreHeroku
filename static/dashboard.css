@@ -43,7 +43,6 @@ body, html {
 
 .profileCard {
     margin-top: 20px;
-    height: 600px;
     background: #F6FBFB;
     text-align: center;
     border-radius: 10px;
@@ -68,7 +67,6 @@ body, html {
 
 .dashboardCard {
     margin-top: 20px;
-    height: 600px;
     background: #F6FBFB;
     text-align: center;
     border-radius: 10px;
@@ -94,13 +92,13 @@ body, html {
 }
 
 .center-btn a {
-    padding: 8px;
     text-decoration: none;
     color: white;
     background-color: #33ccff;
-    border-radius: 15%;
+    border-radius: 50%;
     font-size: 18px;
     font-weight: bold;
+    padding: 18px 8px;
 }
 
 .my-custom-scrollbar {
@@ -108,6 +106,7 @@ body, html {
     position: relative;
     height: 400px;
     overflow: auto;
+    padding-bottom: 40px;
 }
 
 .table-wrapper-scroll-y {
@@ -173,15 +172,18 @@ a.btn.btn-manage {
 
 .btnRemove:hover {
     background-color: #d57a05;
+    text-decoration: none;
+    color: white;
 }
 
 .btnRemove{
     background-color: darkorange;
     font-weight: bold;
     border-radius: 5%;
-    margin-bottom: 10px;
+    margin-bottom: 40px;
     font-size: 18px;
     padding: 10px 22px;
     color: white;
     border: none;
+
 }

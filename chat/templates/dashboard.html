@@ -44,7 +44,7 @@
                         <button class="button btnEdit" onclick="readyAlert()">Edit Account</button>
                     </div>
                     <div class="row justify-content-lg-center">
-                        <button class="button btnRemove" onclick="busyAlert()">Remove Account</button>
+                        <a href="{% url 'deleteAccount' %}" class="btnRemove">DeleteAccount</a>
                     </div>
 
             </div>
@@ -59,7 +59,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="center-btn">
-                            <a href="{% url 'addSemaphore' %}" class="btn">+Add</a>
+                            <a href="{% url 'addSemaphore' %}" class="btn">+New</a>
                         </div>
                     </div>
                 </div>

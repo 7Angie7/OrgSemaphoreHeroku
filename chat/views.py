@@ -93,3 +93,25 @@ def control(request, pk_test):
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test})
+
+
+@login_required(login_url='mainpage')
+def deleteSemap(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+
+    if request.method == 'POST':
+        semap.delete()
+        return redirect('dashboard')
+
+    return render(request, 'deleteSemap.html', {'semap': semap, 'pk_test': pk_test})
+
+
+@login_required(login_url='mainpage')
+def deleteAccount(request):
+    user = request.user
+
+    if request.method == 'POST':
+        user.delete()
+        return redirect('mainpage')
+
+    return render(request, 'deleteAccount.html', {'user': user})

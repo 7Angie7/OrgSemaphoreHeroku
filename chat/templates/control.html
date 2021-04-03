@@ -240,7 +240,7 @@ img {
                         </div>
                         <div class="col-lg-3">
                             <div class="center-btn">
-                                <a href="{% url 'dashboard' %}" class="btn">Remove</a>
+                                <a href="{% url 'deleteSemap' semap.controlUrl %}" class="btn">Delete</a>
                             </div>
                         </div>
                     </div>
@@ -254,7 +254,7 @@ img {
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
 
-                                <input type="text" value="https://organize/semaphore.herokuapp.com/semaphore/{{ semap.controlUrl }}" id="copyText">
+                                <input type="text" value="https://organize-semaphore.herokuapp.com/semaphore/{{ semap.controlUrl }}" id="copyText">
 
                                 <button onclick="copyFunction()" id="copyBtn">Copy Link</button>
 

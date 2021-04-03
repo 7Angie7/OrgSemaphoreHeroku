@@ -1,0 +1,161 @@
+<head>
+    <meta charset="UTF-8">
+    <title>RemoveSemaphore|OrganizeSemaphore</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
+
+    <style>
+        /* body style */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+            overflow: hidden;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        /* ************** */
+
+        /* navbar style */
+        .navbar {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .navbar-nav {
+            margin-left: auto;
+        }
+
+        .navbar .navbar-btn {
+            background-color: #f2d24b;
+            margin-left: 10px;
+            margin-right: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 17px;
+        }
+
+        .navbar-btn a {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
+
+        #navbarNav ul li a:hover {
+            color: #33ccff;
+        }
+
+        /* ********************** */
+        .addCard {
+            margin-top: 20px;
+            background: #F6FBFB;
+            text-align: center;
+            border-radius: 10px;
+        }
+
+        .addCard h1 {
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            padding-top: 35px;
+            padding-bottom: 10px;
+        }
+
+        .login_btn {
+            padding-right: 20px;
+            padding-left: 20px;
+            color: white;
+            background-color: darkorange;
+            font-weight: bold;
+        }
+
+        .login_btn:hover {
+            background-color: #d57a05;
+        }
+
+        .addForm {
+            margin-top: 20px;
+            padding-bottom: 30px;
+        }
+
+        form {
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        .addForm form a {
+            padding-right: 20px;
+            padding-left: 20px;
+            color: white;
+            background-color: #33ccff;
+            font-weight: bold;
+            border-radius: 5%;
+            text-decoration: none;
+            vertical-align: middle;
+            padding-top: 8px;
+            margin-right: 10px;
+        }
+
+        .addForm form a:hover {
+            background-color: #30b5e5;
+        }
+
+        p {
+            margin-top: 50px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<!--  ---  NAVIGATION BAR  ---  -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
+            <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
+        </ul>
+    </div>
+</nav>
+<!--  ------------------------  -->
+
+<!--  ---  MAIN CONTENT   ---  -->
+<br>
+<div class="container">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+            <div class="addCard">
+                <div>
+                    <h1> Delete Semaphore </h1>
+                </div>
+                <div>
+                    <p>Are you sure you want to delete "{{ semap.name }}" semaphore?</p>
+                </div>
+                <div class="addForm">
+                    <form method="POST" action="">
+                        {% csrf_token %}
+
+                        <div class="d-flex justify-content-center mt-4">
+                            <a href="{% url 'control' semap.controlUrl %}">Cancel</a>
+                            <input class="btn login_btn" type="submit" value="Yes, delete it!">
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>

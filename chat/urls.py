@@ -12,4 +12,6 @@ urlpatterns = [
     path('addSemaphore/', views.addSemaphore, name='addSemaphore'),
     path('contact/', views.contact, name='contact'),
     path('control/<str:pk_test>/', views.control, name='control'),
+    path('control/<str:pk_test>/deleteSemap/', views.deleteSemap, name='deleteSemap'),
+    path('dashboard/deleteAccount/', views.deleteAccount, name='deleteAccount'),
 ]
