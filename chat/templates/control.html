@@ -246,7 +246,7 @@ img {
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
                             <div class="tdManageBtn">
-                                <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage">Open "{{ semap.name }}"</a>
+                                <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage" target="_blank">Open "{{ semap.name }}"</a>
                             </div>
                         </div>
                     </div>
@@ -319,11 +319,20 @@ img {
         }
 
         function readyAlert(){
-            alert("GREEN color on semaphore")
             const message = "GREEN";
+            console.log("juuuuuu");
             ws.send(JSON.stringify({
                 'message': message
             }));
+            console.log("eeej");
+
+            $.ajax({
+                url: '/readyAlertUrl/<str:pk_test>/',
+                method: 'POST',
+                success: function(response){
+                    alert("GREEN color on semaphore")
+                }
+            })
         }
         function busyAlert(){
             alert("RED color on semaphore")

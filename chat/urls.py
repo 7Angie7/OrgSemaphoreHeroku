@@ -15,4 +15,5 @@ urlpatterns = [
     path('control/<str:pk_test>/deleteSemap/', views.deleteSemap, name='deleteSemap'),
     path('dashboard/deleteAccount/', views.deleteAccount, name='deleteAccount'),
     path('dashboard/editAccount/', views.editAccount, name='editAccount'),
+    path('readyAlertUrl/<str:pk_test>/', views.readyAlertUrl, name='readyAlertUrl')
 ]

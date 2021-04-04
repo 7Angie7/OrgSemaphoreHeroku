@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from .models import *
 from .forms import CreateUserForm, AddSemaphoreForm
@@ -130,3 +131,10 @@ def editAccount(request):
 
     context = {'form': form}
     return render(request, 'editAccount.html', context)
+
+
+def readyAlertUrl(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    semap.status = 'Ready'
+    semap.save()
+    return HttpResponse('Status changed to --Ready--')
