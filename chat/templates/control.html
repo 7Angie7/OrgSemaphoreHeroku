@@ -327,7 +327,7 @@ img {
             console.log("eeej");
 
             $.ajax({
-                url: '/readyAlertUrl/<str:pk_test>/',
+                url: '/readyAlertUrl/{{ semap.controlUrl }}/',
                 method: 'POST',
                 success: function(response){
                     alert("GREEN color on semaphore")
