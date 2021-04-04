@@ -14,4 +14,5 @@ urlpatterns = [
     path('control/<str:pk_test>/', views.control, name='control'),
     path('control/<str:pk_test>/deleteSemap/', views.deleteSemap, name='deleteSemap'),
     path('dashboard/deleteAccount/', views.deleteAccount, name='deleteAccount'),
+    path('dashboard/editAccount/', views.editAccount, name='editAccount'),
 ]

@@ -4,7 +4,6 @@ body, html {
     padding: 0;
     height: 100%;
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
-    overflow: hidden;
     font-family: 'Nunito', sans-serif;
 }
 
@@ -168,6 +167,8 @@ a.btn.btn-manage {
 
 .btnEdit:hover, .center-btn a:hover{
     background-color: #30b5e5;
+    text-decoration: none;
+    color: white;
 }
 
 .btnRemove:hover {
@@ -182,7 +183,7 @@ a.btn.btn-manage {
     border-radius: 5%;
     margin-bottom: 40px;
     font-size: 18px;
-    padding: 10px 22px;
+    padding: 10px 29px;
     color: white;
     border: none;
 

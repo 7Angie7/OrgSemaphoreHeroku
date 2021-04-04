@@ -115,3 +115,18 @@ def deleteAccount(request):
         return redirect('mainpage')
 
     return render(request, 'deleteAccount.html', {'user': user})
+
+
+@login_required(login_url='mainpage')
+def editAccount(request):
+    user = request.user
+    form = CreateUserForm(instance=user)
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('dashboard')
+
+    context = {'form': form}
+    return render(request, 'editAccount.html', context)

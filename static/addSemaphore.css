@@ -4,7 +4,6 @@ body, html {
     padding: 0;
     height: 100%;
     background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
-    overflow: hidden;
     font-family: 'Nunito', sans-serif;
 }
 
