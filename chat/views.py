@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
+from django.views.decorators.csrf import csrf_exempt
+
 from .models import *
 from .forms import CreateUserForm, AddSemaphoreForm
 from django.contrib import messages
@@ -133,6 +135,7 @@ def editAccount(request):
     return render(request, 'editAccount.html', context)
 
 
+@csrf_exempt
 def readyAlertUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semap.status = 'Ready'
