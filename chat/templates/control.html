@@ -335,11 +335,18 @@ img {
             })
         }
         function busyAlert(){
-            alert("RED color on semaphore")
             const message = "RED";
             ws.send(JSON.stringify({
                 'message': message
             }));
+
+            $.ajax({
+                url: '/busyAlertUrl/{{ semap.controlUrl }}/',
+                method: 'POST',
+                success: function(response){
+                    alert("RED color on semaphore")
+                }
+            })
         }
     </script>
 

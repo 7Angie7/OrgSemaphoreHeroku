@@ -141,3 +141,11 @@ def readyAlertUrl(request, pk_test):
     semap.status = 'Ready'
     semap.save()
     return HttpResponse('Status changed to --Ready--')
+
+
+@csrf_exempt
+def busyAlertUrl(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    semap.status = 'Busy'
+    semap.save()
+    return HttpResponse('Status changed to --Busy--')
