@@ -201,6 +201,36 @@
 
 {{ pk_test|json_script:"pk-test" }}
 <script>
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+    function setDevice(){
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+		    return v.toString(16);
+		  });
+    }
+
+    let device = getCookie('device')
+    if (device == null || device == undefined){
+        device = setDevice()
+    }
+
+    document.cookie ='device=' + device + ";domain=;path=/"
+
     const roomName = JSON.parse(document.getElementById('pk-test').textContent);
     console.log(roomName)
     const ws = new WebSocket(
@@ -234,15 +264,13 @@
             var bbb = aaa.toString()
             document.getElementById("queueNumber").textContent = bbb;
             document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-        }else if (data.message === 'Reset queue') {
+        } else if (data.message === 'Reset queue') {
             console.log("queue reset message");
             var aa = parseInt(document.getElementById("queueNumber").textContent);
             aa = 0;
             var bb = aa.toString()
             document.getElementById("queueNumber").textContent = bb;
-        }
-
-        else {
+        } else {
             console.log("wrong message");
         }
 
@@ -258,9 +286,9 @@
 
     function joinQueue() {
         const message = "New client in queue";
-            ws.send(JSON.stringify({
-                'message': message
-            }));
+        ws.send(JSON.stringify({
+            'message': message
+        }));
 
         $.ajax({
             url: '/joinQueueUrl/{{ semap.controlUrl }}/',

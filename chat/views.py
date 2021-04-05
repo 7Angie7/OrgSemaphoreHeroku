@@ -154,7 +154,9 @@ def busyAlertUrl(request, pk_test):
 
 @csrf_exempt
 def joinQueueUrl(request, pk_test):
+    device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
+    client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
     semap.queueNum += 1
     semap.save()
     return HttpResponse('Change number of queue')

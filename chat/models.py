@@ -21,3 +21,11 @@ class Semaphore(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class QueueClient(models.Model):
+    semap = models.ForeignKey(Semaphore, on_delete=models.CASCADE, null=True)
+    device = models.UUIDField(default=uuid.uuid4)
+
+    def __str__(self):
+        return self.device
