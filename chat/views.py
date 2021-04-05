@@ -156,5 +156,6 @@ def busyAlertUrl(request, pk_test):
 def joinQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semap.queueNum += 1
+    request.session['nameClient'] = 'Boris'
     semap.save()
     return HttpResponse('Change number of queue')
