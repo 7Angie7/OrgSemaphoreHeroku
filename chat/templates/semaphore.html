@@ -175,7 +175,7 @@
 
                 </div>
                 <div class="row justify-content-lg-center">
-                    <button class="button btnJoinQueue" onclick="joinQueue()">Join the Queue</button>
+                    <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue</button>
                 </div>
             </div>
         </div>
@@ -190,7 +190,7 @@
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        <h2 id="queueNumber">{{ num }}</h2>
+                        <h2 id="queueNumber">Number of clients in queue: {{ num }}</h2>
                     </div>
                 </div>
             </div>
@@ -233,6 +233,7 @@
             aaa = aaa + 1;
             var bbb = aaa.toString()
             document.getElementById("queueNumber").textContent = bbb;
+            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
         }
 
         else {
