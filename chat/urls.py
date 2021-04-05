@@ -18,4 +18,5 @@ urlpatterns = [
     path('readyAlertUrl/<str:pk_test>/', views.readyAlertUrl, name='readyAlertUrl'),
     path('busyAlertUrl/<str:pk_test>/', views.busyAlertUrl, name='busyAlertUrl'),
     path('joinQueueUrl/<str:pk_test>/', views.joinQueueUrl, name='joinQueueUrl'),
+    path('resetQueueUrl/<str:pk_test>/', views.resetQueueUrl, name='resetQueueUrl'),
 ]

@@ -229,11 +229,17 @@
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
         } else if (data.message === 'New client in queue') {
             console.log("queue message");
-            var aaa = parseInt(document.getElementById("queueNumber"));
+            var aaa = parseInt(document.getElementById("queueNumber").textContent);
             aaa = aaa + 1;
             var bbb = aaa.toString()
             document.getElementById("queueNumber").textContent = bbb;
             document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+        }else if (data.message === 'Reset queue') {
+            console.log("queue reset message");
+            var aa = parseInt(document.getElementById("queueNumber").textContent);
+            aaa = 0;
+            var bb = aa.toString()
+            document.getElementById("queueNumber").textContent = bb;
         }
 
         else {

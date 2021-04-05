@@ -259,6 +259,9 @@ img {
 
                         </div>
                     </div>
+                    <div class="row justify-content-lg-center">
+                    <button class="button resetQueue" onclick="resetQueue()" id="resetQueueBtn">Join the Queue</button>
+                </div>
                 </div>
             </div>
              <!--  ------------------------  -->
@@ -348,6 +351,21 @@ img {
                 }
             })
         }
+
+        function resetQueue() {
+        const message = "Reset queue";
+            ws.send(JSON.stringify({
+                'message': message
+            }));
+
+        $.ajax({
+            url: '/resetQueueUrl/{{ semap.controlUrl }}/',
+            method: 'POST',
+            success: function (response) {
+                alert("You reset the queue")
+            }
+        })
+    }
     </script>
 
 </body>
