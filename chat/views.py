@@ -74,7 +74,7 @@ def addSemaphore(request):
             task.author = request.user
             task.status = 'Busy'
             task.controlUrl = uuid.uuid4()
-            task.semapUrl = uuid.uuid4()
+            task.queueNum = 0
 
             task.save()
             return redirect('dashboard')
@@ -95,7 +95,8 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test})
+    num = str(semap.queueNum)
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'num': num})
 
 
 @login_required(login_url='mainpage')
@@ -149,3 +150,11 @@ def busyAlertUrl(request, pk_test):
     semap.status = 'Busy'
     semap.save()
     return HttpResponse('Status changed to --Busy--')
+
+
+@csrf_exempt
+def joinQueueUrl(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    semap.queueNum += 1
+    semap.save()
+    return HttpResponse('Change number of queue')
