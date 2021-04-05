@@ -25,7 +25,7 @@ class Semaphore(models.Model):
 
 class QueueClient(models.Model):
     semap = models.ForeignKey(Semaphore, on_delete=models.CASCADE, null=True)
-    device = models.UUIDField(default=uuid.uuid4)
+    device = models.CharField(max_length=200, null=True)
 
     def __str__(self):
         return self.device
