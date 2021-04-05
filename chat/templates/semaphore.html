@@ -229,7 +229,10 @@
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
         } else if (data.message === 'New client in queue') {
             console.log("queue message");
-            document.getElementById("queueNumber").textContent = {{ num }} ;
+            var aaa = parseInt(document.getElementById("queueNumber"));
+            aaa = aaa + 1;
+            var bbb = aaa.toString()
+            document.getElementById("queueNumber").textContent = "bbb" ;
         }
 
         else {
