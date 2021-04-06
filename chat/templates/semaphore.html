@@ -294,7 +294,10 @@
             url: '/joinQueueUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
-                alert("You have been joined the queue")
+                if(response.msg == "You are already in the queue"){
+                    alert("You have been joined the queue")
+                }
+
             }
         })
     }

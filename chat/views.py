@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
@@ -159,11 +159,17 @@ def joinQueueUrl(request, pk_test):
 
     try:
         client = QueueClient.objects.get(device=device, semap=semap)
-        return HttpResponse('You are already in the queue')
+        response = {
+            'msg': "You are already in the queue"
+        }
+
     except:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
-        return HttpResponse('Change number of queue')
+        response = {
+            'msg': "Change number of queue"
+        }
 
+    return JsonResponse(response)
 
 @csrf_exempt
 def resetQueueUrl(request, pk_test):
