@@ -95,7 +95,7 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    num = str(semap.queueNum)
+    num = str(semap.lastQueueNum)
     return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'num': num})
 
 
