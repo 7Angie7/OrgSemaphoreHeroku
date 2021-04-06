@@ -158,7 +158,7 @@ def joinQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
 
     try:
-        client = QueueClient.objects.get(device=device)
+        client = QueueClient.objects.get(device=device, semap=semap)
         return HttpResponse('You are already in the queue')
     except:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
