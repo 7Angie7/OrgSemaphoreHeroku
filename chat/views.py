@@ -156,10 +156,13 @@ def busyAlertUrl(request, pk_test):
 def joinQueueUrl(request, pk_test):
     device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
-    semap.queueNum += 1
-    semap.save()
-    return HttpResponse('Change number of queue')
+
+    try:
+        client = QueueClient.objects.get(device=device)
+        return HttpResponse('You are already in the queue')
+    except:
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
+        return HttpResponse('Change number of queue')
 
 
 @csrf_exempt

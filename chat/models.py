@@ -17,7 +17,7 @@ class Semaphore(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     status = models.CharField(max_length=200, null=True, choices=STATUS)
     controlUrl = models.UUIDField(default=uuid.uuid4)
-    queueNum = models.IntegerField(null=True)
+    lastQueueNum = models.IntegerField(null=True)
 
     def __str__(self):
         return self.name
