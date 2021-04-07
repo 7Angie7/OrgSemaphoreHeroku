@@ -264,8 +264,8 @@
         } else if (data.message === 'New client in queue') {
             console.log("queue message");
             var oldNum = parseInt(document.getElementById("queueNumber").textContent);
-            oldNum = oldNum + 1;
-            var newNum = newNum.toString()
+            oldNum += 1;
+            var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
             document.getElementById("joinQueueBtn").style.backgroundColor = "red";
         } else {
