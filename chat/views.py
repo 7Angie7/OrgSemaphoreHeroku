@@ -95,8 +95,9 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    num = str(semap.lastQueueNum)
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'num': num})
+    numQueueClients = QueueClient.objects.filter(semap=semap).count()
+
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients})
 
 
 @login_required(login_url='mainpage')
@@ -181,7 +182,7 @@ def joinQueueUrl(request, pk_test):
         response = {
             'msg': "Change number of queue"
         }
-        
+
     return JsonResponse(response)
 
 @csrf_exempt

@@ -190,7 +190,7 @@
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        <h2 id="queueNumber">{{ num }}</h2>
+                        <h2 id="queueNumber">{{ numQueueClients }}</h2>
                     </div>
                 </div>
             </div>
@@ -263,17 +263,11 @@
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
         } else if (data.message === 'New client in queue') {
             console.log("queue message");
-            var aaa = parseInt(document.getElementById("queueNumber").textContent);
-            aaa = aaa + 1;
-            var bbb = aaa.toString()
-            document.getElementById("queueNumber").textContent = bbb;
+            var oldNum = parseInt(document.getElementById("queueNumber").textContent);
+            oldNum = oldNum + 1;
+            var newNum = newNum.toString()
+            document.getElementById("queueNumber").textContent = newNum;
             document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-        } else if (data.message === 'Reset queue') {
-            console.log("queue reset message");
-            var aa = parseInt(document.getElementById("queueNumber").textContent);
-            aa = 0;
-            var bb = aa.toString()
-            document.getElementById("queueNumber").textContent = bb;
         } else {
             console.log("wrong message");
         }
