@@ -287,15 +287,15 @@
             url: '/joinQueueUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
-                const message = "New client in queue";
-                ws.send(JSON.stringify({
-                    'message': message
-                }));
-        
                 if (response.msg == "You are already in the queue") {
                     alert("You have been joined the queue")
                 }
-
+                else{
+                    const message = "New client in queue";
+                    ws.send(JSON.stringify({
+                        'message': message
+                    }));
+                }
             }
         })
     }
