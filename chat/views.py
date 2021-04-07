@@ -88,8 +88,9 @@ def contact(request):
 def control(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=2)
+    first = semapClients.first()
 
-    return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test, 'semapClients': semapClients})
+    return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test, 'semapClients': semapClients, 'first': first})
 
 
 def semaphore(request, pk_test):
