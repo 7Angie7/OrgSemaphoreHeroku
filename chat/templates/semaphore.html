@@ -252,16 +252,25 @@
         const data = JSON.parse(event.data)
 
         if (data.message === 'GREEN') {
+            $.ajax({
+            url: '/checkQueueUrl/{{ semap.controlUrl }}/',
+            method: 'POST',
+            success: function (response) {
+                if (response.msg == "SAME") {
+                    document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+                }
+                else if (response.msg == "DIFFERENT"){
+                    console.log("not your turn")
+                }
+                else if (response.msg == "not in queue"){
+                    console.log("you must join queue first")
+                }
+            }
+        })
 
-            console.log(device)
 
 
-            console.log("greeen message");
-            const url = '/checkQueueUrl/{{ semap.controlUrl }}' + device
-            console.log(url)
 
-
-            document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
         } else if (data.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";

@@ -185,9 +185,26 @@ def joinQueueUrl(request, pk_test):
 
     return JsonResponse(response)
 
+
 @csrf_exempt
-def resetQueueUrl(request, pk_test):
+def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semap.queueNum = 0
-    semap.save()
-    return HttpResponse('Reset the queue')
+    lastNum = semap.lastQueueNum
+    device = request.COOKIES['DEVICE']
+
+    try:
+        client = QueueClient.objects.get(semap=semap, device=device)
+        if client.queueNum == lastNum:
+            response = {
+                'msg': "SAME"
+            }
+        else:
+            response = {
+                'msg': "DIFFERENT"
+            }
+    except:
+        response = {
+            'msg': "not in queue"
+        }
+
+    return JsonResponse(response)
