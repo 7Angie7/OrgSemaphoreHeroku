@@ -156,19 +156,17 @@ def busyAlertUrl(request, pk_test):
 def joinQueueUrl(request, pk_test):
     device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
+    lastClient = QueueClient.objects.last()
 
     # try get the last client in database
-    try:
-        lastClient = QueueClient.objects.last()
-        response = {
-            'msg': "you are not first client"
-        }
-
-    # DB is empty - create first client
-    except:
+    if lastClient == None:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1)
         response = {
             'msg': "First client"
+        }
+    else:
+        response = {
+            'msg': "you are not first"
         }
 
     return JsonResponse(response)
