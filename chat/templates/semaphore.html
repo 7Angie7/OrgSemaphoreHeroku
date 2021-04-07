@@ -252,6 +252,10 @@
         const data = JSON.parse(event.data)
 
         if (data.message === 'GREEN') {
+
+            console.log(device)
+
+
             console.log("greeen message");
             const url = '/checkQueueUrl/{{ semap.controlUrl }}' + device
             console.log(url)
