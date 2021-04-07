@@ -253,7 +253,7 @@
 
         if (data.message === 'GREEN') {
             console.log("greeen message");
-            const url = '/checkQueueUrl/{{ semap.controlUrl }}'+device
+            const url = '/checkQueueUrl/{{ semap.controlUrl }}' + device
             console.log(url)
 
 
@@ -283,15 +283,15 @@
     }
 
     function joinQueue() {
-        const message = "New client in queue";
-        ws.send(JSON.stringify({
-            'message': message
-        }));
-
         $.ajax({
             url: '/joinQueueUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
+                const message = "New client in queue";
+                ws.send(JSON.stringify({
+                    'message': message
+                }));
+        
                 if (response.msg == "You are already in the queue") {
                     alert("You have been joined the queue")
                 }
