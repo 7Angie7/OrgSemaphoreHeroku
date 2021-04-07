@@ -53,9 +53,6 @@ def register(request):
     return render(request, 'register.html', context)
 
 
-@login_required(login_url='mainpage')
-def semaphore(request):
-    return render(request, 'semaphore.html', {})
 
 
 def logoutUser(request):
@@ -90,7 +87,9 @@ def contact(request):
 @login_required(login_url='mainpage')
 def control(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test})
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=2)
+
+    return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test, 'semapClients': semapClients})
 
 
 def semaphore(request, pk_test):
