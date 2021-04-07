@@ -160,9 +160,7 @@ def joinQueueUrl(request, pk_test):
     # try get the last client in database
     try:
         lastClient = QueueClient.objects.last()
-        response = {
-            'msg': "you are not first client"
-        }
+        return HttpResponse(lastClient.device)
 
     # DB is empty - create first client
     except:
