@@ -285,12 +285,12 @@
                     <div class="col-lg-10">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <table class="table table-bordered table-striped mb-0">
-
+                                    {% if first != None %}
                                     <tr>
                                         <td class="tdName">{{ first.queueNum }}</td>
                                         <td class="tdManageBtn">{{ first.device }}</td>
                                     </tr>
-
+                                    {% endif %}
                             </table>
                         </div>
                     </div>
