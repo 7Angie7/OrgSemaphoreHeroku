@@ -202,34 +202,34 @@
 {{ pk_test|json_script:"pk-test" }}
 <script>
     function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
             }
         }
+        return cookieValue;
     }
-    return cookieValue;
-}
 
-    function setDevice(){
-        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-		    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-		    return v.toString(16);
-		  });
+    function setDevice() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 
     let device = getCookie('device')
-    if (device == null || device == undefined){
+    if (device == null || device == undefined) {
         device = setDevice()
     }
 
-    document.cookie ='device=' + device + ";domain=;path=/"
+    document.cookie = 'device=' + device + ";domain=;path=/"
 
     const roomName = JSON.parse(document.getElementById('pk-test').textContent);
     console.log(roomName)
@@ -253,6 +253,10 @@
 
         if (data.message === 'GREEN') {
             console.log("greeen message");
+            const url = '/checkQueueUrl/{{ semap.controlUrl }}'+device
+            console.log(url)
+
+
             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
         } else if (data.message === 'RED') {
             console.log("red message");
@@ -294,7 +298,7 @@
             url: '/joinQueueUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
-                if(response.msg == "You are already in the queue"){
+                if (response.msg == "You are already in the queue") {
                     alert("You have been joined the queue")
                 }
 

@@ -157,14 +157,28 @@ def joinQueueUrl(request, pk_test):
     device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
 
+    # try get the last client in database
+    try:
+        lastClient = QueueClient.objects.last()
+
+    # DB is empty - create first client
+    except:
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1)
+        response = {
+            'msg': "Change number of queue"
+        }
+        return JsonResponse(response)
+
+    # check if the client is in DB
     try:
         client = QueueClient.objects.get(device=device, semap=semap)
         response = {
             'msg': "You are already in the queue"
         }
 
+    # add client to DB
     except:
-        client, created = QueueClient.objects.get_or_create(device=device, semap=semap)
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=lastClient+1)
         response = {
             'msg': "Change number of queue"
         }
