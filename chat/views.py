@@ -190,7 +190,7 @@ def joinQueueUrl(request, pk_test):
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     lastNum = semap.lastQueueNum
-    device = request.COOKIES['DEVICE']
+    device = request.COOKIES['device']
 
     try:
         client = QueueClient.objects.get(semap=semap, device=device)
