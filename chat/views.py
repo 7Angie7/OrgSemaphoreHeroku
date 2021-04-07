@@ -160,15 +160,28 @@ def joinQueueUrl(request, pk_test):
 
     # try get the last client in database
     if lastClient == None:
-        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1)
+        firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1)
         response = {
-            'msg': "First client"
+            'msg': "Change number of queue"
         }
-    else:
-        response = {
-            'msg': "you are not first"
-        }
+        return JsonResponse(response)
 
+    else:
+        lastClientNumber = lastClient.queueNum
+        newLastClientNumber = lastClientNumber + 1
+
+    #check if the client is in DB
+    try:
+        client = QueueClient.objects.get(device=device, semap=semap)
+        response = {
+            'msg': "You are already in the queue"
+        }
+    except:
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber)
+        response = {
+            'msg': "Change number of queue"
+        }
+        
     return JsonResponse(response)
 
 @csrf_exempt
