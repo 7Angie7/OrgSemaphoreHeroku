@@ -93,7 +93,7 @@ class IndexConsumer(AsyncWebsocketConsumer):
         message = text_data_json['message']
         name = text_data_json['name']
 
-        if name is not None:
+        if name == "undefined":
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
