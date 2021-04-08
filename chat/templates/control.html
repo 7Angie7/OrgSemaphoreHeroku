@@ -283,8 +283,7 @@
                             <table class="table table-bordered table-striped mb-0" id="clientsTable">
                                 {% if first != None %}
                                     <tr>
-                                        <td class="tdName">{{ first.queueNum }}</td>
-                                        <td class="tdManageBtn">{{ first.device }}</td>
+                                        <td class="tdName">{{ first.clientName }}</td>
                                     </tr>
                                 {% endif %}
                             </table>
@@ -300,8 +299,7 @@
 
                                 {% for i in semapClients %}
                                     <tr>
-                                        <td class="tdName">{{ i.queueNum }}</td>
-                                        <td class="tdManageBtn">{{ i.device }}</td>
+                                        <td class="tdManageBtn">{{ i.clientName }}</td>
                                     </tr>
                                 {% endfor %}
                             </table>
