@@ -19,4 +19,5 @@ urlpatterns = [
     path('busyAlertUrl/<str:pk_test>/', views.busyAlertUrl, name='busyAlertUrl'),
     path('joinQueueUrl/<str:pk_test>/<str:client_name>/', views.joinQueueUrl, name='joinQueueUrl'),
     path('checkQueueUrl/<str:pk_test>/', views.checkQueueUrl, name='checkQueueUrl'),
+    path('helloQueueUrl/<str:pk_test>/', views.helloQueueUrl, name='helloQueueUrl'),
 ]

@@ -86,7 +86,7 @@ def contact(request):
 @login_required(login_url='mainpage')
 def control(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=2)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     first = semapClients.first()
 
     return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test, 'semapClients': semapClients, 'first': first})
@@ -206,6 +206,25 @@ def checkQueueUrl(request, pk_test):
     except:
         response = {
             'msg': "not in queue"
+        }
+
+    return JsonResponse(response)
+
+
+@csrf_exempt
+def helloQueueUrl(request, pk_test):
+    device = request.COOKIES['device']
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+
+    # check if the client is in DB
+    try:
+        client = QueueClient.objects.get(device=device, semap=semap)
+        response = {
+            'msg': "You are already in the queue"
+        }
+    except:
+        response = {
+            'msg': "Not in queue"
         }
 
     return JsonResponse(response)

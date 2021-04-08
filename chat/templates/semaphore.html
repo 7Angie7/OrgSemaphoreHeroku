@@ -249,6 +249,18 @@
     ws.onopen = function (event) {
         console.log(event);
         console.log("Connection is opened");
+
+        $.ajax({
+            url: '/helloQueueUrl/{{ semap.controlUrl }}/',
+            method: 'POST',
+            success: function (response) {
+                if (response.msg == "You are already in the queue") {
+                    document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+                    document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                    document.getElementById("inputname").disabled = true;
+                }
+                            }
+        })
     }
     ws.onmessage = function (event) {
         console.log("Message is received");
