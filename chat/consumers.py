@@ -28,14 +28,25 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
         message = text_data_json['message']
         name = text_data_json['name']
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'semaphore_message',
-                'message': message,
-                'name': name,
-            }
-        )
+        if name is not None:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'semaphore_message',
+                    'message': message,
+                    'name': name,
+                }
+
+            )
+        else:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'semaphore_message',
+                    'message': message,
+                }
+
+            )
 
     async def semaphore_message(self, event):
         print(event)
@@ -48,7 +59,7 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
 
 class IndexConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        self.pk_test =  self.scope['url_route']['kwargs']['pk_test']
+        self.pk_test = self.scope['url_route']['kwargs']['pk_test']
         self.room_group_name = 'semaphore_%s' % self.pk_test
 
         print(self.room_group_name)
@@ -70,14 +81,27 @@ class IndexConsumer(AsyncWebsocketConsumer):
         print("New event is received")
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        name = text_data_json['name']
 
-        await self.channel_layer.group_send(
-            self.room_group_name,
-            {
-                'type': 'semaphore_message',
-                'message': message,
-            }
-        )
+        if name is not None:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'semaphore_message',
+                    'message': message,
+                    'name': name,
+                }
+
+            )
+        else:
+            await self.channel_layer.group_send(
+                self.room_group_name,
+                {
+                    'type': 'semaphore_message',
+                    'message': message,
+                }
+
+            )
 
     async def semaphore_message(self, event):
         print(event)
