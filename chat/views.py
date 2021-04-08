@@ -226,7 +226,8 @@ def helloQueueUrl(request, pk_test):
     try:
         client = QueueClient.objects.get(device=device, semap=semap)
         response = {
-            'msg': "You are already in the queue"
+            'msg': "You are already in the queue",
+            'msgName': client.clientName,
         }
     except:
         response = {
