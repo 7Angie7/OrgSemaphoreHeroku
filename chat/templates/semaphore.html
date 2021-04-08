@@ -302,9 +302,10 @@
 
     function joinQueue() {
         clientName = document.getElementById('inputname').textContent;
+        console.log(clientName)
 
         $.ajax({
-            url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName,
+            url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
             method: 'POST',
             success: function (response) {
                 if (response.msg == "You are already in the queue") {
