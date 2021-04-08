@@ -344,19 +344,20 @@
         console.log("Message is received");
         console.log(event);
 
-        const data = JSON.parse(event.data)
+        var jsondata = JSON.parse(event.data)
 
-        if (data.message === 'GREEN') {
+
+        if (jsondata.message === 'GREEN') {
             console.log("greeen message");
             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-        } else if (data.message === 'RED') {
+        } else if (jsondata.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
-        } else if (data.message === 'New client in queue'){
+        } else if (jsondata.message === 'New client in queue'){
             var table = document.getElementById("clientsTable")
             var newRow = table.insertRow();
             var newCell = newRow.insertCell();
-            var newText = document.createTextNode(data.name);
+            var newText = document.createTextNode(jsondata.name);
             console.log(newText)
             newCell.appendChild(newText);
         }
