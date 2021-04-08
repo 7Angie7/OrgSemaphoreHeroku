@@ -195,7 +195,12 @@
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
+                        {% if semap.semOpen == True %}
                         <h2 id="queueNumber">{{ numQueueClients }}</h2>
+                        {% endif %}
+                        {% if semap.semOpen == False %}
+                        <h2 id="queueNumber">This semaphore is closed!</h2>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -262,8 +267,6 @@
                 } else if (response.msg == "Close now") {
                     document.getElementById("joinQueueBtn").disabled = true;
                     document.getElementById("inputname").disabled = true;
-                    document.getElementById("queueNumber").textContent = "This semaphore is closed!"
-
                 }
             }
         })
@@ -344,7 +347,8 @@
                 else{
                     const message = "New client in queue";
                     ws.send(JSON.stringify({
-                        'message': message
+                        'message': message,
+                        'name': clientName
                     }));
                     document.getElementById("joinQueueBtn").style.backgroundColor = "red";
                     document.getElementById("joinQueueBtn").textContent = 'In queue already';

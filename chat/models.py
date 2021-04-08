@@ -31,4 +31,4 @@ class QueueClient(models.Model):
     clientName = models.CharField(max_length=200, null=True)
 
     def __str__(self):
-        return self.device
+        return self.clientName

@@ -280,7 +280,7 @@
                     <div class="col-lg-10">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
                             <h3>Next client:</h3>
-                            <table class="table table-bordered table-striped mb-0">
+                            <table class="table table-bordered table-striped mb-0" id="clientsTable">
                                 {% if first != None %}
                                     <tr>
                                         <td class="tdName">{{ first.queueNum }}</td>
@@ -354,8 +354,16 @@
         } else if (data.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
-        } else {
-            console.log("wrong message");
+        } else if (data.message === 'New client in queue'){
+            var table = document.getElementById("clientsTable")
+            var newRow = table.insertRow();
+            var newCell = newRow.insertCell();
+            var newText = document.createTextNode(data.name);
+            newCell.appendChild(newText);
+        }
+
+        else {
+            console.log("another message");
         }
     }
     ws.onclose = function (event) {
