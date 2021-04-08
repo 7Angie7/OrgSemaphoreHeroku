@@ -315,7 +315,7 @@
     function joinQueue() {
         var clientName = document.getElementById('inputname').value;
 
-        if (clientName == null){
+        if (clientName == null || clientName == undefined){
             alert("Please, enter your name")
         } else {
             $.ajax({
