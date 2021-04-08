@@ -71,8 +71,7 @@ def addSemaphore(request):
             task.author = request.user
             task.status = 'Busy'
             task.controlUrl = uuid.uuid4()
-            task.queueNum = 0
-
+            task.lastQueueNum = 0
             task.save()
             return redirect('dashboard')
 
