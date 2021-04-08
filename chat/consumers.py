@@ -32,7 +32,7 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': 'semaphore_message',
+                    'type': 'client_message',
                     'message': message,
                     'name': name,
                 }
@@ -54,6 +54,16 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
 
         await self.send(text_data=json.dumps({
             'message': message,
+        }))
+
+    async def client_message(self, event):
+        print(event)
+        message = event['message']
+        client = event['name']
+
+        await self.send(text_data=json.dumps({
+            'message': message,
+            'name': client,
         }))
 
 
@@ -87,7 +97,7 @@ class IndexConsumer(AsyncWebsocketConsumer):
             await self.channel_layer.group_send(
                 self.room_group_name,
                 {
-                    'type': 'semaphore_message',
+                    'type': 'client_message',
                     'message': message,
                     'name': name,
                 }
@@ -109,6 +119,16 @@ class IndexConsumer(AsyncWebsocketConsumer):
 
         await self.send(text_data=json.dumps({
             'message': message,
+        }))
+
+    async def client_message(self, event):
+        print(event)
+        message = event['message']
+        client = event['name']
+
+        await self.send(text_data=json.dumps({
+            'message': message,
+            'name': client,
         }))
 
     pass
