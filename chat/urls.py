@@ -17,6 +17,6 @@ urlpatterns = [
     path('dashboard/editAccount/', views.editAccount, name='editAccount'),
     path('readyAlertUrl/<str:pk_test>/', views.readyAlertUrl, name='readyAlertUrl'),
     path('busyAlertUrl/<str:pk_test>/', views.busyAlertUrl, name='busyAlertUrl'),
-    path('joinQueueUrl/<str:pk_test>/<str:client_name/>', views.joinQueueUrl, name='joinQueueUrl'),
+    path('joinQueueUrl/<str:pk_test>/<str:client_name>/', views.joinQueueUrl, name='joinQueueUrl'),
     path('checkQueueUrl/<str:pk_test>/', views.checkQueueUrl, name='checkQueueUrl'),
 ]
