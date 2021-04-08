@@ -26,12 +26,14 @@ class SemaphoreConsumer(AsyncWebsocketConsumer):
         print("New event is received")
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        name = text_data_json['name']
 
         await self.channel_layer.group_send(
             self.room_group_name,
             {
                 'type': 'semaphore_message',
                 'message': message,
+                'name': name,
             }
         )
 
