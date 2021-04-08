@@ -168,7 +168,7 @@ def joinQueueUrl(request, pk_test, client_name):
         return JsonResponse(response)
 
     else:
-        lastClientNumber = allqueue.lastQueueNum  # last magic number in whole DB
+        lastClientNumber = allqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
 
