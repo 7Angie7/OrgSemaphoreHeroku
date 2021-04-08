@@ -285,7 +285,7 @@
             oldNum += 1;
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
-            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+
         } else {
             console.log("wrong message");
         }
@@ -316,6 +316,9 @@
                     ws.send(JSON.stringify({
                         'message': message
                     }));
+                    document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+                    document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                    document.getElementById("inputname").disabled = true;
                 }
             }
         })
