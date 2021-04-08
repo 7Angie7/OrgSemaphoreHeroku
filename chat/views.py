@@ -164,7 +164,7 @@ def joinQueueUrl(request, pk_test, client_name):
     if allsemap == None:
         firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1, clientName=client_name)
         response = {
-            'msg': "Change number of queue"
+            'msg': "Change number of queue first time"
         }
 
         return JsonResponse(response)
