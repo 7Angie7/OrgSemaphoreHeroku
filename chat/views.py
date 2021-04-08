@@ -216,6 +216,12 @@ def helloQueueUrl(request, pk_test):
     device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
 
+    if semap.semOpen == False:
+        response = {
+            'msg': "Close now"
+        }
+        return JsonResponse(response)
+
     # check if the client is in DB
     try:
         client = QueueClient.objects.get(device=device, semap=semap)
@@ -225,6 +231,27 @@ def helloQueueUrl(request, pk_test):
     except:
         response = {
             'msg': "Not in queue"
+        }
+
+    return JsonResponse(response)
+
+
+@csrf_exempt
+def manageSemUrl(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    status = semap.semOpen
+
+    if (status == False):
+        semap.semOpen = True
+        semap.save()
+        response = {
+            'msg': "Open semaphore"
+        }
+    elif (status == True):
+        semap.semOpen = False
+        semap.save()
+        response = {
+            'msg': "Close semaphore"
         }
 
     return JsonResponse(response)

@@ -229,6 +229,16 @@
                 <div class="row justify-content-lg-center">
                     <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
                 </div>
+                {% if semap.semOpen == False %}
+                <div class="row justify-content-lg-center">
+                    <button class="button btnready" onclick="manageSem()" id="managebtn">Open Semaphore</button>
+                </div>
+                {% endif %}
+                {% if semap.semOpen == True %}
+                <div class="row justify-content-lg-center">
+                    <button class="button btnbusy" onclick="manageSem()" id="managebtn">Close Semaphore</button>
+                </div>
+                {% endif %}
             </div>
         </div>
         <!--  ------------------------  -->
@@ -265,32 +275,35 @@
                     </div>
                 </div>
 
+
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <h3>Next client:</h3>
                             <table class="table table-bordered table-striped mb-0">
-                               {% for i in semapClients %}
+                                {% if first != None %}
                                     <tr>
-                                        <td class="tdName">{{ i.queueNum }}</td>
-                                        <td class="tdManageBtn">{{ i.device }}</td>
+                                        <td class="tdName">{{ first.queueNum }}</td>
+                                        <td class="tdManageBtn">{{ first.device }}</td>
                                     </tr>
-                                {% endfor %}
+                                {% endif %}
                             </table>
                         </div>
                     </div>
                 </div>
 
-
-            <div class="row justify-content-lg-center">
+                <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
+                            <h3>Queue:</h3>
                             <table class="table table-bordered table-striped mb-0">
-                                    {% if first != None %}
+
+                                {% for i in semapClients %}
                                     <tr>
-                                        <td class="tdName">{{ first.queueNum }}</td>
-                                        <td class="tdManageBtn">{{ first.device }}</td>
+                                        <td class="tdName">{{ i.queueNum }}</td>
+                                        <td class="tdManageBtn">{{ i.device }}</td>
                                     </tr>
-                                    {% endif %}
+                                {% endfor %}
                             </table>
                         </div>
                     </div>
@@ -382,6 +395,31 @@
             method: 'POST',
             success: function (response) {
                 alert("RED color on semaphore")
+            }
+        })
+    }
+
+    function manageSem() {
+        $.ajax({
+            url: '/manageSemUrl/{{ semap.controlUrl }}/',
+            method: 'POST',
+            success: function (response) {
+                if (response.msg == "Open semaphore") {
+                    const message = 'OPEN';
+                    ws.send(JSON.stringify({
+                        'message': message
+                    }));
+                    document.getElementById("managebtn").textContent = "Close Semaphore";
+                    document.getElementById("managebtn").style.backgroundColor = "red";
+
+                } else if (response.msg == "Close semaphore") {
+                    const message = 'CLOSE';
+                    ws.send(JSON.stringify({
+                        'message': message
+                    }));
+                    document.getElementById("managebtn").textContent = "Open Semaphore";
+                    document.getElementById("managebtn").style.backgroundColor = "green";
+                }
             }
         })
     }

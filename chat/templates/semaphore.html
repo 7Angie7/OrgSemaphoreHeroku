@@ -258,8 +258,14 @@
                     document.getElementById("joinQueueBtn").style.backgroundColor = "red";
                     document.getElementById("joinQueueBtn").textContent = 'In queue already';
                     document.getElementById("inputname").disabled = true;
+                    document.getElementById("joinQueueBtn").disabled = true;
+                } else if (response.msg == "Close now") {
+                    document.getElementById("joinQueueBtn").disabled = true;
+                    document.getElementById("inputname").disabled = true;
+                    document.getElementById("queueNumber").textContent = "This semaphore is closed!"
+
                 }
-                            }
+            }
         })
     }
     ws.onmessage = function (event) {
@@ -298,7 +304,17 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-        } else {
+        } else if (data.message === 'OPEN') {
+            document.getElementById("inputname").disabled = false;
+            document.getElementById("queueNumber").textContent = {{  }}
+            document.getElementById("joinQueueBtn").disabled = false;
+        }
+        else if (data.message === 'CLOSE') {
+            document.getElementById("inputname").disabled = true;
+            document.getElementById("queueNumber").textContent = "This semaphore is closed!"
+            document.getElementById("joinQueueBtn").disabled = true;
+        }
+        else {
             console.log("wrong message");
         }
 
@@ -332,6 +348,7 @@
                     }));
                     document.getElementById("joinQueueBtn").style.backgroundColor = "red";
                     document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                    document.getElementById("joinQueueBtn").disabled = true;
                     document.getElementById("inputname").disabled = true;
                 }
             }

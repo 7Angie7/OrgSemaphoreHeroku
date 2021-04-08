@@ -18,6 +18,7 @@ class Semaphore(models.Model):
     status = models.CharField(max_length=200, null=True, choices=STATUS)
     controlUrl = models.UUIDField(default=uuid.uuid4)
     lastQueueNum = models.IntegerField(null=True)
+    semOpen = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
