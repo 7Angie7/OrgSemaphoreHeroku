@@ -156,12 +156,11 @@ def busyAlertUrl(request, pk_test):
 @csrf_exempt
 def joinQueueUrl(request, pk_test, client_name):
     device = request.COOKIES['device']
-    allsemap = Semaphore.objects.last()     # last semaphore in whole DB
+    allqueue = QueueClient.objects.last()     # last client in whole DB
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    lastClient = QueueClient.objects.filter(semap=semap).last()     # last client in this semaphore
 
     # try get the last client in database
-    if allsemap == None:
+    if allqueue == None:
         firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1, clientName=client_name)
         response = {
             'msg': "Change number of queue first time"
@@ -170,13 +169,13 @@ def joinQueueUrl(request, pk_test, client_name):
         return JsonResponse(response)
 
     else:
-        lastClientNumber = allsemap.lastQueueNum  # last magic number in whole DB
+        lastClientNumber = allqueue.lastQueueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
 
     #check if the client is in DB
     try:
-        client = QueueClient.objects.get(device=device, semap=semap, clientName=client_name)
+        client = QueueClient.objects.get(device=device, semap=semap)
         response = {
             'msg': "You are already in the queue"
         }
