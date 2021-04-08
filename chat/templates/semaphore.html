@@ -313,10 +313,12 @@
     }
 
     function joinQueue() {
-        clientName = document.getElementById('inputname').value;
-        console.log(clientName)
+        var clientName = document.getElementById('inputname').value;
 
-        $.ajax({
+        if (clientName == null){
+            alert("Please, enter your name")
+        } else {
+            $.ajax({
             url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
             method: 'POST',
             success: function (response) {
@@ -334,6 +336,9 @@
                 }
             }
         })
+        }
+
+
     }
 
 </script>
