@@ -264,7 +264,7 @@ def manageSemUrl(request, pk_test):
 
 
 @csrf_exempt
-def manageSemUrl(request, pk_test):
+def editLastClient(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     first = semapClients.first()
