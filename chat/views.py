@@ -198,15 +198,19 @@ def checkQueueUrl(request, pk_test):
         client = QueueClient.objects.get(semap=semap, device=device)
         if client.queueNum == first.queueNum:
             response = {
-                'msg': "SAME"
+                'msg': "SAME",
+                'cislo': str(first.queueNum),
+                'client': str(client.queueNum)
             }
         else:
             response = {
-                'msg': "DIFFERENT"
+                'msg': "DIFFERENT",
+                'cislo': str(first.queueNum),
+                'client': str(client.queueNum)
             }
     except:
         response = {
-            'msg': "not in queue"
+            'msg': "not in queue",
         }
 
     semap.lastQueueNum = first.queueNum
