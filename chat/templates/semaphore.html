@@ -201,7 +201,9 @@
                         {% if semap.semOpen == False %}
                         <h2 id="queueNumber">This semaphore is closed!</h2>
                         {% endif %}
-                        <h3 id="showClientName"></h3>
+                        {% if currentClient != None %}
+                        <h3 id="showClientName">{{ currentClient.clientName }}</h3>
+                        {% endif %}
                     </div>
                 </div>
             </div>

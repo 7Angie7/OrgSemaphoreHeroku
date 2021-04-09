@@ -94,9 +94,12 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    numQueueClients = QueueClient.objects.filter(semap=semap).count()
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+    numQueueClients = semapClients.count()
+    device = request.COOKIES['device']
+    currentClient = semapClients(device=device)
 
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients})
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients, 'currentClient': currentClient})
 
 
 @login_required(login_url='mainpage')
