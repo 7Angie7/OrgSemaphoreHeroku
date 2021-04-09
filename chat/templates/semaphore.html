@@ -201,12 +201,8 @@
                         {% if semap.semOpen == False %}
                         <h2 id="queueNumber">This semaphore is closed!</h2>
                         {% endif %}
-                        {% if currentClient != Null %}
-                        <h3 id="showClientName">{{ currentClient.clientName }}</h3>
-                        {% endif %}
-                        {% if currentClient == Null %}
-                        <h3 id="showClientName">{{ currentClient.clientName }}</h3>
-                        {% endif %}
+
+                        <h3 id="showClientName"></h3>
 
                     </div>
                 </div>
@@ -271,6 +267,8 @@
                     document.getElementById("joinQueueBtn").textContent = 'In queue already';
                     document.getElementById("inputname").disabled = true;
                     document.getElementById("joinQueueBtn").disabled = true;
+                    document.getElementById("showClientName").textContent = response.msgName.toString();
+
                 } else if (response.msg == "Close now") {
                     document.getElementById("joinQueueBtn").disabled = true;
                     document.getElementById("inputname").disabled = true;
