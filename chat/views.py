@@ -213,8 +213,6 @@ def checkQueueUrl(request, pk_test):
             'msg': "not in queue",
         }
 
-    semap.lastQueueNum = first.queueNum
-    semap.save()
     return JsonResponse(response)
 
 
@@ -262,4 +260,18 @@ def manageSemUrl(request, pk_test):
             'msg': "Close semaphore"
         }
 
+    return JsonResponse(response)
+
+
+@csrf_exempt
+def manageSemUrl(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+    first = semapClients.first()
+    semap.lastQueueNum = first.queueNum
+    semap.save()
+    response = {
+        'msg': 'lastClient changed',
+        'num': str(semap.lastQueueNum)
+    }
     return JsonResponse(response)

@@ -175,10 +175,11 @@
 
                 </div>
                 <div class="input-group mb-3">
-                            <div class="col-lg-8">
-                                <input type="text" name="clientname" placeholder="Enter your name ..." class="form-control" id="inputname">
-                            </div>
-                        </div>
+                    <div class="col-lg-8">
+                        <input type="text" name="clientname" placeholder="Enter your name ..." class="form-control"
+                               id="inputname">
+                    </div>
+                </div>
                 <div class="row justify-content-lg-center">
                     <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue</button>
                 </div>
@@ -196,10 +197,10 @@
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         {% if semap.semOpen == True %}
-                        <h2 id="queueNumber">{{ numQueueClients }}</h2>
+                            <h2 id="queueNumber">{{ numQueueClients }}</h2>
                         {% endif %}
                         {% if semap.semOpen == False %}
-                        <h2 id="queueNumber">This semaphore is closed!</h2>
+                            <h2 id="queueNumber">This semaphore is closed!</h2>
                         {% endif %}
 
                         <h3 id="showClientName"></h3>
@@ -284,22 +285,27 @@
 
         if (data.message === 'GREEN') {
             $.ajax({
-            url: '/checkQueueUrl/{{ semap.controlUrl }}/',
-            method: 'POST',
-            success: function (response) {
-                if (response.msg == "SAME") {
-                    document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-                }
-                else if (response.msg == "DIFFERENT"){
-                    console.log("not your turn")
-                }
-                else if (response.msg == "not in queue"){
-                    console.log("you must join queue first")
-                }
-            }
-        })
+                url: '/checkQueueUrl/{{ semap.controlUrl }}/',
+                method: 'POST',
+                success: function (response) {
+                    if (response.msg == "SAME") {
+                        document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
 
+                        $.ajax({
+                            url: '/editLastClient/{{ semap.controlUrl }}/',
+                            method: 'POST',
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        })
 
+                    } else if (response.msg == "DIFFERENT") {
+                        console.log("not your turn")
+                    } else if (response.msg == "not in queue") {
+                        console.log("you must join queue first")
+                    }
+                }
+            })
 
 
         } else if (data.message === 'RED') {
@@ -318,15 +324,13 @@
         } else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
             document.getElementById("queueNumber").textContent = {{ numQueueClients }}
-            document.getElementById("joinQueueBtn").disabled = false;
+                document.getElementById("joinQueueBtn").disabled = false;
             alert('Semafor bol na nejaku dobu zatvoreny a niektore udaje nemusia byt spravne. Refreshujte stranku prosim')
-        }
-        else if (data.message === 'CLOSE') {
+        } else if (data.message === 'CLOSE') {
             document.getElementById("inputname").disabled = true;
             document.getElementById("queueNumber").textContent = "This semaphore is closed!"
             document.getElementById("joinQueueBtn").disabled = true;
-        }
-        else {
+        } else {
             console.log("wrong message");
         }
 
@@ -343,29 +347,28 @@
     function joinQueue() {
         const clientName = document.getElementById('inputname').value;
         console.log(clientName)
-        if (clientName == null || clientName == undefined || clientName == ""){
+        if (clientName == null || clientName == undefined || clientName == "") {
             alert("Please, enter your name")
         } else {
             $.ajax({
-            url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
-            method: 'POST',
-            success: function (response) {
-                if (response.msg == "You are already in the queue") {
-                    alert("You have been joined the queue already")
+                url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
+                method: 'POST',
+                success: function (response) {
+                    if (response.msg == "You are already in the queue") {
+                        alert("You have been joined the queue already")
+                    } else {
+                        const message = "New client in queue";
+                        ws.send(JSON.stringify({
+                            'message': message,
+                            'name': clientName.toString()
+                        }));
+                        document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+                        document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                        document.getElementById("joinQueueBtn").disabled = true;
+                        document.getElementById("inputname").disabled = true;
+                    }
                 }
-                else{
-                    const message = "New client in queue";
-                    ws.send(JSON.stringify({
-                        'message': message,
-                        'name': clientName.toString()
-                    }));
-                    document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-                    document.getElementById("joinQueueBtn").textContent = 'In queue already';
-                    document.getElementById("joinQueueBtn").disabled = true;
-                    document.getElementById("inputname").disabled = true;
-                }
-            }
-        })
+            })
         }
 
 

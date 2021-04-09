@@ -21,4 +21,5 @@ urlpatterns = [
     path('checkQueueUrl/<str:pk_test>/', views.checkQueueUrl, name='checkQueueUrl'),
     path('helloQueueUrl/<str:pk_test>/', views.helloQueueUrl, name='helloQueueUrl'),
     path('manageSemUrl/<str:pk_test>/', views.manageSemUrl, name='manageSemUrl'),
+    path('editLastClient/<str:pk_test>/', views.editLastClientUrl, name='editLastClientSemUrl'),
 ]
