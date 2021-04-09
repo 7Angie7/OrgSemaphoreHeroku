@@ -189,7 +189,7 @@ def joinQueueUrl(request, pk_test, client_name):
 @csrf_exempt
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    queueClients = QueueClient.objects.filter(semap=semap)
+    queueClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     first = queueClients.first()
     newLastNum = first.queueNum
     semap.lastQueueNum = newLastNum
