@@ -192,8 +192,6 @@ def checkQueueUrl(request, pk_test):
     queueClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     first = queueClients.first()
     newLastNum = first.queueNum
-    semap.lastQueueNum = newLastNum
-    semap.save()
     device = request.COOKIES['device']
 
     try:
@@ -211,6 +209,8 @@ def checkQueueUrl(request, pk_test):
             'msg': "not in queue"
         }
 
+    semap.lastQueueNum = newLastNum
+    semap.save()
     return JsonResponse(response)
 
 
