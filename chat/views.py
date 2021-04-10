@@ -96,7 +96,9 @@ def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     numQueueClients = semapClients.count()
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients})
+    deviceCookie = request.COOKIES['device']
+
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients, 'deviceCookie': deviceCookie})
 
 @login_required(login_url='mainpage')
 def deleteSemap(request, pk_test):
@@ -159,7 +161,7 @@ def joinQueueUrl(request, pk_test, client_name):
 
     # try get the last client in database
     if allqueue == None:
-        firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1, clientName=client_name)
+        firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1, clientName=client_name, clientNumber=0)
         response = {
             'msg': "Change number of queue first time"
         }
@@ -170,17 +172,18 @@ def joinQueueUrl(request, pk_test, client_name):
         lastClientNumber = allqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
-
+    queueClients = QueueClient.objects.filter(queueNum__gt=semap.lastQueueNum).count()
     #check if the client is in DB
     try:
-        client = QueueClient.objects.get(device=device, semap=semap)
+        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gt=semap.lastQueueNum)
         response = {
             'msg': "You are already in the queue"
         }
     except:
-        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name)
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=queueClients)
         response = {
-            'msg': "Change number of queue"
+            'msg': "Change number of queue",
+            'num': str(queueClients)
         }
 
     return JsonResponse(response)
@@ -208,6 +211,9 @@ def checkQueueUrl(request, pk_test):
                 'cislo': str(first.queueNum),
                 'client': str(client.queueNum)
             }
+
+        client.clientNumber -= 1
+        client.save()
     except:
         response = {
             'msg': "not in queue",
@@ -229,10 +235,11 @@ def helloQueueUrl(request, pk_test):
 
     # check if the client is in DB
     try:
-        client = QueueClient.objects.get(device=device, semap=semap)
+        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gt=semap.lastQueueNum)
         response = {
             'msg': "You are already in the queue",
             'msgName': client.clientName,
+            'msgNum': client.clientNumber,
         }
     except:
         response = {

@@ -191,7 +191,7 @@
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="queueClients">
-                            <h5>Number of clients in queue:</h5>
+                            <h5>The number of clients in queue:</h5>
                         {% if semap.semOpen == True %}
                             <h2 id="queueNumber">{{ numQueueClients }}</h2>
                         {% endif %}
@@ -200,7 +200,10 @@
                         {% endif %}
                         </div>
                         <div class="clientInfo">
+                            <h5>Your name:</h5>
                             <h3 id="showClientName"></h3>
+                            <h5>The number of clients ahead of you:</h5>
+                            <h3 id="yourNumber"></h3>
                         </div>
 
 
@@ -269,6 +272,7 @@
                     document.getElementById("inputname").disabled = true;
                     document.getElementById("joinQueueBtn").disabled = true;
                     document.getElementById("showClientName").textContent = response.msgName.toString();
+                    document.getElementById("yourNumber").textContent = response.msgNumber.toString();
 
                 } else if (response.msg == "Close now") {
                     document.getElementById("joinQueueBtn").disabled = true;
@@ -307,6 +311,13 @@
                 }
             })
 
+            if (device == {{ deviceCookie }}){
+                var numbefore = document.getElementById("yourNumber").textContent = data.number;
+                var numafter = numbefore + 1;
+                document.getElementById("yourNumber").textContent = numafter;
+            }
+
+
 
         } else if (data.message === 'RED') {
             console.log("red message");
@@ -318,8 +329,10 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-            var jsondata = JSON.parse(event.data);
-            document.getElementById("showClientName").textContent = jsondata.name;
+            if (device == {{ deviceCookie }}){
+                document.getElementById("showClientName").textContent = data.name;
+                document.getElementById("yourNumber").textContent = data.number;
+            }
 
         } else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
@@ -360,7 +373,8 @@
                         const message = "New client in queue";
                         ws.send(JSON.stringify({
                             'message': message,
-                            'name': clientName.toString()
+                            'name': clientName.toString(),
+                            'number': {{ clientNumber }}
                         }));
                         document.getElementById("joinQueueBtn").style.backgroundColor = "red";
                         document.getElementById("joinQueueBtn").textContent = 'In queue already';

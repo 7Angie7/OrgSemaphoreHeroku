@@ -29,6 +29,7 @@ class QueueClient(models.Model):
     device = models.CharField(max_length=200, null=True)
     queueNum = models.IntegerField(null=True)
     clientName = models.CharField(max_length=200, null=True)
+    clientNumber = models.IntegerField(null=True)
 
     def __str__(self):
         return self.clientName
