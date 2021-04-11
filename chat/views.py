@@ -171,10 +171,11 @@ def joinQueueUrl(request, pk_test, client_name):
         lastClientNumber = allqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
-    queueClients = QueueClient.objects.filter(queueNum__gt=semap.lastQueueNum).count()
+    queueClients = QueueClient.objects.filter(queueNum__gte=semap.lastQueueNum).count()
+
     #check if the client is in DB
     try:
-        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gt=semap.lastQueueNum)
+        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gte=semap.lastQueueNum)
         response = {
             'msg': "You are already in the queue"
         }
@@ -182,7 +183,7 @@ def joinQueueUrl(request, pk_test, client_name):
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=queueClients)
         response = {
             'msg': "Change number of queue",
-            'num': str(queueClients)
+            'num': str(queueClients),
         }
 
     return JsonResponse(response)

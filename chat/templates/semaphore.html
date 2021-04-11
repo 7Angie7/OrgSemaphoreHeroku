@@ -350,10 +350,10 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-            /*if (device == ){
+            /*if (device == ){*/
                 document.getElementById("showClientName").textContent = data.name;
                 document.getElementById("yourNumber").textContent = data.number;
-            }*/
+            /*}*/
 
         } else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
@@ -393,11 +393,12 @@
                 success: function (response) {
                     if (response.msg == "You are already in the queue") {
                         alert("You have been joined the queue already")
-                    } else {
+                    } else if (response.msg == "Change number of queue"){
                         const message = "New client in queue";
                         ws.send(JSON.stringify({
                             'message': message,
                             'name': clientName.toString(),
+                            'number': response.num,
                         }));
                         document.getElementById("joinQueueBtn").style.backgroundColor = "red";
                         document.getElementById("joinQueueBtn").textContent = 'In queue already';
