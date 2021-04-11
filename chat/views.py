@@ -53,8 +53,6 @@ def register(request):
     return render(request, 'register.html', context)
 
 
-
-
 def logoutUser(request):
     logout(request)
     return redirect('mainpage')
@@ -98,7 +96,8 @@ def semaphore(request, pk_test):
     numQueueClients = semapClients.count()
     # deviceCookie = request.COOKIES['device']
 
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients}) # , 'deviceCookie': deviceCookie})
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients})
+
 
 @login_required(login_url='mainpage')
 def deleteSemap(request, pk_test):
@@ -281,4 +280,5 @@ def editLastClient(request, pk_test):
         'msg': 'lastClient changed',
         'num': str(semap.lastQueueNum)
     }
+
     return JsonResponse(response)
