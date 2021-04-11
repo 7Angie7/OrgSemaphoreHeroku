@@ -99,6 +99,7 @@ class IndexConsumer(AsyncWebsocketConsumer):
 
         try:
             name = text_data_json['name']
+            number = text_data_json['number']
 
             await self.channel_layer.group_send(
                 self.room_group_name,
@@ -106,6 +107,7 @@ class IndexConsumer(AsyncWebsocketConsumer):
                     'type': 'client_message',
                     'message': message,
                     'name': name,
+                    'number': number,
                 }
 
             )
@@ -131,10 +133,12 @@ class IndexConsumer(AsyncWebsocketConsumer):
         print(event)
         message = event['message']
         client = event['name']
+        number = event['number']
 
         await self.send(text_data=json.dumps({
             'message': message,
             'name': client,
+            'number': number,
         }))
 
     pass
