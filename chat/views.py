@@ -211,8 +211,6 @@ def checkQueueUrl(request, pk_test):
                 'client': str(client.queueNum)
             }
 
-        client.clientNumber -= 1
-        client.save()
     except:
         response = {
             'msg': "not in queue",

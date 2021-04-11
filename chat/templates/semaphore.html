@@ -150,22 +150,16 @@
             <div class="profileCard">
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        {% if semap.status == 'Busy' %}
-                            <img src="{% static 'images/redLight.png' %}" id="demo" alt="busyLight">
-                        {% endif %}
-                        {% if semap.status == 'Ready' %}
-                            <img src="{% static 'images/greenLight.png' %}" id="demo" alt="busyLight">
-                        {% endif %}
+                        <img src="{% static 'images/redLight.png' %}" id="demo" alt="busyLight">
                     </div>
-
                 </div>
 
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="input-group mb-3">
                             <div class="col-lg-12">
-                                <input type="text" name="clientname" placeholder="Enter your name ..." class="form-control"
-                               id="inputname">
+                                <input type="text" name="clientname" placeholder="Enter your name ..."
+                                       class="form-control" id="inputname">
                             </div>
                         </div>
                     </div>
@@ -173,7 +167,8 @@
 
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue</button>
+                        <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue
+                        </button>
                     </div>
                 </div>
 
@@ -192,12 +187,12 @@
                     <div class="col-lg-10">
                         <div class="queueClients">
                             <h5>The number of clients in queue:</h5>
-                        {% if semap.semOpen == True %}
-                            <h2 id="queueNumber">{{ numQueueClients }}</h2>
-                        {% endif %}
-                        {% if semap.semOpen == False %}
-                            <h2 id="queueNumber">This semaphore is closed!</h2>
-                        {% endif %}
+                            {% if semap.semOpen == True %}
+                                <h2 id="queueNumber">{{ numQueueClients }}</h2>
+                            {% endif %}
+                            {% if semap.semOpen == False %}
+                                <h2 id="queueNumber">This semaphore is closed!</h2>
+                            {% endif %}
                         </div>
                         <div class="clientInfo">
                             <h5>Your name:</h5>
@@ -205,7 +200,6 @@
                             <h5>The number of clients ahead of you:</h5>
                             <h3 id="yourNumber"></h3>
                         </div>
-
 
 
                     </div>
@@ -218,6 +212,45 @@
 
 {{ pk_test|json_script:"pk-test" }}
 <script>
+
+    // check if you are in queue and if semaphore is closed
+    $.ajax({
+        url: '/helloQueueUrl/{{ semap.controlUrl }}/',
+        method: 'POST',
+        success: function (response) {
+            if (response.msg == "You are already in the queue") {
+                document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+                document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                document.getElementById("inputname").disabled = true;
+                document.getElementById("joinQueueBtn").disabled = true;
+                document.getElementById("showClientName").textContent = response.msgName.toString();
+                //document.getElementById("yourNumber").textContent = response.msgNumber.toString();
+
+                // check your position
+                $.ajax({
+                    url: '/checkQueueUrl/{{ semap.controlUrl }}/',
+                    method: 'POST',
+                    success: function (response) {
+                        if (response.msg == "SAME") {
+                            document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+                        } else if (response.msg == "DIFFERENT") {
+                            console.log("not your turn")
+                        } else if (response.msg == "not in queue") {
+                            console.log("you must join queue first")
+                        }
+                    }
+                })
+
+            } else if (response.msg == "Close now") {
+                document.getElementById("joinQueueBtn").disabled = true;
+                document.getElementById("inputname").disabled = true;
+            } else if (response.msg == "Not in queue") {
+                console.log("Hello, you can join queue now")
+            }
+        }
+    })
+
+    // ------------------------- COOKIES ----------------------------- //
     function getCookie(name) {
         let cookieValue = null;
         if (document.cookie && document.cookie !== '') {
@@ -248,8 +281,12 @@
 
     document.cookie = 'device=' + device + ";domain=;path=/";
 
+    // ------------------------------------------------------------ //
+
+    // -------------------- WEBSOCKETS --------------------------- //
     const roomName = JSON.parse(document.getElementById('pk-test').textContent);
     console.log(roomName)
+
     const ws = new WebSocket(
         'wss://'
         + window.location.host
@@ -261,26 +298,8 @@
     ws.onopen = function (event) {
         console.log(event);
         console.log("Connection is opened");
-
-        $.ajax({
-            url: '/helloQueueUrl/{{ semap.controlUrl }}/',
-            method: 'POST',
-            success: function (response) {
-                if (response.msg == "You are already in the queue") {
-                    document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-                    document.getElementById("joinQueueBtn").textContent = 'In queue already';
-                    document.getElementById("inputname").disabled = true;
-                    document.getElementById("joinQueueBtn").disabled = true;
-                    document.getElementById("showClientName").textContent = response.msgName.toString();
-                    document.getElementById("yourNumber").textContent = response.msgNumber.toString();
-
-                } else if (response.msg == "Close now") {
-                    document.getElementById("joinQueueBtn").disabled = true;
-                    document.getElementById("inputname").disabled = true;
-                }
-            }
-        })
     }
+
     ws.onmessage = function (event) {
         console.log("Message is received");
         console.log(event);
@@ -316,7 +335,6 @@
                 var numafter = numbefore + 1;
                 document.getElementById("yourNumber").textContent = numafter;
             }*/
-
 
 
         } else if (data.message === 'RED') {
@@ -357,6 +375,9 @@
         console.log(event);
     }
 
+    // -------------------------------------------------------------- //
+
+    // ------------------------- FUNCTIONS -------------------------- //
     function joinQueue() {
         const clientName = document.getElementById('inputname').value;
         console.log(clientName)
@@ -387,6 +408,7 @@
 
     }
 
+    // ------------------------------------------------------------------------------- //
 </script>
 
 </body>
