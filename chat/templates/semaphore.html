@@ -329,10 +329,10 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-            if (device == {{ deviceCookie }}){
+            /*if (device == ){
                 document.getElementById("showClientName").textContent = data.name;
                 document.getElementById("yourNumber").textContent = data.number;
-            }
+            }*/
 
         } else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
