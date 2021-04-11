@@ -191,24 +191,18 @@ def joinQueueUrl(request, pk_test, client_name):
 @csrf_exempt
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
-    first = semapClients.first()
-
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     device = request.COOKIES['device']
 
     try:
         client = semapClients.get(device=device)
-        if client.queueNum == first.queueNum:
+        if client.queueNum == semap.lastQueueNum:
             response = {
                 'msg': "SAME",
-                'cislo': str(first.queueNum),
-                'client': str(client.queueNum)
             }
         else:
             response = {
                 'msg': "DIFFERENT",
-                'cislo': str(first.queueNum),
-                'client': str(client.queueNum)
             }
 
     except:
