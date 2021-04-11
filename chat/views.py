@@ -226,7 +226,7 @@ def helloQueueUrl(request, pk_test):
 
     # check if the client is in DB
     try:
-        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gt=semap.lastQueueNum)
+        client = QueueClient.objects.get(device=device, semap=semap, queueNum__gte=semap.lastQueueNum)
         response = {
             'msg': "You are already in the queue",
             'msgName': client.clientName,
