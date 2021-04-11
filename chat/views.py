@@ -197,7 +197,7 @@ def checkQueueUrl(request, pk_test):
     device = request.COOKIES['device']
 
     try:
-        client = QueueClient.objects.get(semap=semap, device=device)
+        client = semapClients.get(device=device)
         if client.queueNum == first.queueNum:
             response = {
                 'msg': "SAME",
