@@ -96,9 +96,9 @@ def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     numQueueClients = semapClients.count()
-    deviceCookie = request.COOKIES['device']
+    # deviceCookie = request.COOKIES['device']
 
-    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients, 'deviceCookie': deviceCookie})
+    return render(request, 'semaphore.html', {'semap': semap, 'pk_test': pk_test, 'numQueueClients': numQueueClients}) # , 'deviceCookie': deviceCookie})
 
 @login_required(login_url='mainpage')
 def deleteSemap(request, pk_test):
