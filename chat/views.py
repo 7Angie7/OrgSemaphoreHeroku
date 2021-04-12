@@ -286,3 +286,8 @@ def editClientInfo(request, pk_test):
 
     client.clientNumber -= 1
     client.save()
+
+    response = {
+        'msgNum': str(client.clientNumber)
+    }
+    return JsonResponse(response)

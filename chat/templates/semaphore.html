@@ -267,8 +267,26 @@
                     success: function (response) {
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+
+                            $.ajax({
+                            url: '/editClientInfo/{{ semap.controlUrl }}/',
+                            method: 'POST',
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        })
+
                         } else if (response.msg == "DIFFERENT") {
                             console.log("not your turn")
+
+                            $.ajax({
+                            url: '/editClientInfo/{{ semap.controlUrl }}/',
+                            method: 'POST',
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        })
+
                         } else if (response.msg == "not in queue") {
                             console.log("you must join queue first")
                         }
@@ -329,6 +347,7 @@
                             method: 'POST',
                             success: function (response) {
                                 console.log(response);
+                                document.getElementById("yourNumber").textContent = response.msgNum;
                             }
                         })
 
@@ -339,6 +358,7 @@
                             method: 'POST',
                             success: function (response) {
                                 console.log(response);
+                                document.getElementById("yourNumber").textContent = response.msgNum;
                             }
                         })
                     } else if (response.msg == "not in queue") {
