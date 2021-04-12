@@ -257,8 +257,6 @@
                 document.getElementById("joinQueueBtn").textContent = 'In queue already';
                 document.getElementById("inputname").disabled = true;
                 document.getElementById("joinQueueBtn").disabled = true;
-                document.getElementById("showClientName").textContent = response.msgName.toString();
-                document.getElementById("yourNumber").textContent = response.msgNumber;
 
                 // check your position
                 $.ajax({
@@ -267,10 +265,14 @@
                     success: function (response) {
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+                            document.getElementById("showClientName").textContent = response.msgName.toString();
+                            document.getElementById("yourNumber").textContent = response.msgNumber;
 
 
                         } else if (response.msg == "DIFFERENT") {
                             console.log("not your turn")
+                            document.getElementById("showClientName").textContent = response.msgName.toString();
+                            document.getElementById("yourNumber").textContent = response.msgNumber;
 
 
                         } else if (response.msg == "not in queue") {
