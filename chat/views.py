@@ -232,7 +232,7 @@ def helloQueueUrl(request, pk_test):
         response = {
             'msg': "You are already in the queue",
             'msgName': client.clientName,
-            'msgNum': client.clientNumber,
+            'msgNum': str(client.clientNumber),
         }
     except:
         response = {

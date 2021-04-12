@@ -258,7 +258,7 @@
                 document.getElementById("inputname").disabled = true;
                 document.getElementById("joinQueueBtn").disabled = true;
                 document.getElementById("showClientName").textContent = response.msgName.toString();
-                document.getElementById("yourNumber").textContent = response.msgNumber.toString();
+                document.getElementById("yourNumber").textContent = response.msgNumber;
 
                 // check your position
                 $.ajax({
