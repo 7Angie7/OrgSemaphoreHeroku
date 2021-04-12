@@ -92,7 +92,7 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     numQueueClients = semapClients.count()
     # deviceCookie = request.COOKIES['device']
 
