@@ -285,7 +285,6 @@
     })
 
 
-
     // -------------------- WEBSOCKETS --------------------------- //
     const roomName = JSON.parse(document.getElementById('pk-test').textContent);
     console.log(roomName)
@@ -325,13 +324,29 @@
                             }
                         })
 
+                        $.ajax({
+                            url: '/editClientInfo/{{ semap.controlUrl }}/',
+                            method: 'POST',
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        })
+
                     } else if (response.msg == "DIFFERENT") {
                         console.log("not your turn")
+                        $.ajax({
+                            url: '/editClientInfo/{{ semap.controlUrl }}/',
+                            method: 'POST',
+                            success: function (response) {
+                                console.log(response);
+                            }
+                        })
                     } else if (response.msg == "not in queue") {
                         console.log("you must join queue first")
                     }
                 }
             })
+
 
             /*if (device == ){
                 var numbefore = document.getElementById("yourNumber").textContent = data.number;
@@ -351,8 +366,8 @@
             document.getElementById("queueNumber").textContent = newNum;
 
             /*if (device == ){*/
-                document.getElementById("showClientName").textContent = data.name;
-                document.getElementById("yourNumber").textContent = data.number;
+            document.getElementById("showClientName").textContent = data.name;
+            document.getElementById("yourNumber").textContent = data.number;
             /*}*/
 
         } else if (data.message === 'OPEN') {
@@ -393,7 +408,7 @@
                 success: function (response) {
                     if (response.msg == "You are already in the queue") {
                         alert("You have been joined the queue already")
-                    } else if (response.msg == "Change number of queue"){
+                    } else if (response.msg == "Change number of queue") {
                         const message = "New client in queue";
                         ws.send(JSON.stringify({
                             'message': message,

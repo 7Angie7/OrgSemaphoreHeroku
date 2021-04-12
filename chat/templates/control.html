@@ -439,11 +439,9 @@
 
     function readyAlert() {
         const message = "GREEN";
-        console.log("juuuuuu");
         ws.send(JSON.stringify({
             'message': message
         }));
-        console.log("eeej");
 
         $.ajax({
             url: '/readyAlertUrl/{{ semap.controlUrl }}/',

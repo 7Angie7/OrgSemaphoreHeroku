@@ -92,7 +92,7 @@ def control(request, pk_test):
 
 def semaphore(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     numQueueClients = semapClients.count()
     # deviceCookie = request.COOKIES['device']
 
@@ -275,3 +275,13 @@ def editLastClient(request, pk_test):
     }
 
     return JsonResponse(response)
+
+
+@csrf_exempt
+def editClientInfo(request, pk_test):
+    device = request.COOKIES['device']
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    client = QueueClient.objects.get(semap=semap, device=device)
+
+    client.clientNumber -= 1
+    client.save()
