@@ -258,7 +258,14 @@
                 document.getElementById("inputname").disabled = true;
                 document.getElementById("joinQueueBtn").disabled = true;
                 document.getElementById("showClientName").textContent = response.msgName;
-                document.getElementById("yourNumber").textContent = response.msgNum;
+
+                var x = parseInt(response.msgNum);
+                if (x >= 0) {
+                    document.getElementById("yourNumber").textContent = response.msgNum;
+                } else {
+                    document.getElementById("yourNumber").textContent = "Your turn";
+                }
+
 
                 // check your position
                 $.ajax({
@@ -319,19 +326,16 @@
                         document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
 
                         $.ajax({
-                            url: '/editLastClient/{{ semap.controlUrl }}/',
-                            method: 'POST',
-                            success: function (response) {
-                                console.log(response);
-                            }
-                        })
-
-                        $.ajax({
                             url: '/editClientInfo/{{ semap.controlUrl }}/',
                             method: 'POST',
                             success: function (response) {
                                 console.log(response);
-                                document.getElementById("yourNumber").textContent = response.msgNum;
+                                var x = parseInt(response.msgNum);
+                                if (x >= 0) {
+                                    document.getElementById("yourNumber").textContent = response.msgNum;
+                                } else {
+                                    document.getElementById("yourNumber").textContent = "Your turn";
+                                }
                             }
                         })
 
@@ -342,7 +346,12 @@
                             method: 'POST',
                             success: function (response) {
                                 console.log(response);
-                                document.getElementById("yourNumber").textContent = response.msgNum;
+                                var x = parseInt(response.msgNum);
+                                if (x >= 0) {
+                                    document.getElementById("yourNumber").textContent = response.msgNum;
+                                } else {
+                                    document.getElementById("yourNumber").textContent = "Your turn";
+                                }
                             }
                         })
                     } else if (response.msg == "not in queue") {
