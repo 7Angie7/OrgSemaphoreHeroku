@@ -154,9 +154,9 @@ def busyAlertUrl(request, pk_test):
 
 @csrf_exempt
 def joinQueueUrl(request, pk_test, client_name):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
     allqueue = QueueClient.objects.last()     # last client in whole DB
-    semap = Semaphore.objects.get(controlUrl=pk_test)
 
     # try get the last client in database
     if allqueue == None:
@@ -171,7 +171,8 @@ def joinQueueUrl(request, pk_test, client_name):
         lastClientNumber = allqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
-    queueClients = QueueClient.objects.filter(queueNum__gte=semap.lastQueueNum).count()
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
+    numQueueClients = semapClients.count()
 
     #check if the client is in DB
     try:
@@ -180,10 +181,10 @@ def joinQueueUrl(request, pk_test, client_name):
             'msg': "You are already in the queue"
         }
     except:
-        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=queueClients)
+        client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=numQueueClients)
         response = {
             'msg': "Change number of queue",
-            'num': str(queueClients),
+            'num': str(numQueueClients),
         }
 
     return JsonResponse(response)

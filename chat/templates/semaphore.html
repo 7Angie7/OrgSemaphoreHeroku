@@ -365,11 +365,6 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-            /*if (device == ){*/
-            document.getElementById("showClientName").textContent = data.name;
-            document.getElementById("yourNumber").textContent = data.number;
-            /*}*/
-
         } else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
             document.getElementById("queueNumber").textContent = {{ numQueueClients }}
@@ -419,6 +414,8 @@
                         document.getElementById("joinQueueBtn").textContent = 'In queue already';
                         document.getElementById("joinQueueBtn").disabled = true;
                         document.getElementById("inputname").disabled = true;
+                        document.getElementById("showClientName").textContent = ClientName.toString();
+                        document.getElementById("yourNumber").textContent = response.num;
                     }
                 }
             })
