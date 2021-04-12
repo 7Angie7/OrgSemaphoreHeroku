@@ -318,6 +318,11 @@
         const data = JSON.parse(event.data)
 
         if (data.message === 'GREEN') {
+            var oldNum = parseInt(document.getElementById("queueNumber").textContent);
+            oldNum -= 1;
+            var newNum = oldNum.toString()
+            document.getElementById("queueNumber").textContent = newNum;
+
             $.ajax({
                 url: '/checkQueueUrl/{{ semap.controlUrl }}/',
                 method: 'POST',
