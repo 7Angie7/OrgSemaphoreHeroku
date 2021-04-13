@@ -381,6 +381,8 @@
 {{ pk_test|json_script:"pk-test" }}
 <script>
 
+    // ------------------------ FUNCTIONS ------------------------------- //
+    // copy url to the clipboard
     function copyFunction() {
         console.log('Copy Fce')
         var textToCopy = document.getElementById('copyText');
@@ -390,55 +392,12 @@
         alert("Copied the text: " + textToCopy.value)
     }
 
-    const roomName = JSON.parse(document.getElementById('pk-test').textContent);
-    console.log(roomName)
-    const ws = new WebSocket(
-        'wss://'
-        + window.location.host
-        + '/ws/control/'
-        + roomName
-        + '/'
-    );
 
-    ws.onopen = function (event) {
-        console.log(event);
-        console.log("Connection is opened");
-    }
-    ws.onmessage = function (event) {
-        console.log("Message is received");
-        console.log(event);
-
-        var jsondata = JSON.parse(event.data);
-
-
-        if (jsondata.message === 'GREEN') {
-            console.log("greeen message");
-            document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-        } else if (jsondata.message === 'RED') {
-            console.log("red message");
-            document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
-        } else if (jsondata.message === 'New client in queue') {
-            var table = document.getElementById("clientsTable")
-            var newRow = table.insertRow();
-            var newCell = newRow.insertCell();
-            var newText = document.createTextNode(jsondata.name);
-            console.log(newText)
-            newCell.appendChild(newText);
-        } else {
-            console.log("another message");
-        }
-    }
-    ws.onclose = function (event) {
-        console.log(event);
-        console.log("Connection is closed");
-    }
-    ws.onerror = function (event) {
-        console.log("Something went wrong");
-        console.log(event);
-    }
-
+    // send message - invite next client
     function readyAlert() {
         const message = "GREEN";
+
+        // change compare number in semaphore
         $.ajax({
             url: '/editLastClient/{{ semap.controlUrl }}/',
             method: 'POST',
@@ -447,10 +406,12 @@
             }
         })
 
+        // send message
         ws.send(JSON.stringify({
             'message': message
         }));
 
+        // change semaphore status in DB = 'Ready'
         $.ajax({
             url: '/readyAlertUrl/{{ semap.controlUrl }}/',
             method: 'POST',
@@ -499,6 +460,63 @@
             }
         })
     }
+
+
+    // ------------------------ WEB SOCKETS ------------------------------- //
+    const roomName = JSON.parse(document.getElementById('pk-test').textContent);
+    console.log(roomName)
+    const ws = new WebSocket(
+        'wss://'
+        + window.location.host
+        + '/ws/control/'
+        + roomName
+        + '/'
+    );
+
+    ws.onopen = function (event) {
+        console.log(event);
+        console.log("Connection is opened");
+    }
+    ws.onmessage = function (event) {
+        console.log("Message is received");
+        console.log(event);
+
+        var jsondata = JSON.parse(event.data);
+
+        // next client
+        if (jsondata.message === 'GREEN') {
+            console.log("greeen message");
+            document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+        }
+
+        else if (jsondata.message === 'RED') {
+            console.log("red message");
+            document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
+        }
+        // new client joined the queue
+        else if (jsondata.message === 'New client in queue') {
+            var table = document.getElementById("clientsTable")
+            var newRow = table.insertRow();
+            var newCell = newRow.insertCell();
+            var newText = document.createTextNode(jsondata.name);
+            console.log(newText)
+            newCell.appendChild(newText);
+        }
+        // wrong message
+        else {
+            console.log("another message");
+        }
+    }
+    ws.onclose = function (event) {
+        console.log(event);
+        console.log("Connection is closed");
+    }
+    ws.onerror = function (event) {
+        console.log("Something went wrong");
+        console.log(event);
+    }
+
+
 
 </script>
 

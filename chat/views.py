@@ -85,7 +85,7 @@ def contact(request):
 def control(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
-    first = semapClients.first()
+    first = QueueClient.objects.get(semap=semap, queueNum=semap.lastQueueNum)
 
     return render(request, 'control.html', {'semap': semap, 'pk_test': pk_test, 'semapClients': semapClients, 'first': first})
 
@@ -156,10 +156,10 @@ def busyAlertUrl(request, pk_test):
 def joinQueueUrl(request, pk_test, client_name):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
-    allqueue = QueueClient.objects.last()     # last client in whole DB
+    lastallqueue = QueueClient.objects.last()     # last client in whole DB
 
     # try get the last client in database
-    if allqueue == None:
+    if lastallqueue == None:
         firstclient, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=1, clientName=client_name, clientNumber=0)
         response = {
             'msg': "Change number of queue first time"
@@ -168,13 +168,13 @@ def joinQueueUrl(request, pk_test, client_name):
         return JsonResponse(response)
 
     else:
-        lastClientNumber = allqueue.queueNum  # last magic number in whole DB
+        lastClientNumber = lastallqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
-    numQueueClients = semapClients.count()
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum) # waiting clients
+    numQueueClients = semapClients.count() # number of waiting clients in queue
 
-    #check if the client is in DB
+    # check if the client is in DB
     try:
         client = QueueClient.objects.get(device=device, semap=semap, queueNum__gte=semap.lastQueueNum)
         response = {
@@ -201,10 +201,14 @@ def checkQueueUrl(request, pk_test):
         if client.queueNum == semap.lastQueueNum:
             response = {
                 'msg': "SAME",
+                'msgName': str(client.clientName),
+                'msgNum': str(client.clientNumber),
             }
         else:
             response = {
                 'msg': "DIFFERENT",
+                'msgName': str(client.clientName),
+                'msgNum': str(client.clientNumber),
             }
 
     except:
@@ -231,8 +235,6 @@ def helloQueueUrl(request, pk_test):
         client = QueueClient.objects.get(device=device, semap=semap, queueNum__gte=semap.lastQueueNum)
         response = {
             'msg': "You are already in the queue",
-            'msgName': client.clientName,
-            'msgNum': str(client.clientNumber),
         }
     except:
         response = {
@@ -266,9 +268,9 @@ def manageSemUrl(request, pk_test):
 @csrf_exempt
 def editLastClient(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
-    first = semapClients.first()
-    semap.lastQueueNum = first.queueNum
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum) # all clients in queue
+    first = semapClients.first()    # first client in queue
+    semap.lastQueueNum = first.queueNum     # magic number of first client save as number of last client in queue
     semap.save()
     response = {
         'msg': 'lastClient changed',
@@ -282,12 +284,14 @@ def editLastClient(request, pk_test):
 def editClientInfo(request, pk_test):
     device = request.COOKIES['device']
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    client = QueueClient.objects.get(semap=semap, device=device)
+    allclients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
+    client = allclients.get(device=device)
 
-    client.clientNumber -= 1
+    newClientNumber = client.clientNumber - 1
+    client.clientNumber = newClientNumber
     client.save()
 
     response = {
-        'msgNum': str(client.clientNumber)
+        'msgNum': str(newClientNumber)
     }
     return JsonResponse(response)

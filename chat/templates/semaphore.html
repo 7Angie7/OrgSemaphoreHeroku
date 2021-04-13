@@ -253,38 +253,25 @@
         method: 'POST',
         success: function (response) {
             if (response.msg == "You are already in the queue") {
-                document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-                document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
-                document.getElementById("inputname").disabled = true;
-                document.getElementById("joinQueueBtn").disabled = true;
-                document.getElementById("showClientName").textContent = response.msgName;
-
-                var x = parseInt(response.msgNum);
-                if (x >= 0) {
-                    document.getElementById("yourNumber").textContent = response.msgNum;
-                } else if (x == -1){
-                    document.getElementById("yourNumber").textContent = "Your turn";
-                } else {
-                    document.getElementById("joinQueueBtn").className = "button btnJoinQueue";
-                document.getElementById("inputname").disabled = false;
-                document.getElementById("joinQueueBtn").disabled = false;
-                document.getElementById("showClientName").textContent = "";
-                document.getElementById("yourNumber").textContent = "";
-                }
-
 
                 // check your position
                 $.ajax({
                     url: '/checkQueueUrl/{{ semap.controlUrl }}/',
                     method: 'POST',
                     success: function (response) {
+
+                        // it's your turn
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-
-                        } else if (response.msg == "DIFFERENT") {
-                            console.log("not your turn")
-
-                        } else if (response.msg == "not in queue") {
+                            fillClientInfo(response.msgName, response.msgNum);
+                        }
+                        // you are in queue, but it is not your turn
+                        else if (response.msg == "DIFFERENT") {
+                            console.log("not your turn");
+                            fillClientInfo(response.msgName, response.msgNum)
+                        }
+                        // you are not in queue
+                        else if (response.msg == "not in queue") {
                             console.log("you must join queue first")
                         }
                     }
@@ -324,10 +311,10 @@
         const data = JSON.parse(event.data)
 
         if (data.message === 'GREEN') {
-            var a = parseInt(document.getElementById("queueNumber").textContent);
+            /*var a = parseInt(document.getElementById("queueNumber").textContent);
             a -= 1;
             var b = a.toString()
-            document.getElementById("queueNumber").textContent = b;
+            document.getElementById("queueNumber").textContent = b;*/
 
             $.ajax({
                 url: '/checkQueueUrl/{{ semap.controlUrl }}/',
@@ -342,10 +329,19 @@
                             success: function (response) {
                                 console.log(response);
                                 var x = parseInt(response.msgNum);
-                                if (x >= 0) {
+                                if (x > 0) {
                                     document.getElementById("yourNumber").textContent = response.msgNum;
-                                } else {
+                                } else if (x === 0) {
+                                    document.getElementById("yourNumber").textContent = "Get ready";
+                                } else if (x === -1) {
                                     document.getElementById("yourNumber").textContent = "Your turn";
+                                } else {
+                                    document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
+                                    document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                                    document.getElementById("inputname").disabled = false;
+                                    document.getElementById("joinQueueBtn").disabled = false;
+                                    document.getElementById("showClientName").textContent = "";
+                                    document.getElementById("yourNumber").textContent = "";
                                 }
                             }
                         })
@@ -358,10 +354,19 @@
                             success: function (response) {
                                 console.log(response);
                                 var x = parseInt(response.msgNum);
-                                if (x >= 0) {
+                                if (x > 0) {
                                     document.getElementById("yourNumber").textContent = response.msgNum;
-                                } else {
+                                } else if (x === 0) {
+                                    document.getElementById("yourNumber").textContent = "Get ready";
+                                } else if (x === -1) {
                                     document.getElementById("yourNumber").textContent = "Your turn";
+                                } else {
+                                    document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
+                                    document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                                    document.getElementById("inputname").disabled = false;
+                                    document.getElementById("joinQueueBtn").disabled = false;
+                                    document.getElementById("showClientName").textContent = "";
+                                    document.getElementById("yourNumber").textContent = "";
                                 }
                             }
                         })
@@ -382,8 +387,11 @@
         } else if (data.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
-        } else if (data.message === 'New client in queue') {
+        }
+        // new client joined the queue
+        else if (data.message === 'New client in queue') {
             console.log("queue message");
+            // number of client in queue + 1
             var oldNum = parseInt(document.getElementById("queueNumber").textContent);
             oldNum += 1;
             var newNum = oldNum.toString()
@@ -434,18 +442,54 @@
                             'name': clientName.toString(),
                             'number': response.num,
                         }));
-                        document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-                        document.getElementById("joinQueueBtn").textContent = 'In queue already';
-                        document.getElementById("joinQueueBtn").disabled = true;
-                        document.getElementById("inputname").disabled = true;
-                        document.getElementById("showClientName").textContent = clientName.toString();
-                        document.getElementById("yourNumber").textContent = response.num;
+
+                        fillClientInfo(clientName.toString(), response.num);
                     }
                 }
             })
         }
+    }
 
+    function fillClientInfo(name, number) {
 
+        var x = parseInt(number)
+
+        // client is in queue, but there are people ahead
+        if (x > 0) {
+            document.getElementById("yourNumber").textContent = number;
+            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
+            document.getElementById("inputname").disabled = true;
+            document.getElementById("joinQueueBtn").disabled = true;
+            document.getElementById("showClientName").textContent = name;
+        }
+        // there is nobody ahead
+        else if (x === 0) {
+            document.getElementById("yourNumber").textContent = "Get Ready";
+            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
+            document.getElementById("inputname").disabled = true;
+            document.getElementById("joinQueueBtn").disabled = true;
+            document.getElementById("showClientName").textContent = name;
+        }
+        // your turn
+        else if (x === -1) {
+            document.getElementById("yourNumber").textContent = "Get Ready";
+            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
+            document.getElementById("inputname").disabled = true;
+            document.getElementById("joinQueueBtn").disabled = true;
+            document.getElementById("showClientName").textContent = name;
+        }
+        // client is not in queue
+        else {
+            document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
+            document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+            document.getElementById("inputname").disabled = false;
+            document.getElementById("joinQueueBtn").disabled = false;
+            document.getElementById("showClientName").textContent = "";
+            document.getElementById("yourNumber").textContent = "";
+        }
     }
 
     // ------------------------------------------------------------------------------- //
