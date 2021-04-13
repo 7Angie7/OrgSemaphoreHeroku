@@ -125,6 +125,17 @@
             background-color: #d0b341;
         }
 
+        .btnLeaveQueue {
+            background-color: darkorange;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .btnLeaveQueue:hover {
+            background-color: #d57a05;
+        }
+
         .queueClients {
             margin-top: 30px;
         }
@@ -334,10 +345,11 @@
                                     document.getElementById("yourNumber").textContent = response.msgNum;
                                 } else if (x === 0) {
                                     document.getElementById("yourNumber").textContent = "Get ready";
+                                    document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
                                     document.getElementById("yourNumber").textContent = "Your turn";
                                 } else {
-                                    document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
+                                    document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
                                     document.getElementById("inputname").disabled = false;
                                     document.getElementById("joinQueueBtn").disabled = false;
@@ -359,6 +371,7 @@
                                     document.getElementById("yourNumber").textContent = response.msgNum;
                                 } else if (x === 0) {
                                     document.getElementById("yourNumber").textContent = "Get ready";
+                                    document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
                                     document.getElementById("yourNumber").textContent = "Your turn";
                                 } else {
@@ -465,7 +478,7 @@
         // client is in queue, but there are people ahead
         if (x > 0) {
             document.getElementById("yourNumber").textContent = number;
-            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
             document.getElementById("inputname").disabled = true;
             document.getElementById("joinQueueBtn").disabled = true;
@@ -473,8 +486,9 @@
         }
         // there is nobody ahead
         else if (x === 0) {
+            document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
             document.getElementById("yourNumber").textContent = "Get Ready";
-            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
             document.getElementById("inputname").disabled = true;
             document.getElementById("joinQueueBtn").disabled = true;
@@ -483,7 +497,7 @@
         // your turn
         else if (x === -1) {
             document.getElementById("yourNumber").textContent = "Your turn";
-            document.getElementById("joinQueueBtn").style.backgroundColor = "red";
+            document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
             document.getElementById("inputname").disabled = true;
             document.getElementById("joinQueueBtn").disabled = true;

@@ -419,6 +419,9 @@
                 alert("GREEN color on semaphore")
             }
         })
+
+        // remove first row in table in control page
+        document.getElementById("clientsTable").deleteRow(0);
     }
 
     function busyAlert() {
@@ -447,7 +450,7 @@
                         'message': message
                     }));
                     document.getElementById("managebtn").textContent = "Close Semaphore";
-                    document.getElementById("managebtn").className = "button btnbusy"
+                    document.getElementById("managebtn").className = "button btnbusy";
 
                 } else if (response.msg == "Close semaphore") {
                     const message = 'CLOSE';
@@ -455,7 +458,7 @@
                         'message': message
                     }));
                     document.getElementById("managebtn").textContent = "Open Semaphore";
-                    document.getElementById("managebtn").className = "btnready"
+                    document.getElementById("managebtn").className = "btnready";
                 }
             }
         })
