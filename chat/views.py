@@ -202,13 +202,13 @@ def checkQueueUrl(request, pk_test):
             response = {
                 'msg': "SAME",
                 'msgName': str(client.clientName),
-                'msgNum': str(client.queueNum),
+                'msgNum': str(client.clientNumber),
             }
         else:
             response = {
                 'msg': "DIFFERENT",
                 'msgName': str(client.clientName),
-                'msgNum': str(client.queueNum),
+                'msgNum': str(client.clientNumber),
             }
 
     except:

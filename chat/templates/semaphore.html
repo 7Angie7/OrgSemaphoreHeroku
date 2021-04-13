@@ -274,12 +274,6 @@
                         else if (response.msg == "not in queue") {
                             console.log("you must join queue first")
 
-                            document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
-                            document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
-                            document.getElementById("inputname").disabled = false;
-                            document.getElementById("joinQueueBtn").disabled = false;
-                            document.getElementById("showClientName").textContent = "";
-                            document.getElementById("yourNumber").textContent = "";
                         }
                     }
                 })
@@ -379,6 +373,13 @@
                         })
                     } else if (response.msg == "not in queue") {
                         console.log("you must join queue first")
+                        document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
+                        document.getElementById("joinQueueBtn").style.backgroundColor = "yellow";
+                        document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                        document.getElementById("inputname").disabled = false;
+                        document.getElementById("joinQueueBtn").disabled = false;
+                        document.getElementById("showClientName").textContent = "";
+                        document.getElementById("yourNumber").textContent = "";
                     }
                 }
             })
