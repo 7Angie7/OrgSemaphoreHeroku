@@ -254,7 +254,7 @@
         success: function (response) {
             if (response.msg == "You are already in the queue") {
                 document.getElementById("joinQueueBtn").style.backgroundColor = "red";
-                document.getElementById("joinQueueBtn").textContent = 'In queue already';
+                document.getElementById("joinQueueBtn").textContent = 'Leave the queue';
                 document.getElementById("inputname").disabled = true;
                 document.getElementById("joinQueueBtn").disabled = true;
                 document.getElementById("showClientName").textContent = response.msgName;
@@ -262,8 +262,14 @@
                 var x = parseInt(response.msgNum);
                 if (x >= 0) {
                     document.getElementById("yourNumber").textContent = response.msgNum;
-                } else {
+                } else if (x == -1){
                     document.getElementById("yourNumber").textContent = "Your turn";
+                } else {
+                    document.getElementById("joinQueueBtn").className = "button btnJoinQueue";
+                document.getElementById("inputname").disabled = false;
+                document.getElementById("joinQueueBtn").disabled = false;
+                document.getElementById("showClientName").textContent = "";
+                document.getElementById("yourNumber").textContent = "";
                 }
 
 

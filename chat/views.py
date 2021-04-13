@@ -171,7 +171,7 @@ def joinQueueUrl(request, pk_test, client_name):
         lastClientNumber = allqueue.queueNum  # last magic number in whole DB
         newLastClientNumber = lastClientNumber + 1
 
-    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     numQueueClients = semapClients.count()
 
     #check if the client is in DB
