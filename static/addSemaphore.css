@@ -21,11 +21,11 @@ body, html {
 
 .navbar .navbar-btn {
     background-color: #f2d24b;
-    margin-left: 10px;
     margin-right: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 17px;
+    width: 140px;
 }
 
 .navbar-btn a {
@@ -42,10 +42,11 @@ body, html {
 
 .addCard {
     margin-top: 20px;
-    height: 400px;
     background: #F6FBFB;
     text-align: center;
     border-radius: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .addCard h1 {
@@ -61,6 +62,7 @@ body, html {
     color: white;
     background-color: #f2d24b;
     font-weight: bold;
+    margin-bottom: 30px;
 }
 
 .login_btn:hover {
