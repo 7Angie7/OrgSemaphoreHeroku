@@ -300,12 +300,13 @@ def editClientInfo(request, pk_test):
 @csrf_exempt
 def checkEmptyQueue(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-
+    allclients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+    count = allclients.count()
     try:
-        allclients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+
         response = {
             'msg': "somebody in queue",
-            'allclients': str(allclients)
+            'allclients': str(count)
         }
     except:
         response = {
