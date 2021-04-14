@@ -21,11 +21,11 @@ body, html {
 
 .navbar .navbar-btn {
     background-color: #f2d24b;
-    margin-left: 10px;
     margin-right: 5px;
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 17px;
+    width: 130px;
 }
 
 .navbar-btn a {
@@ -42,7 +42,7 @@ body, html {
 
 /* card style */
 .Card {
-    margin-top: 40px;
+    margin-top: 20px;
     background: #F6FBFB;
     text-align: center;
     border-radius: 10px;
@@ -84,4 +84,9 @@ body, html {
 
 .links {
     padding-bottom: 12px;
+}
+
+.registerForm {
+    padding-left: 10px;
+    padding-right: 10px;
 }
