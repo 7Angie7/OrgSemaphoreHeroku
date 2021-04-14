@@ -402,7 +402,7 @@
             success: function (response) {
                 console.log(response);
 
-                if (response == "Nobody in queue") {
+                if (response.msg == "Nobody in queue") {
                     alert("Nobody in queue")
                 } else {
                     const message = "GREEN";
