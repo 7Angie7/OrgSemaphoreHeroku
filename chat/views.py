@@ -303,5 +303,12 @@ def checkEmptyQueue(request, pk_test):
 
     try:
         allclients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+        response = {
+            'msg': "somebody in queue"
+        }
     except:
-        return HttpResponse("Nobody in queue")
+        response = {
+            'msg': "Nobody in queue"
+        }
+
+    return JsonResponse(response)
