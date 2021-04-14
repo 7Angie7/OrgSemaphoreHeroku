@@ -302,15 +302,14 @@ def checkEmptyQueue(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     allclients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
     count = allclients.count()
-    try:
 
-        response = {
-            'msg': "somebody in queue",
-            'allclients': str(count)
-        }
-    except:
+    if count == 0:
         response = {
             'msg': "Nobody in queue"
+        }
+    else:
+        response = {
+            'msg': "Someone in queue"
         }
 
     return JsonResponse(response)
