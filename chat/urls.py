@@ -23,4 +23,5 @@ urlpatterns = [
     path('manageSemUrl/<str:pk_test>/', views.manageSemUrl, name='manageSemUrl'),
     path('editLastClient/<str:pk_test>/', views.editLastClient, name='editLastClient'),
     path('editClientInfo/<str:pk_test>/', views.editClientInfo, name='editClientInfo'),
+    path('checkEmptyQueue/<str:pk_test>/', views.checkEmptyQueue, name='checkEmptyQueue'),
 ]

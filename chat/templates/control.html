@@ -395,33 +395,48 @@
 
     // send message - invite next client
     function readyAlert() {
-        const message = "GREEN";
-
         // change compare number in semaphore
         $.ajax({
-            url: '/editLastClient/{{ semap.controlUrl }}/',
+            url: '/checkEmptyQueue/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
                 console.log(response);
+
+                if (response == "Nobody in queue") {
+                    alert("Nobody in queue")
+                } else {
+                    const message = "GREEN";
+
+                    // change compare number in semaphore
+                    $.ajax({
+                        url: '/editLastClient/{{ semap.controlUrl }}/',
+                        method: 'POST',
+                        success: function (response) {
+                            console.log(response);
+                        }
+                    })
+
+                    // send message
+                    ws.send(JSON.stringify({
+                        'message': message
+                    }));
+
+                    // change semaphore status in DB = 'Ready'
+                    $.ajax({
+                        url: '/readyAlertUrl/{{ semap.controlUrl }}/',
+                        method: 'POST',
+                        success: function (response) {
+                            alert("GREEN color on semaphore")
+                        }
+                    })
+
+                    // remove first row in table in control page
+                    document.getElementById("clientsTable").deleteRow(0);
+                }
             }
         })
 
-        // send message
-        ws.send(JSON.stringify({
-            'message': message
-        }));
 
-        // change semaphore status in DB = 'Ready'
-        $.ajax({
-            url: '/readyAlertUrl/{{ semap.controlUrl }}/',
-            method: 'POST',
-            success: function (response) {
-                alert("GREEN color on semaphore")
-            }
-        })
-
-        // remove first row in table in control page
-        document.getElementById("clientsTable").deleteRow(0);
     }
 
     function busyAlert() {
@@ -490,9 +505,7 @@
         if (jsondata.message === 'GREEN') {
             console.log("greeen message");
             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-        }
-
-        else if (jsondata.message === 'RED') {
+        } else if (jsondata.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
         }
@@ -518,7 +531,6 @@
         console.log("Something went wrong");
         console.log(event);
     }
-
 
 
 </script>

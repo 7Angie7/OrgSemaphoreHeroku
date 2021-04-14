@@ -295,3 +295,13 @@ def editClientInfo(request, pk_test):
         'msgNum': str(newClientNumber)
     }
     return JsonResponse(response)
+
+
+@csrf_exempt
+def checkEmptyQueue(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+
+    try:
+        allclients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+    except:
+        return HttpResponse("Nobody in queue")
