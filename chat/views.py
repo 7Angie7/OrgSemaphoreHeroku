@@ -25,7 +25,7 @@ def mainpage(request):
             login(request, user)
             return redirect('dashboard')
         else:
-            messages.info(request, "Username OR password is incorrect")
+            messages.info(request, "Nesprávne používateľské meno alebo heslo!")
 
     return render(request, 'mainpage.html', {})
 
@@ -46,7 +46,7 @@ def register(request):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.success(request, user + ", your account was created. Please, log in.")
+            messages.success(request, user + ", Váš účet bol úspešne vytvorený!")
             return redirect('mainpage')
 
     context = {'form': form}

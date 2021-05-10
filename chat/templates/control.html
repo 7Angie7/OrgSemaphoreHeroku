@@ -3,9 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Control-{{ semap.name }}|OrganizeSemaphore</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
@@ -82,7 +91,7 @@
 
         .dashboardCard {
             margin-top: 20px;
-            height: 600px;
+            height: 590px;
             background: #F6FBFB;
             text-align: center;
             border-radius: 10px;
@@ -232,6 +241,81 @@
             color: #30b5e5;
         }
 
+        .responsive {
+            display: none;
+        }
+
+        @media only screen and (max-width: 900px) {
+            .profileCard {
+                display: none;
+            }
+
+            h5 {
+                font-size: 15px;
+            }
+
+            .center-btn {
+                padding-top: 0;
+            }
+
+            .linkCopy {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .table-first-client {
+                margin-right: 10px;
+                margin-left: 10px;
+                margin-top: 10px;
+            }
+
+            .table-first-client h5 {
+                margin-top: 10px;
+            }
+
+            .my-custom-scrollbar {
+                margin-top: 0;
+                margin-left: 10px;
+                margin-right: 10px;
+                height: 200px;
+            }
+
+            .dashboardCard {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            .openUrl {
+                display: none;
+
+            }
+
+            .responsive {
+                display: grid;
+                margin-top: 15px;
+            }
+
+            .center-btn a {
+                font-size: 13px;
+            }
+
+            .btnready{
+                font-size: 13px;
+                margin-bottom: 4px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .btnbusy{
+                font-size: 13px;
+                margin-bottom: 4px;
+            }
+
+            .col-sm-8 {
+                margin: auto;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -244,17 +328,16 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <!--  item DASHBOARD is active  -->
-            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
-            <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'dashboard' %}">NÁSTENKA</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">O NÁS</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">KONTAKT</a></li>
+            <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">ODHLÁSIŤ SA</a></li>
         </ul>
     </div>
 </nav>
 <!--  ------------------------  -->
 
 <!--  ---  MAIN CONTENT   ---  -->
-<br>
 <div class="container">
     <div class="row">
         <!--  ---    ---  -->
@@ -273,20 +356,21 @@
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        <button class="button btnready" onclick="readyAlert()">I'm ready!</button>
+                        <button class="button btnready" onclick="readyAlert()">Ďalší klient</button>
                     </div>
 
                 </div>
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
-                        <button class="button btnbusy" onclick="busyAlert()">I'm busy!</button>
+                        <button class="button btnbusy" onclick="busyAlert()">Vymazať poradie</button>
                     </div>
 
                 </div>
                 {% if semap.semOpen == False %}
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
-                            <button class="button btnready" onclick="manageSem()" id="managebtn">Open Semaphore</button>
+                            <button class="button btnready" onclick="manageSem()" id="managebtn">Otvoriť prihlasovanie
+                            </button>
                         </div>
 
                     </div>
@@ -294,7 +378,9 @@
                 {% if semap.semOpen == True %}
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
-                            <button class="button btnbusy" onclick="manageSem()" id="managebtn">Close Semaphore</button>
+                            <button class="button btnbusy" onclick="manageSem()" id="managebtn">Uzatvoriť
+                                prihlasovanie
+                            </button>
                         </div>
 
                     </div>
@@ -311,7 +397,7 @@
                     </div>
                     <div class="col-lg-3">
                         <div class="center-btn">
-                            <a href="{% url 'deleteSemap' semap.controlUrl %}" class="btn">Delete</a>
+                            <a href="{% url 'deleteSemap' semap.controlUrl %}" class="btn">Odstrániť</a>
                         </div>
                     </div>
                 </div>
@@ -323,7 +409,7 @@
                                    value="https://organize-semaphore.herokuapp.com/semaphore/{{ semap.controlUrl }}"
                                    id="copyText">
 
-                            <button onclick="copyFunction()" id="copyBtn">Copy Link</button>
+                            <button onclick="copyFunction()" id="copyBtn">Kopírovať</button>
                         </div>
 
 
@@ -334,7 +420,7 @@
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="table-first-client">
-                            <h5>Next client:</h5>
+                            <h5>Aktuálny klient:</h5>
                             <table class="table table-bordered table-striped mb-0">
                                 {% if first != None %}
                                     <tr>
@@ -349,7 +435,7 @@
                 <div class="row justify-content-lg-center">
                     <div class="col-lg-10">
                         <div class="table-wrapper-scroll-y my-custom-scrollbar">
-                            <h5>Queue:</h5>
+                            <h5>Zapísaní klienti:</h5>
                             <table class="table table-bordered table-striped mb-0" id="clientsTable">
 
                                 {% for i in semapClients %}
@@ -371,6 +457,35 @@
                     </div>
                 </div>
 
+                <div class="responsive">
+
+                    <div class="row justify-content-lg-center">
+                        <div class="col-sm-8">
+                            <button class="button btnready" onclick="readyAlert()">Ďalší klient</button>
+                            <button class="button btnbusy" onclick="busyAlert()">Vymazať poradie</button>
+                        </div>
+                    </div>
+                    {% if semap.semOpen == False %}
+                        <div class="row justify-content-lg-center">
+                            <div class="col-lg-10">
+                                <button class="button btnready" onclick="manageSem()" id="managebtn">Otvoriť
+                                    prihlasovanie
+                                </button>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    {% if semap.semOpen == True %}
+                        <div class="row justify-content-lg-center">
+                            <div class="col-lg-10">
+                                <button class="button btnbusy" onclick="manageSem()" id="managebtn">Uzatvoriť
+                                    prihlasovanie
+                                </button>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                </div>
 
             </div>
         </div>

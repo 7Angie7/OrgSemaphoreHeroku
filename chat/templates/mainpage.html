@@ -24,10 +24,10 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
             <!--  item HOME is active  -->
-            <li class="nav-item active"><a class="nav-link" href="{% url 'mainpage' %}">HOME</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">CONTACT</a></li>
-            <li class="navbar-btn"><a href="{% url 'register' %}" class="btn">SIGN UP</a></li>
+            <li class="nav-item active"><a class="nav-link" href="{% url 'mainpage' %}">HLAVNÁ STRÁNKA</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">O NÁS</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">KONTAKT</a></li>
+            <li class="navbar-btn"><a href="{% url 'register' %}" class="btn">REGISTRÁCIA</a></li>
         </ul>
     </div>
 </nav>
@@ -40,7 +40,7 @@
         <div class="col-lg-8">
             <div class="Card">
                 <div class="title">
-                    <h1>Open your dashboard and manage your semaphores</h1>
+                    <h1>Otvor svoju nástenku a spravuj svoje semafóry</h1>
                 </div>
 
                 <div class="row justify-content-lg-center">
@@ -53,18 +53,18 @@
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" name="username" placeholder="Username..." class="form-control">
+                                    <input type="text" name="username" placeholder="Používateľské meno..." class="form-control">
                                 </div>
                                 <div class="input-group mb-2">
                                     <div class="input-group-append">
                                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                                     </div>
-                                    <input type="password" name="password" placeholder="Password..."
+                                    <input type="password" name="password" placeholder="Heslo..."
                                            class="form-control">
                                 </div>
 
                                 <div class="d-flex justify-content-center mt-4 login_container">
-                                    <input class="btn login_btn" type="submit" value="Login">
+                                    <input class="btn login_btn" type="submit" value="Prihlásiť sa">
                                 </div>
 
                                 {% for message in messages %}
@@ -73,7 +73,7 @@
 
                                 <div class="mt-4">
                                     <div class="d-flex justify-content-center links">
-                                        Don't have an account? <a href="{% url 'register' %}" class="ml-2">SIGN UP</a>
+                                        Nemáte účet? <a href="{% url 'register' %}" class="ml-2">Zaregistrujte sa!</a>
                                     </div>
                                 </div>
                             </form>
