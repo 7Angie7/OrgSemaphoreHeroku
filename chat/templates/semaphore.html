@@ -227,34 +227,42 @@
                         <div id="trafficLight">
                             <img src="{%static 'images/redLight.png'%}" id="demo" alt="busyLight">
                         </div>
-                        <div id="yourName">
-                            <p>Your name:</p>
-                            <h3 id="showClientName">Adam</h3>
-                        </div>
                         <div id="allNumber">
-                            <p>Celkovy pocet cakajucich</p>
+                            <p>Celkový počet čakajúcich:</p>
                             {% if semap.semOpen == True %}
                                 <h3 id="queueNumber">{{ numQueueClients }}</h3>
                             {% endif %}
                             {% if semap.semOpen == False %}
-                                <h3 id="queueNumber">Prihlasovanie do poradia je uzatvorene</h3>
+                                <h3 id="queueNumber">Prihlasovanie do poradia je ukončené</h3>
                             {% endif %}
                         </div>
-                        <div id="yourNumber">
-                            <p>Pocet cakajucich pred tebou</p>
-                            <h3>2</h3>
-                        </div>
-                        <div id="yourTime">
-                            <p>Predpokladany cas cakania</p>
-                            <h3>10 minut</h3>
-                        </div>
-                        <div class="yourInput">
+
+
+                        <div id="newClient">
+                            <div class="yourInput">
                             <input type="text" name="clientname" placeholder="Enter your name ..." class="form-control" id="inputname">
                         </div>
                         <div id="clientButton">
-                            <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue
+                            <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Zapísať sa do poradia
                             </button>
                         </div>
+                        </div>
+
+                    <div id="sameClient">
+                        <div id="yourName">
+                            <p>Tvoje meno:</p>
+                            <h3 id="showClientName"></h3>
+                        </div>
+                        <div id="yourNumber">
+                            <p>Počet čakajúcich pred tebou</p>
+                            <h3></h3>
+                        </div>
+                        <div id="yourTime">
+                            <p>Predpokladaný čas čakania</p>
+                            <h3></h3>
+                        </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
@@ -336,9 +344,7 @@
                 document.getElementById("inputname").disabled = true;
             } else if (response.msg == "Not in queue") {
                 console.log("Hello, you can join queue now");
-                document.getElementById("yourName").style.display = 'none';
-                document.getElementById("yourNumber").style.display = 'none';
-                document.getElementById("yourTime").style.display = 'none';
+                document.getElementById("sameClient").style.display = 'none';
             }
         }
     })
