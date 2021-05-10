@@ -259,9 +259,9 @@
                                 <p>Tvoje meno:</p>
                                 <h3 id="showClientName"></h3>
                             </div>
-                            <div id="yourNumber">
+                            <div id="yourNumberDiv">
                                 <p>Počet čakajúcich pred tebou:</p>
-                                <h3></h3>
+                                <h3 id="yourNumber"></h3>
                             </div>
                             <div id="yourTime">
                                 <p>Predpokladaný čas čakania:</p>
@@ -321,7 +321,7 @@
         success: function (response) {
             if (response.msg == "You are already in the queue") {
                 document.getElementById("sameClient").style.display = 'grid';
-                
+
 
                 // check your position
                 $.ajax({
