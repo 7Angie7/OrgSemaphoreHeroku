@@ -141,6 +141,10 @@
             margin: 30px auto;
         }
 
+        #sameClient {
+            display: none;
+        }
+
     </style>
 </head>
 <body>
@@ -314,6 +318,7 @@
         method: 'POST',
         success: function (response) {
             if (response.msg == "You are already in the queue") {
+                document.getElementById("sameClient").style.display = 'grid';
 
                 // check your position
                 $.ajax({
@@ -344,7 +349,7 @@
                 document.getElementById("inputname").disabled = true;
             } else if (response.msg == "Not in queue") {
                 console.log("Hello, you can join queue now");
-                document.getElementById("sameClient").style.display = 'none';
+
             }
         }
     })
