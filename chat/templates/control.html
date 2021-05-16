@@ -436,7 +436,7 @@
                             <table class="table table-bordered table-striped mb-0">
                                 {% if first != None %}
                                     <tr>
-                                        <td class="tdName">{{ first.clientName }}</td>
+                                        <td id="tdName">{{ first.clientName }}</td>
                                     </tr>
                                 {% endif %}
                             </table>
@@ -549,8 +549,11 @@
                         }
                     })
 
+                    var currentclient = document.getElementById("clientsTable").firstChild;
+                    console.log(currentclient);
                     // remove first row in table in control page
                     document.getElementById("clientsTable").deleteRow(0);
+
                 }
             }
         })
@@ -624,6 +627,7 @@
         if (jsondata.message === 'GREEN') {
             console.log("greeen message");
             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+
         } else if (jsondata.message === 'RED') {
             console.log("red message");
             document.getElementById("demo").src = "{% static 'images/redLight.png' %}";

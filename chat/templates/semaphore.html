@@ -244,7 +244,7 @@
 
                         <div id="newClient">
                             <div class="yourInput">
-                                <input type="text" name="clientname" placeholder="Enter your name ..."
+                                <input type="text" name="clientname" placeholder="Vložte svoje meno..."
                                        class="form-control" id="inputname">
                             </div>
                             <div id="clientButton">
@@ -260,7 +260,7 @@
                                 <h3 id="showClientName"></h3>
                             </div>
                             <div id="yourNumberDiv">
-                                <p>Počet čakajúcich pred tebou:</p>
+                                <p id="yourNumberLabel">Počet čakajúcich pred tebou:</p>
                                 <h3 id="yourNumber"></h3>
                             </div>
                             <div id="yourTime">
@@ -332,11 +332,13 @@
                         // it's your turn
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
+                            document.getElementById("newClient").style.display = "none";
                             fillClientInfo(response.msgName, response.msgNum);
                         }
                         // you are in queue, but it is not your turn
                         else if (response.msg == "DIFFERENT") {
                             console.log("not your turn");
+                            document.getElementById("newClient").style.display = "none";
                             fillClientInfo(response.msgName, response.msgNum)
                         }
                         // you are not in queue
@@ -403,10 +405,11 @@
                                 if (x > 0) {
                                     document.getElementById("yourNumber").textContent = response.msgNum;
                                 } else if (x === 0) {
-                                    document.getElementById("yourNumber").textContent = "Get ready";
+                                    document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
                                     document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
-                                    document.getElementById("yourNumber").textContent = "Your turn";
+                                    document.getElementById("yourNumberLabel").style.visibility = "hidden";
+                                    document.getElementById("yourNumber").textContent = "Ste na rade!";
                                 } else {
                                     document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
@@ -429,10 +432,11 @@
                                 if (x > 0) {
                                     document.getElementById("yourNumber").textContent = response.msgNum;
                                 } else if (x === 0) {
-                                    document.getElementById("yourNumber").textContent = "Get ready";
+                                    document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
                                     document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
-                                    document.getElementById("yourNumber").textContent = "Your turn";
+                                    document.getElementById("yourNumberLabel").style.visibility = "hidden";
+                                    document.getElementById("yourNumber").textContent = "Ste na rade!";
                                 } else {
                                     document.getElementById("joinQueueBtn").style.backgroundColor = className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
@@ -547,7 +551,7 @@
         // there is nobody ahead
         else if (x === 0) {
             document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
-            document.getElementById("yourNumber").textContent = "Priprav sa";
+            document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
@@ -556,6 +560,7 @@
         }
         // your turn
         else if (x === -1) {
+            document.getElementById("yourNumberLabel").style.visibility = "hidden";
             document.getElementById("yourNumber").textContent = "Ste na rade!";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
