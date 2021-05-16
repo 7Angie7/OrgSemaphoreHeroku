@@ -578,7 +578,7 @@
             url: '/manageSemUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
-                if (response.msg == "Otvoriť prihlasovanie") {
+                if (response.msg == "Open semaphore") {
                     const message = 'OPEN';
                     ws.send(JSON.stringify({
                         'message': message
@@ -586,7 +586,7 @@
                     document.getElementById("managebtn").textContent = "Ukončiť prihlasovanie";
                     document.getElementById("managebtn").className = "button btnbusy";
 
-                } else if (response.msg == "Ukončiť prihlasovanie") {
+                } else if (response.msg == "Close semaphore") {
                     const message = 'CLOSE';
                     ws.send(JSON.stringify({
                         'message': message
