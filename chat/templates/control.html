@@ -1,3 +1,9 @@
+<!-- ===================================================== -->
+<!-- AUTHOR:    Erika Fasankova                            -->
+<!-- PROJECT:   Web App - Organize Semaphore               -->
+<!-- Bachelor Thesis                                       -->
+<!-- ===================================================== -->
+
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -91,7 +97,7 @@
 
         .dashboardCard {
             margin-top: 20px;
-            height: 590px;
+            height: 600px;
             background: #F6FBFB;
             text-align: center;
             border-radius: 10px;
@@ -102,6 +108,10 @@
             font-style: italic;
             padding-top: 35px;
             padding-bottom: 10px;
+        }
+
+        .dashboardCard h1:hover {
+            font-weight: bold;
         }
 
         .profileImg {
@@ -128,6 +138,7 @@
 
         .center-btn a:hover {
             background-color: #d57a05;
+            color: white;
         }
 
         .button {
@@ -203,7 +214,7 @@
         .my-custom-scrollbar {
             margin-top: 20px;
             position: relative;
-            height: 250px;
+            height: 350px;
             overflow: auto;
             padding-bottom: 40px;
         }
@@ -299,14 +310,14 @@
                 font-size: 13px;
             }
 
-            .btnready{
+            .btnready {
                 font-size: 13px;
                 margin-bottom: 4px;
                 padding-left: 30px;
                 padding-right: 30px;
             }
 
-            .btnbusy{
+            .btnbusy {
                 font-size: 13px;
                 margin-bottom: 4px;
             }
@@ -340,7 +351,7 @@
 <!--  ---  MAIN CONTENT   ---  -->
 <div class="container">
     <div class="row">
-        <!--  ---    ---  -->
+        <!--  ---  CONTROL COL  ---  -->
         <div class="col-lg-4">
             <div class="profileCard">
                 <div class="row justify-content-lg-center">
@@ -378,7 +389,7 @@
                 {% if semap.semOpen == True %}
                     <div class="row justify-content-lg-center">
                         <div class="col-lg-10">
-                            <button class="button btnbusy" onclick="manageSem()" id="managebtn">Uzatvoriť
+                            <button class="button btnbusy" onclick="manageSem()" id="managebtn">Ukončiť
                                 prihlasovanie
                             </button>
                         </div>
@@ -388,12 +399,12 @@
             </div>
         </div>
         <!--  ------------------------  -->
-        <!--  ---    ---  -->
+        <!--  ---  INFO COL  ---  -->
         <div class="col-lg-8">
             <div class="dashboardCard">
                 <div class="row text-center">
                     <div class="col-lg-9">
-                        <h1>" {{ semap.name }} "</h1>
+                        <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage" target="_blank"><h1>" {{ semap.name }} "</h1></a>
                     </div>
                     <div class="col-lg-3">
                         <div class="center-btn">
@@ -448,14 +459,7 @@
                     </div>
                 </div>
 
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <div class="openUrl">
-                            <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage" target="_blank">Open
-                                "{{ semap.name }}"</a>
-                        </div>
-                    </div>
-                </div>
+
 
                 <div class="responsive">
 
@@ -478,7 +482,7 @@
                     {% if semap.semOpen == True %}
                         <div class="row justify-content-lg-center">
                             <div class="col-lg-10">
-                                <button class="button btnbusy" onclick="manageSem()" id="managebtn">Uzatvoriť
+                                <button class="button btnbusy" onclick="manageSem()" id="managebtn">Ukončiť
                                     prihlasovanie
                                 </button>
                             </div>
@@ -574,20 +578,20 @@
             url: '/manageSemUrl/{{ semap.controlUrl }}/',
             method: 'POST',
             success: function (response) {
-                if (response.msg == "Open semaphore") {
+                if (response.msg == "Otvoriť prihlasovanie") {
                     const message = 'OPEN';
                     ws.send(JSON.stringify({
                         'message': message
                     }));
-                    document.getElementById("managebtn").textContent = "Close Semaphore";
+                    document.getElementById("managebtn").textContent = "Ukončiť prihlasovanie";
                     document.getElementById("managebtn").className = "button btnbusy";
 
-                } else if (response.msg == "Close semaphore") {
+                } else if (response.msg == "Ukončiť prihlasovanie") {
                     const message = 'CLOSE';
                     ws.send(JSON.stringify({
                         'message': message
                     }));
-                    document.getElementById("managebtn").textContent = "Open Semaphore";
+                    document.getElementById("managebtn").textContent = "Otvoriť prihlasovanie";
                     document.getElementById("managebtn").className = "btnready";
                 }
             }
