@@ -360,7 +360,7 @@
                             <img src="{% static 'images/redLight.png' %}" id="demo" alt="busyLight">
                         {% endif %}
                         {% if semap.status == 'Ready' %}
-                            <img src="{% static 'images/greenLight.png' %}" id="demo" alt="busyLight">
+                            <img src="{% static 'images/greenLight.png' %}" id="demo" alt="readyLight">
                         {% endif %}
                     </div>
 
@@ -404,7 +404,8 @@
             <div class="dashboardCard">
                 <div class="row text-center">
                     <div class="col-lg-9">
-                        <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage" target="_blank"><h1>" {{ semap.name }} "</h1></a>
+                        <a href="{% url 'semaphore' semap.controlUrl %}" class="btn btn-manage" target="_blank"><h1>
+                            " {{ semap.name }} "</h1></a>
                     </div>
                     <div class="col-lg-3">
                         <div class="center-btn">
@@ -458,7 +459,6 @@
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class="responsive">
@@ -592,7 +592,7 @@
                         'message': message
                     }));
                     document.getElementById("managebtn").textContent = "Otvoriť prihlasovanie";
-                    document.getElementById("managebtn").className = "btnready";
+                    document.getElementById("managebtn").className = "button btnready";
                 }
             }
         })
