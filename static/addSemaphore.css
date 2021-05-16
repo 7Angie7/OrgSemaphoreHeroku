@@ -1,3 +1,9 @@
+/** =====================================================
+ ** AUTHOR:    Erika Fasankova
+ ** PROJECT:   Web App - Organize Semaphore
+ ** Bachelor Thesis
+ ** ===================================================== **/
+
 /* body style */
 body, html {
     margin: 0;
@@ -67,6 +73,7 @@ body, html {
 
 .login_btn:hover {
     background-color: #d0b341;
+    color: white;
 }
 
 .addForm{
@@ -76,8 +83,4 @@ body, html {
 form {
     margin-left: 15px;
     margin-right: 15px;
-}
-
-label {
-    float: left;
 }

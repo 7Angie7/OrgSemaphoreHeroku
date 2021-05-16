@@ -1,3 +1,9 @@
+/** =====================================================
+ ** AUTHOR:    Erika Fasankova
+ ** PROJECT:   Web App - Organize Semaphore
+ ** Bachelor Thesis
+ ** ===================================================== **/
+
 /* body style */
 body, html {
     margin: 0;
@@ -21,7 +27,7 @@ body, html {
 
 .navbar .navbar-btn {
     background-color: #f2d24b;
-    margin-left: 10px;
+    margin-left: 0;
     margin-right: 5px;
     padding-left: 10px;
     padding-right: 10px;
@@ -153,7 +159,7 @@ a.btn.btn-manage {
     font-size: 13px;
     margin-bottom: 5px;
     padding: 5px;
-        background-color: #f2d24b;
+    background-color: #f2d24b;
     color: white;
 }
 
@@ -173,7 +179,7 @@ a.btn.btn-manage:hover {
     margin: 30px auto 15px;
 }
 
-.btnEdit:hover, .center-btn a:hover{
+.btnEdit:hover, .center-btn a:hover {
     background-color: #30b5e5;
     text-decoration: none;
     color: white;
@@ -185,7 +191,7 @@ a.btn.btn-manage:hover {
     color: white;
 }
 
-.btnRemove{
+.btnRemove {
     background-color: darkorange;
     font-weight: bold;
     border-radius: 5%;
@@ -199,38 +205,38 @@ a.btn.btn-manage:hover {
 
 }
 
-.profileCard .col-lg-8{
+.profileCard .col-lg-8 {
     margin-top: 20px;
     margin-bottom: 10px;
 }
 
-.responsiveProfile{
+.responsiveProfile {
     display: none;
 }
 
 @media only screen and (max-width: 980px) {
-    .profileCard{
+    .profileCard {
         display: none;
     }
 
-    .center-btn{
+    .center-btn {
         padding-top: 0;
     }
 
-    .my-custom-scrollbar{
+    .my-custom-scrollbar {
         margin: 10px;
         height: 260px;
     }
 
-    .responsiveProfile{
-        display: inline flow-root list-item;
+    .responsiveProfile {
+        display: grid;
     }
 
-    .btnEdit{
+    .btnEdit {
         margin-top: 10px;
     }
 
-    .btnRemove{
+    .btnRemove {
         margin-bottom: 20px;
     }
 }
