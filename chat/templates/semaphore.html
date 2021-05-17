@@ -541,6 +541,7 @@
 
         // client is in queue, but there are people ahead
         if (x > 0) {
+            document.getElementById("yourNumberLabel").style.visibility = "hidden";
             document.getElementById("yourNumber").textContent = number;
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
@@ -550,6 +551,7 @@
         }
         // there is nobody ahead
         else if (x === 0) {
+            document.getElementById("yourNumberLabel").style.visibility = "hidden";
             document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
             document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
