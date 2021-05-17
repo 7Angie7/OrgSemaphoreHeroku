@@ -339,7 +339,7 @@
                         else if (response.msg == "DIFFERENT") {
                             console.log("not your turn");
                             document.getElementById("newClient").style.display = "none";
-                            fillClientInfo(response.msgName, response.msgNum)
+                            fillClientInfo(response.msgName, response.msgNum, response.msgTime);
                         }
                         // you are not in queue
                         else if (response.msg == "not in queue") {
@@ -528,20 +528,21 @@
                             'number': response.num,
                         }));
                         document.getElementById("newClient").style.display = "none";
-                        fillClientInfo(clientName.toString(), response.num);
+                        fillClientInfo(clientName.toString(), response.num, response.clienttime);
                     }
                 }
             })
         }
     }
 
-    function fillClientInfo(name, number) {
+    function fillClientInfo(name, number, time) {
 
         var x = parseInt(number)
 
         // client is in queue, but there are people ahead
         if (x > 0) {
             document.getElementById("yourNumber").textContent = number;
+            document.getElementById("yourTime").textContent = time;
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
@@ -552,6 +553,7 @@
         else if (x === 0) {
             document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
             document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
+            document.getElementById("yourTime").textContent = time;
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
@@ -562,6 +564,7 @@
         else if (x === -1) {
             document.getElementById("yourNumberLabel").style.visibility = "hidden";
             document.getElementById("yourNumber").textContent = "Ste na rade!";
+            document.getElementById("yourNumberDiv").style.visibility = "hidden";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;

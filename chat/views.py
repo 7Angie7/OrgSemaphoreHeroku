@@ -174,6 +174,7 @@ def joinQueueUrl(request, pk_test, client_name):
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum) # waiting clients
     numQueueClients = semapClients.count() # number of waiting clients in queue
 
+
     # check if the client is in DB
     try:
         client = QueueClient.objects.get(device=device, semap=semap, queueNum__gte=semap.lastQueueNum)
@@ -182,9 +183,11 @@ def joinQueueUrl(request, pk_test, client_name):
         }
     except:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=numQueueClients)
+        time = client.clientNumber * semap.time;
         response = {
             'msg': "Change number of queue",
             'num': str(numQueueClients),
+            'clienttime': str(time),
         }
 
     return JsonResponse(response)
@@ -203,12 +206,15 @@ def checkQueueUrl(request, pk_test):
                 'msg': "SAME",
                 'msgName': str(client.clientName),
                 'msgNum': str(client.clientNumber),
+
             }
         else:
+            time = client.Number * semap.time
             response = {
                 'msg': "DIFFERENT",
                 'msgName': str(client.clientName),
                 'msgNum': str(client.clientNumber),
+                'msgTime': str(time),
             }
 
     except:
