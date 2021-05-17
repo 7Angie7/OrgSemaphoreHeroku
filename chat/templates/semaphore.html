@@ -333,7 +333,7 @@
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
                             document.getElementById("newClient").style.display = "none";
-                            fillClientInfo(response.msgName, response.msgNum);
+                            fillClientInfo(response.msgName, response.msgNum, response.msgTime);
                         }
                         // you are in queue, but it is not your turn
                         else if (response.msg == "DIFFERENT") {

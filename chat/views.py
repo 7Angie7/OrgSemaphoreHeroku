@@ -201,15 +201,15 @@ def checkQueueUrl(request, pk_test):
 
     try:
         client = semapClients.get(device=device)
+        time = client.Number * semap.time
         if client.queueNum == semap.lastQueueNum:
             response = {
                 'msg': "SAME",
                 'msgName': str(client.clientName),
                 'msgNum': str(client.clientNumber),
-
+                'msgTime': str(time),
             }
         else:
-            time = client.Number * semap.time
             response = {
                 'msg': "DIFFERENT",
                 'msgName': str(client.clientName),
