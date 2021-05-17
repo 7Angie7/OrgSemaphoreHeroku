@@ -183,7 +183,7 @@ def joinQueueUrl(request, pk_test, client_name):
         }
     except:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=numQueueClients)
-        time = client.clientNumber * semap.time;
+        time = client.clientNumber * semap.time
         response = {
             'msg': "Change number of queue",
             'num': str(numQueueClients),
