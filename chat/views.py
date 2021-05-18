@@ -297,8 +297,11 @@ def editClientInfo(request, pk_test):
     client.clientNumber = newClientNumber
     client.save()
 
+    time = newClientNumber * semap.time
+
     response = {
-        'msgNum': str(newClientNumber)
+        'msgNum': str(newClientNumber),
+        'msgTime': str(time),
     }
     return JsonResponse(response)
 

@@ -332,13 +332,13 @@
                         // it's your turn
                         if (response.msg == "SAME") {
                             document.getElementById("demo").src = "{% static 'images/greenLight.png' %}";
-                            document.getElementById("newClient").style.display = "none";
+                            document.getElementById("inputname").style.display = "none";
                             fillClientInfo(response.msgName, response.msgNum, response.msgTime);
                         }
                         // you are in queue, but it is not your turn
                         else if (response.msg == "DIFFERENT") {
                             console.log("not your turn");
-                            document.getElementById("newClient").style.display = "none";
+                            document.getElementById("inputname").style.display = "none";
                             fillClientInfo(response.msgName, response.msgNum, response.msgTime);
                         }
                         // you are not in queue
@@ -403,16 +403,23 @@
                                 console.log(response);
                                 var x = parseInt(response.msgNum);
                                 if (x > 0) {
+                                    //there are people ahead
                                     document.getElementById("yourNumber").textContent = response.msgNum;
+                                    document.getElementById("yourTime").textContent = response.msgTime;
                                 } else if (x === 0) {
+                                    //nobody ahead you - get ready
                                     document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
+                                    document.getElementById("yourTime").textContent = response.msgTime;
                                     document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
+                                    //your turn
                                     document.getElementById("yourNumberLabel").style.visibility = "hidden";
                                     document.getElementById("yourNumber").textContent = "Ste na rade!";
+                                    document.getElementById("yourTimeDiv").textContent = "hidden";
                                 } else {
                                     document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                                    document.getElementById("newClient").style.display = "grid";
                                     document.getElementById("inputname").disabled = false;
                                     document.getElementById("joinQueueBtn").disabled = false;
                                     document.getElementById("showClientName").textContent = "";
@@ -527,7 +534,7 @@
                             'name': clientName.toString(),
                             'number': response.num,
                         }));
-                        document.getElementById("newClient").style.display = "none";
+                        document.getElementById("inputname").style.display = "none";
                         fillClientInfo(clientName.toString(), response.num, response.clienttime);
                     }
                 }
@@ -542,7 +549,7 @@
         // client is in queue, but there are people ahead
         if (x > 0) {
             document.getElementById("yourNumber").textContent = number;
-            document.getElementById("yourTime").textContent = time;
+            document.getElementById("yourTime").textContent = time + " minút";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
@@ -553,7 +560,7 @@
         else if (x === 0) {
             document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
             document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
-            document.getElementById("yourTime").textContent = time;
+            document.getElementById("yourTime").textContent = time + " minút";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
@@ -564,7 +571,7 @@
         else if (x === -1) {
             document.getElementById("yourNumberLabel").style.visibility = "hidden";
             document.getElementById("yourNumber").textContent = "Ste na rade!";
-            document.getElementById("yourNumberDiv").style.visibility = "hidden";
+            document.getElementById("yourTimeDiv").style.visibility = "hidden";
             document.getElementById("joinQueueBtn").className = "button btnLeaveQueue"
             document.getElementById("joinQueueBtn").textContent = 'Opustiť poradie';
             document.getElementById("inputname").disabled = true;
