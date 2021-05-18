@@ -415,13 +415,14 @@
                                     //your turn
                                     document.getElementById("yourNumberLabel").style.visibility = "hidden";
                                     document.getElementById("yourNumber").textContent = "Ste na rade!";
-                                    document.getElementById("yourTimeDiv").textContent = "hidden";
+                                    document.getElementById("yourTimeDiv").style.visibility = "hidden";
                                 } else {
                                     document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
-                                    document.getElementById("newClient").style.display = "grid";
+                                    document.getElementById("inputname").style.visibility = "visible";
                                     document.getElementById("inputname").disabled = false;
                                     document.getElementById("joinQueueBtn").disabled = false;
+                                    document.getElementById("sameClient").style.display = "none";
                                     document.getElementById("showClientName").textContent = "";
                                     document.getElementById("yourNumber").textContent = "";
                                 }
