@@ -439,6 +439,12 @@
                                         <td id="tdName">{{ first.clientName }}</td>
                                     </tr>
                                 {% endif %}
+                                {% if first != None %}
+                                    <tr>
+                                        <td id="tdName"></td>
+                                    </tr>
+                                {% endif %}
+
                             </table>
                         </div>
                     </div>
@@ -499,7 +505,7 @@
 <!--  ------------------------  -->
 {{ pk_test|json_script:"pk-test" }}
 <script>
-    
+
 
     // ------------------------ FUNCTIONS ------------------------------- //
     // copy url to the clipboard
@@ -551,10 +557,11 @@
                     })
 
                     var ourTable = document.getElementById("clientsTable");
-                    var firstcell = ourTable.rows.item(1).cells;
+                    var firstcell = ourTable.rows.item(0).cells.item(0).innerHTML;
                     console.log(firstcell);
                     // remove first row in table in control page
                     document.getElementById("clientsTable").deleteRow(0);
+                    document.getElementById("tdName").innerText = firstcell;
 
                 }
             }
