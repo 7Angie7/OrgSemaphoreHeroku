@@ -486,7 +486,7 @@
         } else if (text === "Opustiť poradie") {
             alert("Opustili ste poradie!");
             $.ajax({
-                url: '/deleteClient/',
+                url: '/deleteClient/{{ semap.controlUrl }}/',
                 method: 'POST',
                 success: function (response){
                     alert("anooo");

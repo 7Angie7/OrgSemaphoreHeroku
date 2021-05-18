@@ -193,12 +193,13 @@ def joinQueueUrl(request, pk_test, client_name):
 
     return JsonResponse(response)
 
+
 @csrf_exempt
-def deleteClient(request):
-    '''semap = Semaphore.objects.get(controlUrl=pk_test)
+def deleteClient(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
     client = QueueClient.objects.get(device=device, semap=semap)
-    client.delete()'''
+    client.delete()
     return HttpResponse("ahooooj")
 
 
