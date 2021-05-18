@@ -198,7 +198,8 @@ def joinQueueUrl(request, pk_test, client_name):
 def deleteClient(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
-    client = QueueClient.objects.get(device=device, semap=semap)
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
+    client = semapClients.get(device=device)
     client.delete()
     return HttpResponse("ahooooj")
 
