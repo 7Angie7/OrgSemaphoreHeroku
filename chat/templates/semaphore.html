@@ -438,18 +438,26 @@
                                 console.log(response);
                                 var x = parseInt(response.msgNum);
                                 if (x > 0) {
+                                    //there are people ahead
                                     document.getElementById("yourNumber").textContent = response.msgNum;
+                                    document.getElementById("yourTime").textContent = response.msgTime;
                                 } else if (x === 0) {
+                                    //nobody ahead you - get ready
                                     document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
+                                    document.getElementById("yourTime").textContent = response.msgTime;
                                     document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
+                                    //your turn
                                     document.getElementById("yourNumberLabel").style.visibility = "hidden";
                                     document.getElementById("yourNumber").textContent = "Ste na rade!";
+                                    document.getElementById("yourTimeDiv").style.visibility = "hidden";
                                 } else {
-                                    document.getElementById("joinQueueBtn").style.backgroundColor = className = "button btnJoinQueue"
+                                    document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                                    document.getElementById("inputname").style.visibility = "visible";
                                     document.getElementById("inputname").disabled = false;
                                     document.getElementById("joinQueueBtn").disabled = false;
+                                    document.getElementById("sameClient").style.display = "none";
                                     document.getElementById("showClientName").textContent = "";
                                     document.getElementById("yourNumber").textContent = "";
                                 }
@@ -460,8 +468,10 @@
                         document.getElementById("demo").src = "{% static 'images/redLight.png' %}";
                         document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                         document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
+                        document.getElementById("inputname").style.visibility = "visible";
                         document.getElementById("inputname").disabled = false;
                         document.getElementById("joinQueueBtn").disabled = false;
+                        document.getElementById("sameClient").style.display = "none";
                         document.getElementById("showClientName").textContent = "";
                         document.getElementById("yourNumber").textContent = "";
                     }
