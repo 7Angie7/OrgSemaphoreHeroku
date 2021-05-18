@@ -650,6 +650,10 @@
             console.log(newText)
             newCell.appendChild(newText);
         }
+        //client left
+        else if (jsondata.message === 'Client left') {
+            alert("Niektorý z čakajúcich klientov opustil poradie. Obnovte stránku prosím, pre aktuálne údaje.");
+        }
         // wrong message
         else {
             console.log("another message");

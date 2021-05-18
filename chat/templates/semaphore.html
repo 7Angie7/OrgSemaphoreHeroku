@@ -483,7 +483,19 @@
                 })
             }
         } else if (text === "Opustiť poradie") {
-            alert("Opustit poradie");
+            alert("Opustili ste poradie!");
+            $.ajax({
+                url: '/deleteClient/{{ semap.controlUrl }}/' + clientName + '/',
+                method: 'POST',
+                success: function (){
+                    const message = "Client left"
+                    ws.send(JSON.strinify({
+                        'message': message,
+                    }))
+                }
+
+            })
+
         } else {
             alert("Chyba tlacitka");
         }
