@@ -499,6 +499,7 @@
 <!--  ------------------------  -->
 {{ pk_test|json_script:"pk-test" }}
 <script>
+    
 
     // ------------------------ FUNCTIONS ------------------------------- //
     // copy url to the clipboard
@@ -549,8 +550,9 @@
                         }
                     })
 
-                    var currentclient = document.getElementById("clientsTable").firstChild;
-                    console.log(currentclient);
+                    var ourTable = document.getElementById("clientsTable");
+                    var firstcell = ourTable.rows.item(1).cells;
+                    console.log(firstcell);
                     // remove first row in table in control page
                     document.getElementById("clientsTable").deleteRow(0);
 
