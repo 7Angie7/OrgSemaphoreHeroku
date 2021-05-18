@@ -24,5 +24,5 @@ urlpatterns = [
     path('editLastClient/<str:pk_test>/', views.editLastClient, name='editLastClient'),
     path('editClientInfo/<str:pk_test>/', views.editClientInfo, name='editClientInfo'),
     path('checkEmptyQueue/<str:pk_test>/', views.checkEmptyQueue, name='checkEmptyQueue'),
-    path('deleteClient', views.deleteClient, name='deleteClient'),
+    path('deleteClient/', views.deleteClient, name='deleteClient'),
 ]
