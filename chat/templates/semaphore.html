@@ -179,6 +179,7 @@
                                        class="form-control" id="inputname">
                             </div>
                             <div id="clientButton">
+                                {% csrf_token %}
                                 <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Zapísať sa do poradia</button>
                             </div>
                         </div>
@@ -488,10 +489,7 @@
                 url: '/deleteClient/{{ semap.controlUrl }}/',
                 method: 'POST',
                 success: function (){
-                    const message = "Client left"
-                    ws.send(JSON.strinify({
-                        'message': message,
-                    }))
+                    alert("anooo")
                 }
 
             })
