@@ -426,7 +426,12 @@
             var newNum = oldNum.toString()
             document.getElementById("queueNumber").textContent = newNum;
 
-        } else if (data.message === 'OPEN') {
+        }
+        // new client joined the queue
+        else if (data.message === 'Clean') {
+            alert("Správca vymazal poradovník. Obnovte stránku a zapíšte sa znova!")
+        }
+        else if (data.message === 'OPEN') {
             document.getElementById("inputname").disabled = false;
             document.getElementById("queueNumber").textContent = {{ numQueueClients }}
                 document.getElementById("joinQueueBtn").disabled = false;
@@ -484,12 +489,11 @@
                 })
             }
         } else if (text === "Opustiť poradie") {
-            alert("Opustili ste poradie!");
             $.ajax({
                 url: '/deleteClient/{{ semap.controlUrl }}/',
                 method: 'POST',
                 success: function (response){
-                    alert("anooo");
+                    alert("Boli ste odstránený z poradia. Obnovte stránky pre opätovné prihlásenie.");
                     const message = "Client left";
                     ws.send(JSON.stringify({
                         'message': message,

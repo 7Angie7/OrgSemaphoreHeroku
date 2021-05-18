@@ -205,6 +205,18 @@ def deleteClient(request, pk_test):
 
 
 @csrf_exempt
+def deleteClient(request, pk_test):
+    semap = Semaphore.objects.get(controlUrl=pk_test)
+    device = request.COOKIES['device']
+    semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
+
+    for person in semapClients:
+        person.delete()
+
+    return HttpResponse("clean queue")
+
+
+@csrf_exempt
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)

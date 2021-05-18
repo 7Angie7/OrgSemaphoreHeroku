@@ -583,6 +583,19 @@
                 alert("RED color on semaphore")
             }
         })
+
+        $.ajax({
+                url: '/cleanQueue/{{ semap.controlUrl }}/',
+                method: 'POST',
+                success: function (response){
+                    alert("Všetci čakajúci v poradí boli odstránení! Obnovte stránku, prosím.");
+                    const message = "Clean";
+                    ws.send(JSON.stringify({
+                        'message': message,
+                    }));
+                }
+
+            })
     }
 
     function manageSem() {
