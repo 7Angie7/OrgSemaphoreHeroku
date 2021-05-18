@@ -194,7 +194,7 @@ def joinQueueUrl(request, pk_test, client_name):
     return JsonResponse(response)
 
 
-def deleteClient(request, pk_test):
+def deleteClient(request):
     '''semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
     client = QueueClient.objects.get(device=device, semap=semap)
