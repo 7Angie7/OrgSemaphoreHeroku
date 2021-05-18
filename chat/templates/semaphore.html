@@ -459,7 +459,8 @@
     function joinQueue() {
 
         var text = document.getElementById("joinQueueBtn").textContent;
-        if (text == "Zapísať sa do poradia") {
+        console.log(text);
+        if (text === "Zapísať sa do poradia") {
 
 
             const clientName = document.getElementById('inputname').value;
@@ -487,7 +488,7 @@
                     }
                 })
             }
-        } else if (text == "Opustiť poradie") {
+        } else if (text === "Opustiť poradie") {
             alert("Opustit poradie");
         } else {
             alert("Chyba tlacitka");
