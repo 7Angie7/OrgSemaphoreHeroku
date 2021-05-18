@@ -490,6 +490,10 @@
                 method: 'POST',
                 success: function (response){
                     alert("anooo");
+                    const message = "Client left";
+                    ws.send(JSON.stringify({
+                        'message': message,
+                    }));
                 }
 
             })

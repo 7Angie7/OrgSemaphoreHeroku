@@ -201,7 +201,7 @@ def deleteClient(request, pk_test):
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     client = semapClients.get(device=device)
     client.delete()
-    return HttpResponse("ahooooj")
+    return redirect('semaphore')
 
 
 @csrf_exempt
