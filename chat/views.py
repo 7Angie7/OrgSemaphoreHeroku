@@ -200,7 +200,7 @@ def deleteClient(request, pk_test):
     device = request.COOKIES['device']
     client = QueueClient.objects.get(device=device, semap=semap)
     client.delete()'''
-    return redirect('semaphore')
+    return HttpResponse("ahoooooj")
 
 
 @csrf_exempt
