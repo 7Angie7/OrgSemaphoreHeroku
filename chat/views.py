@@ -183,7 +183,7 @@ def joinQueueUrl(request, pk_test, client_name):
         }
     except:
         client, created = QueueClient.objects.get_or_create(device=device, semap=semap, queueNum=newLastClientNumber, clientName=client_name, clientNumber=numQueueClients)
-        time = client.clientNumber * semap.time
+        time = (client.clientNumber+1) * semap.time
         response = {
             'msg': "Change number of queue",
             'num': str(numQueueClients),
@@ -201,7 +201,7 @@ def checkQueueUrl(request, pk_test):
 
     try:
         client = semapClients.get(device=device)
-        time = client.clientNumber * semap.time
+        time = (client.clientNumber+1) * semap.time
         if client.queueNum == semap.lastQueueNum:
             response = {
                 'msg': "SAME",
@@ -297,7 +297,7 @@ def editClientInfo(request, pk_test):
     client.clientNumber = newClientNumber
     client.save()
 
-    time = newClientNumber * semap.time
+    time = (newClientNumber+1) * semap.time
 
     response = {
         'msgNum': str(newClientNumber),
