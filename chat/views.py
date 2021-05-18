@@ -195,10 +195,10 @@ def joinQueueUrl(request, pk_test, client_name):
 
 
 @login_required(login_url='mainpage')
-def deleteClient(request, pk_test, client_name):
+def deleteClient(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     device = request.COOKIES['device']
-    client = QueueClient.objects.get(device=device, semap=semap, clientName=client_name)
+    client = QueueClient.objects.get(device=device, semap=semap)
     client.delete()
     return redirect('semaphore')
 
