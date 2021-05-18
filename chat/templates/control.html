@@ -529,7 +529,7 @@
                 console.log(response);
 
                 if (response.msg == "Nobody in queue") {
-                    alert("Nobody in queue")
+                    alert("Nikto ďalší v poradí nečaká!")
                 } else {
                     const message = "GREEN";
 
@@ -552,7 +552,7 @@
                         url: '/readyAlertUrl/{{ semap.controlUrl }}/',
                         method: 'POST',
                         success: function (response) {
-                            alert("GREEN color on semaphore")
+                            alert("Zavolali ste ďalšieho čakajúceho v poradí!")
                         }
                     })
 

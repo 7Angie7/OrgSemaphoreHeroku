@@ -150,75 +150,6 @@
 <body>
 <!--  ---  MAIN CONTENT   ---  -->
 
-<!-- old version
-<div class="container">
-    <div class="row">
-
-        <div class="col-lg-4">
-            <div class="profileCard">
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <img src="static 'images/redLight.png'" id="demo" alt="busyLight">
-                    </div>
-                </div>
-
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <div class="input-group mb-3">
-                            <div class="col-lg-12">
-                                <input type="text" name="clientname" placeholder="Enter your name ..."
-                                       class="form-control" id="inputname">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <button class="button btnJoinQueue" onclick="joinQueue()" id="joinQueueBtn">Join the Queue
-                        </button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-
-        <div class="col-lg-8">
-            <div class="dashboardCard">
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <h1>"  semap.name  "</h1>
-                    </div>
-                </div>
-                <div class="row justify-content-lg-center">
-                    <div class="col-lg-10">
-                        <div class="queueClients">
-                            <h5>The number of clients in queue:</h5>
-                             if semap.semOpen == True
-                                <h2 id="queueNumber"> numQueueClients </h2>
-                              endif
-                             if semap.semOpen == False
-                                <h2 id="queueNumber">This semaphore is closed!</h2>
-                             endif
-                        </div>
-                        <div class="clientInfo">
-                            <h5>Your name:</h5>
-                            <h3 id="showClientName"></h3>
-                            <h5>The number of clients ahead of you:</h5>
-                            <h3 id="yourNumber"></h3>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</div>
--->
-
 <div class="container">
     <div class="row">
         <div class="col-lg-8">
@@ -454,7 +385,7 @@
                                 } else {
                                     document.getElementById("joinQueueBtn").className = "button btnJoinQueue"
                                     document.getElementById("joinQueueBtn").textContent = 'Join the Queue';
-                                    document.getElementById("inputname").style.display= "grid";
+                                    document.getElementById("inputname").style.display = "grid";
                                     document.getElementById("inputname").disabled = false;
                                     document.getElementById("joinQueueBtn").disabled = false;
                                     document.getElementById("sameClient").style.display = "none";
@@ -526,30 +457,40 @@
 
     // ------------------------- FUNCTIONS -------------------------- //
     function joinQueue() {
-        const clientName = document.getElementById('inputname').value;
-        console.log(clientName)
-        if (clientName == null || clientName == undefined || clientName == "") {
-            alert("Please, enter your name")
-        } else {
-            document.getElementById("sameClient").style.display = 'grid';
-            $.ajax({
-                url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
-                method: 'POST',
-                success: function (response) {
-                    if (response.msg == "You are already in the queue") {
-                        alert("You have been joined the queue already")
-                    } else if (response.msg == "Change number of queue") {
-                        const message = "New client in queue";
-                        ws.send(JSON.stringify({
-                            'message': message,
-                            'name': clientName.toString(),
-                            'number': response.num,
-                        }));
-                        document.getElementById("inputname").style.display = "none";
-                        fillClientInfo(clientName.toString(), response.num, response.clienttime);
+
+        var text = document.getElementById("joinQueueBtn").textContent;
+        if (text == "Zapísať sa do poradia") {
+
+
+            const clientName = document.getElementById('inputname').value;
+            console.log(clientName)
+            if (clientName == null || clientName == undefined || clientName == "") {
+                alert("Please, enter your name")
+            } else {
+                document.getElementById("sameClient").style.display = 'grid';
+                $.ajax({
+                    url: '/joinQueueUrl/{{ semap.controlUrl }}/' + clientName + '/',
+                    method: 'POST',
+                    success: function (response) {
+                        if (response.msg == "You are already in the queue") {
+                            alert("You have been joined the queue already")
+                        } else if (response.msg == "Change number of queue") {
+                            const message = "New client in queue";
+                            ws.send(JSON.stringify({
+                                'message': message,
+                                'name': clientName.toString(),
+                                'number': response.num,
+                            }));
+                            document.getElementById("inputname").style.display = "none";
+                            fillClientInfo(clientName.toString(), response.num, response.clienttime);
+                        }
                     }
-                }
-            })
+                })
+            }
+        } else if (text == "Opustiť poradie") {
+            alert("Opustit poradie");
+        } else {
+            alert("Chyba tlacitka");
         }
     }
 
