@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'chat',
+    #'mysite',
+    'mysite',
     'channels',
 ]
 
@@ -89,6 +90,7 @@ DATABASES = {
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 '''
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -99,8 +101,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-'''
 
+'''
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
 
@@ -156,3 +158,4 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
