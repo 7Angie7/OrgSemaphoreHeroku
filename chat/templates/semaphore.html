@@ -443,7 +443,10 @@
         } else if (data.message === 'CLOSE') {
             document.getElementById("inputname").disabled = true;
             document.getElementById("queueNumber").textContent = "This semaphore is closed!"
-        } else {
+        } else if (data.message === 'Client left') {
+            alert("Niektorý z klientov opustil poradie. Prosím, obnovte stránku.")
+        }
+          else {
             console.log("wrong message");
         }
 
