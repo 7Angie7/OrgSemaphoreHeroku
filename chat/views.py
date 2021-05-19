@@ -205,6 +205,17 @@ def deleteClient(request, pk_test):
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     client = semapClients.get(device=device)
     client.delete()
+    
+    try:
+        newClient = semapClients.get(device=device)
+        aheadClients = semapClients.objects.filter(queueNum_lt=newClient.queueNum)
+        newNum = aheadClients.count()
+        newClient.queueNum = newNum
+        newClient.save()
+    
+    except:
+        pass
+    
     return HttpResponse("client delete")
 
 
