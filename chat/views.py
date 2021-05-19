@@ -81,6 +81,10 @@ def contact(request):
     return render(request, 'contact.html', {})
 
 
+def aboutus(request):
+    return render(request, 'aboutus.html', {})
+
+
 @login_required(login_url='mainpage')
 def control(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)

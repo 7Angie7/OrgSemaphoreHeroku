@@ -340,8 +340,8 @@
         <ul class="navbar-nav">
             <!--  item DASHBOARD is active  -->
             <li class="nav-item active"><a class="nav-link" href="{% url 'dashboard' %}">NÁSTENKA</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">O NÁS</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">KONTAKT</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}">O NÁS</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">KONTAKT</a></li>
             <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">ODHLÁSIŤ SA</a></li>
         </ul>
     </div>

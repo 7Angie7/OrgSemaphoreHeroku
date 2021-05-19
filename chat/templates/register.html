@@ -38,8 +38,8 @@
         <ul class="navbar-nav">
             <!--  item HOME is active  -->
             <li class="nav-item"><a class="nav-link" href="{% url 'mainpage' %}">HLAVNÁ STRÁNKA</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">O NÁS</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">KONTAKT</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}">O NÁS</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">KONTAKT</a></li>
             <li class="navbar-btn"><a href="{% url 'mainpage' %}" class="btn">PRIHLÁSENIE</a></li>
         </ul>
     </div>

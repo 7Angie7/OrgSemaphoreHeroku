@@ -10,6 +10,7 @@ urlpatterns = [
     path('semaphore/<str:pk_test>', views.semaphore, name='semaphore'),
     path('logoutUser/', views.logoutUser, name='logoutUser'),
     path('addSemaphore/', views.addSemaphore, name='addSemaphore'),
+    path('aboutus/', views.aboutus, name='aboutus'),
     path('contact/', views.contact, name='contact'),
     path('control/<str:pk_test>/', views.control, name='control'),
     path('control/<str:pk_test>/deleteSemap/', views.deleteSemap, name='deleteSemap'),

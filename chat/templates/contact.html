@@ -1,115 +1,127 @@
+<!-- ===================================================== -->
+<!-- AUTHOR:    Erika Fasankova                            -->
+<!-- PROJECT:   Web App - Organize Semaphore               -->
+<!-- Bachelor Thesis                                       -->
+<!-- ===================================================== -->
+
+{% load static %}
 <head>
     <meta charset="UTF-8">
-	<title>Login</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>DeleteAccount|OrganizeSemaphore</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+          integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../static/contact.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Nunito&display=swap" rel="stylesheet">
 
     <style>
-        body, html{
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
-    font-family: 'Akaya Telivigala', cursive;
-}
+        /* body style */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(112deg, rgba(149, 238, 254, 1) 28%, rgba(161, 252, 153, 1) 100%);
+            font-family: 'Nunito', sans-serif;
+        }
 
-.navbar {
-    font-family: 'Akaya Telivigala', cursive;
-    font-weight: bold;
-    font-size: 20px;
-}
+        /* ************** */
 
-.navbar-nav {
-    margin-left: auto;
-}
+        /* navbar style */
+        .navbar {
+            font-weight: bold;
+            font-size: 20px;
+        }
 
-.navbar .navbar-btn{
-    background-color: #f2d24b;
-    font-family: 'Akaya Telivigala', cursive;
-    margin-left: 10px;
-    margin-right: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 17px;
-}
+        .navbar-nav {
+            margin-left: auto;
+        }
 
-.navbar-btn a{
-    font-weight: bold;
-    font-size: 20px;
-    color: black;
-}
+        .navbar .navbar-btn {
+            background-color: #f2d24b;
+            margin-left: 10px;
+            margin-right: 5px;
+            padding-left: 10px;
+            padding-right: 10px;
+            border-radius: 17px;
+        }
 
-#navbarNav ul li a:hover{
-    color: #33ccff;
-}
+        .navbar-btn a {
+            font-weight: bold;
+            font-size: 20px;
+            color: black;
+        }
 
-.profileCard {
-    margin-top: 20px;
-    height: 600px;
-    background: #F6FBFB;
-    text-align: center;
-    border-radius: 10px;
-}
+        #navbarNav ul li a:hover {
+            color: #33ccff;
+        }
 
-.profileCard h1 {
-    padding-top: 35px;
-    padding-bottom: 10px;
-}
+        /* ********************** */
+        .addCard {
+            margin-top: 20px;
+            background: #F6FBFB;
+            text-align: center;
+            border-radius: 10px;
+        }
 
-.profileCard i {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 30px;;
-    border-color: grey;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 75%;
-}
+        .addCard h1 {
+            font-family: 'Lato', sans-serif;
+            font-style: italic;
+            padding-top: 35px;
+            padding-bottom: 10px;
+        }
 
-.addCard {
-    margin-top: 20px;
-    height: 600px;
-    background: #F6FBFB;
-    text-align: center;
-    border-radius: 10px;
-}
 
+        p {
+            margin-top: 50px;
+            font-size: 18px;
+            padding-bottom: 40px;
+        }
     </style>
 </head>
 <body>
 
-    <!--  ---  NAVIGATION BAR  ---  -->
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+<!--  ---  NAVIGATION BAR  ---  -->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">DASHBOARD</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">ABOUT US</a></li>
-                <!--  item CONTACT is active  -->
-                <li class="nav-item active"><a class="nav-link" href="{% url 'contact' %}">CONTACT</a></li>
-                <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">LOG OUT</a></li>
-            </ul>
-        </div>
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="{% url 'dashboard' %}">NÁSTENKA</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'aboutus' %}">O NÁS</a></li>
+            <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">KONTAKT</a></li>
+            <li class="navbar-btn"><a href="{% url 'logoutUser' %}" class="btn">ODHLÁSIŤ SA</a></li>
+        </ul>
+    </div>
+</nav>
+<!--  ------------------------  -->
 
-    </nav>
-
-
-    <br>
-    <div class="container">
-        <div class="row justify-content-lg-center">
-            <div class="col-lg-8">
-                <div class="addCard">
-                    <h1> CONTACT </h1>
+<!--  ---  MAIN CONTENT   ---  -->
+<br>
+<div class="container">
+    <div class="row justify-content-lg-center">
+        <div class="col-lg-8">
+            <div class="addCard">
+                <div>
+                    <h1> Kontaktná e-mailová adresa </h1>
                 </div>
+                <div>
+                    <p>organizesemaphore@gmail.com</p>
+                </div>
+
             </div>
         </div>
     </div>
-
+</div>
 </body>
