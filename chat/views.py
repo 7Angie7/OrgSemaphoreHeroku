@@ -210,7 +210,7 @@ def deleteClient(request, pk_test):
         newClient = semapClients.get(device=device)
         aheadClients = semapClients.objects.filter(queueNum_lt=newClient.queueNum)
         newNum = aheadClients.count()
-        newClient.queueNum = newNum
+        newClient.queueNum = newNum-1
         newClient.save()
     
     except:
