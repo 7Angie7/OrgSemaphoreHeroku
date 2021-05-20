@@ -339,11 +339,11 @@
                                 if (x > 0) {
                                     //there are people ahead
                                     document.getElementById("yourNumber").textContent = response.msgNum;
-                                    document.getElementById("yourTime").textContent = response.msgTime;
+                                    document.getElementById("yourTime").textContent = response.msgTime + " minút";
                                 } else if (x === 0) {
                                     //nobody ahead you - get ready
                                     document.getElementById("yourNumber").textContent = "0 - Pripravte sa!";
-                                    document.getElementById("yourTime").textContent = response.msgTime;
+                                    document.getElementById("yourTime").textContent = response.msgTime + " minút";
                                     document.getElementById("demo").src = "{% static 'images/yellowLight.png' %}";
                                 } else if (x === -1) {
                                     //your turn
