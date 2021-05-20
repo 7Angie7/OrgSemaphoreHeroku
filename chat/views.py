@@ -160,7 +160,12 @@ def busyAlertUrl(request, pk_test):
 @csrf_exempt
 def joinQueueUrl(request, pk_test, client_name):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    device = request.COOKIES['sessionid']
+    
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
+    
     lastallqueue = QueueClient.objects.last()     # last client in whole DB
 
     # try get the last client in database
@@ -201,7 +206,12 @@ def joinQueueUrl(request, pk_test, client_name):
 @csrf_exempt
 def deleteClient(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    device = request.COOKIES['sessionid']
+    
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
+        
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     client = semapClients.get(device=device)
     client.delete()
@@ -222,7 +232,12 @@ def deleteClient(request, pk_test):
 @csrf_exempt
 def cleanQueue(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    device = request.COOKIES['sessionid']
+
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
+    
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gt=semap.lastQueueNum)
 
     for person in semapClients:
@@ -235,7 +250,10 @@ def cleanQueue(request, pk_test):
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
-    device = request.COOKIES['sessionid']
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
 
     try:
         client = semapClients.get(device=device)
@@ -265,7 +283,11 @@ def checkQueueUrl(request, pk_test):
 
 @csrf_exempt
 def helloQueueUrl(request, pk_test):
-    device = request.COOKIES['sessionid']
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
+        
     semap = Semaphore.objects.get(controlUrl=pk_test)
 
     if semap.semOpen == False:
@@ -326,7 +348,11 @@ def editLastClient(request, pk_test):
 
 @csrf_exempt
 def editClientInfo(request, pk_test):
-    device = request.COOKIES['sessionid']
+    try:
+        device = request.COOKIES['sessionid']
+    except:
+        device = request.COOKIES['device']
+        
     semap = Semaphore.objects.get(controlUrl=pk_test)
     allclients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
     client = allclients.get(device=device)
