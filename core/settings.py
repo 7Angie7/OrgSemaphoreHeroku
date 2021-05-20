@@ -146,7 +146,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 ASGI_APPLICATION = "core.routing.application"
 
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CHANNEL_LAYERS = {
