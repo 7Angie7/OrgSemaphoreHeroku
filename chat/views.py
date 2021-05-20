@@ -160,7 +160,7 @@ def busyAlertUrl(request, pk_test):
 @csrf_exempt
 def joinQueueUrl(request, pk_test, client_name):
     semap = Semaphore.objects.get(controlUrl=pk_test)
-    device = request.COOKIES['device']
+    device = request.COOKIES['sessionid']
     lastallqueue = QueueClient.objects.last()     # last client in whole DB
 
     # try get the last client in database
