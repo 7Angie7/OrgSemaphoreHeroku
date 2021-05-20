@@ -235,7 +235,7 @@ def cleanQueue(request, pk_test):
 def checkQueueUrl(request, pk_test):
     semap = Semaphore.objects.get(controlUrl=pk_test)
     semapClients = QueueClient.objects.filter(semap=semap, queueNum__gte=semap.lastQueueNum)
-    device = request.COOKIES['device']
+    device = request.COOKIES['sessionid']
 
     try:
         client = semapClients.get(device=device)
