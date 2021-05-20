@@ -303,9 +303,14 @@ def helloQueueUrl(request, pk_test):
             'msg': "You are already in the queue",
         }
     except:
-        response = {
-            'msg': "Not in queue"
-        }
+        if semap.semOpen == False:
+            response = {
+                'msg': "Close now"
+            }
+        else:    
+            response = {
+                'msg': "Not in queue"
+            }
 
     return JsonResponse(response)
 
